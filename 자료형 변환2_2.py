@@ -1,0 +1,5 @@
+x=input("실수를 입력해주세요")
+x=float(x)
+y=input("실수를 입력해주세요")
+y=float(y)
+print("x + y : ",x+y)

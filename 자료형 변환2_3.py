@@ -1,0 +1,12 @@
+x = input("정수(x)를 입력해주세요")
+x = int(x)
+y = input("정수(y)를 입력해주세요")
+y = int(y)
+print("x + y : ",x+y)
+print("x - y : ",x-y)
+print("x * y : ",x*y)
+print("x / y : ",x/y)
+print("x의 y제곱은 : ",x**y)
+print("x / y의 몫은 : ",x//y)
+print("x / y의 나머지는 : ",x%y)
+

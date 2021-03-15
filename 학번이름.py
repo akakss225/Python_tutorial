@@ -1,0 +1,5 @@
+print("인하")
+print("대학교")
+print(14)
+print("학번")
+print("송수민")
