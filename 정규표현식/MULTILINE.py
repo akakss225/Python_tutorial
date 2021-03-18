@@ -12,7 +12,7 @@ you need python
 python three"""
 
 print(p.findall(data))
-
+# .M이라는 즉, 맨 앞에 python이라는 단어로 시작되는 모든 구간을 찾아줌.
 q = re.compile('^python\s\w+',re.M)
 
 print(q.findall(data))

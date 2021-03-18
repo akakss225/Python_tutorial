@@ -12,4 +12,3 @@ class MoreFourCal(FourCal):
 a = MoreFourCal(2,4)
 print(a.add())
 
-        

@@ -9,6 +9,7 @@ p = re.compile('[a-z]+')
 m = p.match('python')
 
 print(m.group())
-print(m.start())
-print(m.end())
-print(m.span())
+print(m.start())#첫번째 인덱스
+print(m.end())#끝 인덱스
+print(m.span())#튜플형태
+

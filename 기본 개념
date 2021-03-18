@@ -1,0 +1,22 @@
+Immutable( 정수 , 실수 , 문자열 , 튜플 )
+
+a = 1
+def vartest(a):
+    a += 1
+vartest(a)
+print(a)
+
+>>이렇게 해도 출력되는 값은 1 이다. 즉, 함수 내에서는 지역변수로써 a가
+작용하기 때문에 함수 밖 a에 대한 영향력을 행사할 수 없는 것이다.'
+
+Mutable( 리스트, 딕셔너리, 집합 )
+
+b = [1,2,3]
+def vartest2(b):
+    b = b.append(4)
+vartest2(b)
+print(b)
+
+>>Mutable의 경우 주소자체를 공유하기 때문에 영향을 미칠 수 있다.
+다만 이때 vartest2를 통해 생성된 b와 전역변수 b는 엄연히 다른 것이다.
+

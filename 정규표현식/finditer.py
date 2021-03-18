@@ -11,5 +11,6 @@ print(m)
 print(n)
 print(l)
 
+#finditer는 match되는 문자열을 전부 match객체 형태로 출력시켜준다.
 for i in l:
     print(i)
