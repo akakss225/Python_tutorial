@@ -16,6 +16,8 @@ def sum(n):
     for i in range(1, n):
         if i*5 >= n:
             break
+        elif i*3 == i*5:
+            continue
         else:
             five = five + i*5
         
