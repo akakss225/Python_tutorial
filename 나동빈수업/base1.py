@@ -17,7 +17,3 @@ for i in range(0,x):
         print("%s번째 학생은 낙제입니다." %(i + 1))
     else :
         print("%s번째 학생은 합격입니다." %(i + 1))
-
-
-
-
