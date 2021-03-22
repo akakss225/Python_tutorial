@@ -15,10 +15,10 @@ a = 2
 add(a)
 print(a)
 
-
 def add1():
     global b
     b += 5
 b = 2
 add1()
 print(b)
+
