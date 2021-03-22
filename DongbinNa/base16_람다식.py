@@ -10,5 +10,6 @@ list2 = [6,7,8,9,10]
 
 my_function = lambda a, b : a +b
 result = map(my_function, list1, list2)
-print(result)
-print(list(result))
+print(result) # 오브젝트 생성.
+print(list(result)) # 출력은 리스트식으로 가능.
+
