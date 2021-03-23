@@ -4,6 +4,6 @@ f  = open('input.txt', 'w')
 f.close()
 
 f = open('input.txt', 'a',encoding='UTF-8')
-data = '안녕하세요?\n 송수민입니다.'
+data = '안녕하세요?\n송수민입니다.'
 f.write(data)
 f.close()
