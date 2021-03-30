@@ -56,7 +56,7 @@ class Poly3:
         return self.parm.pop()
 
     def size(self):
-        return self.parm.size()
+        pass
 
     def print(self):
         n = self.parm.size()
@@ -72,9 +72,6 @@ class Poly3:
             
     @classmethod
     def add(cls, p, q):
-        if p.m != q.m or p.n != q.n:
-            return -1
-        
         r = Poly3()
         while p.size() > 0 and q.size() > 0:
             if p.peek() > q.peek():
@@ -106,10 +103,10 @@ y.print()
 z = Poly3.add(x,y)
 z.print()
 
-'''
+
 
 # 두개의 희소행렬의 곱셈
-
+'''
 class SparseMatrix:
     def __init__(self,m,n):
         self.sm = [[m ,n ,0]]
