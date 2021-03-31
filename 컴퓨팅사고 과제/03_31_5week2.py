@@ -9,6 +9,6 @@ def bubleSort(value):
                 value[j] = temp
         print('step',i,'-',value)
 
-a =[3, 6, 4, 5, 2, 1, 9, 8, 7]
+a =[50, 6, 77, 11, 43]
 print(a)
 print(bubleSort(a))

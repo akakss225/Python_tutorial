@@ -13,7 +13,7 @@ def selectionSort(value):
         value[i], value[indexMin] = value[indexMin], value[i]
         print('step',i,'-',value)
 
-a = [3,6,4,5,2,1,9,8,7]
+a = [50, 6, 77, 11, 43]
 
 print(a)
 print(selectionSort(a))
