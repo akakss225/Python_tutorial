@@ -26,11 +26,11 @@ class DLinkedList:
         curNode = self.root
         if curNode.item == item:
             self.current = curNode
-            print('현재 위치는',self.current.item,'입니다.')
+            print('현재 위치는 %s 입니다.' % self.current.item)
         else:
             if curNode.item == item:
                 self.current = curNode
-                print('현재 위치는',self.current.item,'입니다.')
+                print('현재 위치는 %s 입니다.' % self.current.item)
     
     def moveLeft(self):
         if self.current == self.root:
@@ -62,7 +62,7 @@ a.append('사과')
 a.append('배')
 a.append('포도')
 a.print()
-a.setCurrent('배')
+a.setCurrent('포도')
 
 a.moveLeft()
 
