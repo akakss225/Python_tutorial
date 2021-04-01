@@ -1,6 +1,6 @@
 # LinkedList를 이용한 다항식의 덧셈.
 import numpy as np
-
+'''
 class Node:
     def __init__(self, item = None, link = None):
         self.item = item
@@ -56,7 +56,7 @@ class Poly3:
         return self.parm.pop()
 
     def size(self):
-        pass
+        return self.parm.size()
 
     def print(self):
         n = self.parm.size()
@@ -195,4 +195,3 @@ q.print()
 
 c = SparseMatrix.mult(p, q)
 c.print()  
-'''
