@@ -11,3 +11,4 @@ if 'Bio' in dic:
 else:
     print('생물학 시험을 치루지 않았습니다.')
 
+

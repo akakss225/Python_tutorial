@@ -9,6 +9,7 @@ class CircleLinkedList:
     def __init__(self):
         self.root = CNode()
         self.tail = CNode()
+        self.current = self.root
     
     def append(self, item):
         newNode = CNode(item)
@@ -19,31 +20,28 @@ class CircleLinkedList:
             while curNode.link != None:
                 curNode = curNode.link
             curNode.link = newNode
+        self.tail = newNode
         
-    def current(self, item):
-        newNode = CNode(item)
+        
+    def setCurrent(self, item):
         curNode = self.root
-        if curNode.item != newNode.item:
-            if curNode.link == None and curNode.item != newNode.item:
-                curNode = self.tail
-            else:
-                while curNode.item != newNode.item:
-                    curNode = curNode.link
-        print('현재 위치는 %s 입니다.' %curNode.item)
+        if curNode.item == item:
+            self.current = curNode
+        else:
+            while curNode.item != item:
+                curNode = curNode.link
+            self.current = curNode
+        print('현재 위치는 %s 입니다.' %self.current.item)
         
     def moveRight(self):
-        curNode = self.root
-        if curNode == None:
-            print('리스트가 존재하지 않습니다.')
+        if self.current == self.tail:
+            self.current = self.root
+            print('현재 위치는 %s 입니다.' %self.current.item)
         else:
-            if curNode.link == None:
-                curNode.link = self.tail
-                print('현재 위치는 %s 입니다.' %curNode.item)
-            else:
-                curNode = curNode.link
-                print('현재 위치는 %s 입니다.' %curNode.item)
+            self.current = self.current.link
+            print('현재 위치는 %s 입니다.' %self.current.item)
         
-    
+
     def print(self):
         curNode = self.root
         print(curNode.item,end=',')
@@ -59,5 +57,5 @@ a.append('포도')
 a.append('배')
 a.append('귤')
 a.print()
-a.current('배')
+a.setCurrent('귤')
 a.moveRight()

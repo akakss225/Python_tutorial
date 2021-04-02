@@ -8,5 +8,3 @@ def Muliplication_table():
         print(number,'*',i,'=',number*i)
 
 print(Muliplication_table())
-
-        

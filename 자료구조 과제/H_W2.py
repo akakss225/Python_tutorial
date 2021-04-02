@@ -120,7 +120,7 @@ class SparseMatrix:
     def shape(self):
         return self.m, self.n
     
-    # row와 column값을 주면 그에 대한 값을 반환해 주는 함수(메소드)
+    #row와 column값을 주면 그에 대한 값을 반환해 주는 함수(메소드)
     def getValue(self, row, col):
         for i in range(1, len(self.sm)):
             if row == self.sm[i][0] and col == self.sm[i][1]:

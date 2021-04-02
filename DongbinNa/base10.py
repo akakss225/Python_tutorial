@@ -14,7 +14,6 @@ class Monster(Unit):
         self.name = name
         self.power = power
         self.type = type
-    
 
     def show_info(self):
         print('몬스터 이름:', self.name, '/ 몬스터 종류', self.type)
@@ -26,3 +25,4 @@ unit.attack()
 monster = Monster('슬라임', 10,'초급')
 monster.show_info()
 monster.attack()
+

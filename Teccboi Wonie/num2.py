@@ -11,6 +11,7 @@ class Person:
     def introduce(self):
         print('안녕 나는',self.name,'내 나이는',self.age,' 살이야')
 
+# introduce 메소드를 오버라이딩.
 class Police(Person):
     def arrest(self, to_arrest):
         print('넌 체포됐다,', to_arrest)

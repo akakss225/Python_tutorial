@@ -28,6 +28,5 @@ print(car1.name)
 del car1
 del car2
 
-
 car1.show_info()
 car2.show_info()

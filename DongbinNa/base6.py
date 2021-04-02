@@ -32,5 +32,3 @@ for i in range(0, len(tuple)):
     else:
         print(tuple[i])        
 
-list2 = ['P','y','t','h','o','n']
-print(list + list2)
