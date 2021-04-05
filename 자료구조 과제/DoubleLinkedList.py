@@ -50,12 +50,12 @@ class DoubleLinkedList:
         result = 1
         curNode = self.root
         if curNode.item == None:
-            print(0)
+            return 0
         else:
             while curNode.rlink != None:
                 curNode = curNode.rlink
                 result += 1
-            print(result)
+            return result
             
     def find(self, item):
         curNode = self.root
@@ -63,12 +63,61 @@ class DoubleLinkedList:
         if curNode.item == item:
             return index
         else:
-            while curNode.item != item:
+            while curNode.rlink != None:
                 curNode = curNode.rlink
                 index += 1
                 if curNode.item == item:
                     return index
-
+            return -1
+        
+    def nodeFind(self, index):
+        curNode = self.root
+        if index < 0 or self.size() == 0:
+            return None
+        
+        if index == 0:
+            return curNode.item
+        elif index >= self.size():
+            return None
+        else:
+            for i in range(index):
+                curNode = curNode.rlink
+            return curNode.item
+    
+    def insert(self, item, idx):
+        curNode = self.root
+        newNode = DNode(item)
+        if idx < 0 or idx > self.size():
+            return None
+        elif idx == 0:
+            temp = self.root
+            self.root = newNode
+            newNode.rlink = temp
+        else:
+            for i in range(1,idx):
+                curNode = curNode.rlink
+            temp = curNode.rlink
+            curNode.rlink = newNode
+            newNode.rlink = temp
+            newNode.llink = temp.llink
+            
+    def delete(self, item):
+        curNode = self.root
+        if self.root.item == item:
+            self.root = self.root.rlink
+            self.root.llink = None
+        else:
+            while curNode.rlink != None:
+                curNode = curNode.rlink
+                if curNode.rlink == None:
+                    if curNode.item == item:
+                        curNode.llink.rlink = curNode.rlink
+                else:
+                    if curNode.item == item:
+                        curNode.llink.rlink = curNode.rlink
+                        curNode.rlink.llink = curNode.llink
+                        
+            
     def print(self):
         curNode = self.root
         if curNode.item == None:
@@ -89,9 +138,14 @@ a.print()
 a.setCurrent('배')
 a.moveLeft()
 a.moveRight()
-a.size()
+print(a.size())
 print(a.find('사과'))
 print(a.find('배'))
 print(a.find('귤'))
 print(a.find('포도'))
 print(a.find('딸기'))
+print(a.nodeFind(3))
+a.insert('체리',3)
+a.print()
+a.delete('배')
+a.print()
