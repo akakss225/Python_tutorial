@@ -29,6 +29,8 @@ class Monster:
             user.hp -= 3
     
     def status(self):
+        if self.hp <= 0:
+            return None
         print('캐리터명 :',self.name)
         print('공격력 :',self.power)
         print('HP :',self.hp)
