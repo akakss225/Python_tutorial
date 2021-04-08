@@ -30,3 +30,4 @@ cookie2.check()
 cookie3 = Macaron('바나나', 50)
 cookie3.print()
 cookie3.check()
+

@@ -1,8 +1,8 @@
 import sys
 from PyQt5.QtWidgets import *
-import PyQt5 import uic
+from PyQt5 import uic
 
-form_class = uic.loadUiType(C:\\Users\\akaks\\Documents\\Python_tutorial\\PyQT\\num1.ui)[0]
+form_class = uic.loadUiType("C:\\Users\\akaks\\Documents\\Python_tutorial\\PyQT\\num1.ui")[0]
 
 class WindowClass(QMainWidow, from_class):
     def __init__(self):

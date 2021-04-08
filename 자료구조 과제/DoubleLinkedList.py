@@ -92,14 +92,15 @@ class DoubleLinkedList:
         elif idx == 0:
             temp = self.root
             self.root = newNode
-            newNode.rlink = temp
+            self.root.rlink = temp
         else:
             for i in range(1,idx):
                 curNode = curNode.rlink
-            temp = curNode.rlink
-            curNode.rlink = newNode
-            newNode.rlink = temp
-            newNode.llink = temp.llink
+            preNode = curNode.llink
+            temp = curNode.rlink #원래 idx에 존재하던 값을 temp에 임시저장
+            curNode.rlink = newNode #지정된 idx에 새로운 값을 저장 
+            curNode.rlink.llink = preNode #새롭게 지정된 값의 llink에 원랴 idx에 존재하던 값을 저장
+            curNode.rlink.rlink = temp
             
     def delete(self, item):
         curNode = self.root
@@ -145,7 +146,8 @@ print(a.find('귤'))
 print(a.find('포도'))
 print(a.find('딸기'))
 print(a.nodeFind(3))
+
 a.insert('체리',3)
 a.print()
-a.delete('배')
+a.delete('체리')
 a.print()
