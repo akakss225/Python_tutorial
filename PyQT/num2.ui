@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>315</height>
+    <width>522</width>
+    <height>338</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,11 +28,11 @@
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <widget class="QPlainTextEdit" name="plainTextEdit">
-      <property name="plainText">
-       <string>헬로 파이큐티 텍스트</string>
-      </property>
-     </widget>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QPlainTextEdit" name="plainTextEdit"/>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -41,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>498</width>
+     <width>522</width>
      <height>21</height>
     </rect>
    </property>
