@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMainWindow,QApplication, qApp, QFileDialog
 from PyQt5.uic import loadUiType
 from PyQt5.QtGui import *
 
-form_class = loadUiType("imageViewer.ui")[0]
+form_class = loadUiType("C:\\Users\\akaks\Documents\\Python_tutorial\\자료구조 과제\\imageViewer.ui")[0]
 
 class Node:
     def __init__(self, item = None):
@@ -43,7 +43,7 @@ class CirclelinkedList:
                 curNode = curNode.link
             self.current = curNode
     
-    def moverNext(self):
+    def moveNext(self):
         self.current = self.current.link
         print('현재 위치는', self.current,'입니다.')
     
@@ -102,7 +102,7 @@ class ViewerClass(QMainWindow, form_class):
         self.label.setPixmap(self.qPixmapVar)
     
     def moveNextClick(self):
-        self.files.moverNext()
+        self.files.moveNext()
         self.qPixmapVar.load(self.files.current.item)
         self.qPixmapVar = self.qPixmapVar.scaled(700, 400, aspectRatioMode = True)
         self.label.setPixmap(self.qPixmapVar)
