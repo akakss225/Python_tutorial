@@ -84,11 +84,10 @@ for item in numList:
     # item이 * / 연산자 이면,
     elif item == '*' or item == '/':
         # 우선 s에 쌓여있는 값 중 last가 곱셈 나눗셈 연산자인지 확인하고
-        while s.peek() == '*' or s.peek() == '/':
-            # 맞다면, 그 값을 리스트에 담아주고
+        if isOder(s.peek()) == True:
             postNum.append(s.pop())
-        # 아니라면 item을 s에 담아준다.
-        s.push(item)
+        else:
+            s.push(item)
     # item이 숫자라면,
     elif isNum(item) == True:
         # 그대로 list에 담아준다
@@ -104,4 +103,22 @@ while s.isEmpty() == False:
 print(s.s)
 
 
+for item in postNum:
+    if isOder(item) == True:
+        s.push(item)
+    else:
+        num1 = float(s.pop())
+        num2 = float(s.pop())
+        if item == '+' :
+            s.push(str(num1 + num2))
+        elif item == '-':
+            s.push(str(num1 - num2))
+        elif item == '*':
+            s.push(str(num1 * num2))
+        elif item == '/':
+            s.push(str(num1 / num2))
+
+print(s.pop())
+
+        
 
