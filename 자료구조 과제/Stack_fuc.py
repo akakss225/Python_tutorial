@@ -10,19 +10,19 @@ class Stack:
         return len(self.s) == 0
     
     def pop(self):
-        if self.isEmpty() == True:
-            return None
-        else:
+        if self.isEmpty() == False:
             return self.s.pop(-1)
+        else:
+            return None
     
     def size(self):
         return len(self.s)
     
     def peek(self):
-        if self.isEmpty == True:
-            return None
+        if self.isEmpty() == False:
+            return self.s[s.size()-1]
         else:
-            return self.s[-1]
+            return None
     
 def eqBranktCheck(f):
     s = Stack()
@@ -73,26 +73,17 @@ for item in numList:
             else:
                 # 반복문을 통해 temp에 들어오는 값이 ( 가 아니면, 빈 list에 값을 담아놓는다.
                 postNum.append(temp)
-    # item이 + - 연산자 이면,
-    elif item == '+' or item == '-':
-        # 우선 isOder를 통해 스택의 last가 연산자임을 확인하고,
-        while isOder(s.peek()) == True:
-            # True가 나온다면, s에서 pop한 값을 list에 담는다.
-            postNum.append(s.pop())
-        # 스택에 쌓인 값이 숫자 혹은 + - 연산자가 아니라면, item을 s에 담아준다.
-        s.push(item)
-    # item이 * / 연산자 이면,
-    elif item == '*' or item == '/':
-        # 우선 s에 쌓여있는 값 중 last가 곱셈 나눗셈 연산자인지 확인하고
+    # item이 연산자 이면,
+    elif isOder(item) == True:
         if isOder(s.peek()) == True:
             postNum.append(s.pop())
-        else:
-            s.push(item)
+        s.push(item)
     # item이 숫자라면,
     elif isNum(item) == True:
         # 그대로 list에 담아준다
         postNum.append(item)
     # list 혹은 Stack에 값을 담을 때 마다 출력해준다.
+    print(s.s)
     print(postNum)
 
 # 최종적으로 Stack이 빌때까지 Stack에 남은 값들을 list에 담아준다.
@@ -101,10 +92,11 @@ while s.isEmpty() == False:
     postNum.append(s.pop())
 
 print(s.s)
+print(postNum)
 
 
 for item in postNum:
-    if isOder(item) == True:
+    if isNum(item) == True:
         s.push(item)
     else:
         num1 = float(s.pop())
@@ -119,6 +111,3 @@ for item in postNum:
             s.push(str(num1 / num2))
 
 print(s.pop())
-
-        
-
