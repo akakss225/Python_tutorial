@@ -50,7 +50,6 @@ def isNum(a):
     except ValueError:
         return False
 
-    
 num = '( 12.3 + 6 ) * 3 / 6'
 numList = num.split(" ")
 s = Stack() # 빈 스텍
@@ -101,13 +100,16 @@ for item in postNum:
     else:
         num1 = float(s.pop())
         num2 = float(s.pop())
+        print(num1)
+        print(num2)
+        
         if item == '+' :
-            s.push(str(num1 + num2))
+            s.push(str(round(num2 + num1,2)))
         elif item == '-':
-            s.push(str(num1 - num2))
+            s.push(str(round(num2 - num1,2)))
         elif item == '*':
-            s.push(str(num1 * num2))
+            s.push(str(round(num2 * num1,2)))
         elif item == '/':
-            s.push(str(num1 / num2))
+            s.push(str(round(num2 / num1,2)))
 
 print(s.pop())
