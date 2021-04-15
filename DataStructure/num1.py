@@ -1,7 +1,9 @@
-# Queue
+# Queue(대기행렬) FIFO
 # 기본적으로 Queue의 경우 2개의 변수가 사용됨
 # enQueue : Queue를 늘리는것
 # deQueue : Queue를 줄이는것
+# fornt : Queue에서 제거가 일어나는 쪽
+# rear : Queue에서 추가가 일어나는 쪽
 
 class Queue:
     def __init__(self):
@@ -49,3 +51,4 @@ print(q.getRear())
 
 print(q.deQueue())
 print(q.q)
+print(q.isEmpty())
