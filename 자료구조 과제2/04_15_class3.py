@@ -8,9 +8,6 @@ class BNode:
     def setRight(self, node):
         self.right = node   
 
-class BinaryTree:
-    def __init__(self,root):
-        self.root = root
 
 class BinaryTree:
     def __init__(self,root):
