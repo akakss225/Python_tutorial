@@ -11,4 +11,5 @@ l = [1,2,2,3,3]
 newList = list(set(l))
 
 print(type(newList))
+print(l)
 print(newList)
