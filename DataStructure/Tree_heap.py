@@ -62,7 +62,6 @@ class Heap_Tree:
             self.heapify_down(0)
             
             
-      
       def print_Heap(self):
             print(self.H)
 
