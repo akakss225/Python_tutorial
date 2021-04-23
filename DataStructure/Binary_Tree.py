@@ -3,6 +3,7 @@
 # preOrder : MLR 순서로 방문한다. 즉, 자기자신을 먼저 방문하고, 좌변으로 전부 방문을 하고 마지막에 우측으로 이동한다.
 # inOrder : LMR
 # postOrder : LRM
+# 순회방법을 안다면, 모양을 모르는 이진트리의 모양을 알아낼 수 있다(reconstruct).
 
 
 
