@@ -1,3 +1,5 @@
+#종합 그래프
+
 import matplotlib.pyplot as plt
 import numpy as np
 

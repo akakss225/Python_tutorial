@@ -1,3 +1,5 @@
+# 선 그래프
+
 import matplotlib.pyplot as plt
 
 x = [1,2,3,4,5,6,7,8,9]
