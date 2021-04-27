@@ -14,28 +14,30 @@ class Node:
         self.left = None
         self.right = None
     
-    def preOrder(self): # 현재 방문중인 node = self
+    def preOrder(self): 
         if self.key != None:
-            print(self.key)
+            print(self.key, end=" ")
             if self.left:
                 self.left.preOrder()
             if self.right:
                 self.right.preOrder()
+
     
     def inOrder(self):
         if self.key != None:
             if self.left:
                 self.left.inOrder()
-            print(self.key)
+            print(self.key,end=" ")
             if self.right:
                 self.right.inOrder()
+
     
     def postOrder(self):
         if self.left:
             self.left.postOrder()
         if self.right:
             self.right.postOrder()
-        print(self.key)
+        print(self.key,end=" ")
     
             
     
@@ -55,5 +57,9 @@ b.right = d
 d.parent = b
 
 a.preOrder()
+print()
 a.inOrder()
+print()
 a.postOrder()
+
+
