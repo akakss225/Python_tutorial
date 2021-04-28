@@ -32,6 +32,8 @@ plt.ylabel("Floating Population", fontsize=12)
 
 # 산점도 그리기(x축 : 요일, y축 : 유동인구수)
 plt.scatter(x_data[0:5],a[0:5],c='r',s=50)
+
+# 추가적으로 주말또한 다른 색으로 산점도를 그려줌
 plt.scatter(x_data[5:],a[5:],c='b',s=50)
 
 
