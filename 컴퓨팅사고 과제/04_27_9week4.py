@@ -1,3 +1,5 @@
+# 분산 그래프
+
 import matplotlib.pyplot as plt
 
 x1 = [2, 3, 4]
