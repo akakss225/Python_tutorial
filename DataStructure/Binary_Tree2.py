@@ -68,6 +68,7 @@ class BST: # Binary Search Tree
             print('Key is already in tree')
             return p
         
+        
 
 a = BST()
 a.insert(15)
@@ -78,3 +79,5 @@ a.insert(2)
 a.insert(17)
 a.insert(19)
 a.insert(32)
+
+print(a.__str__())
