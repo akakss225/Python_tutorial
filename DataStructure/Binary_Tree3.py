@@ -105,12 +105,10 @@ class BST:
 
 
 t = BST()
-t_list = list(t)
-
-t.insert(15)    
+t.insert(15)
 t.insert(21)    
 t.insert(24)    
-t.insert(53)    
+t.insert(53)
 t.insert(7)    
 t.insert(10)    
 t.insert(5)    
