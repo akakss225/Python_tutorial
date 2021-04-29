@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow,QApplication
 from PyQt5.uic import loadUiType
 
-form_class=loadUiType("/Users/sumin/Desktop/Python/Python_tutorial/자료구조 과제2/SimpleCalc.ui")[0]
+form_class=loadUiType("/Users/sumin/Desktop/Python/Python_tutorial/SCSC자구과제/SimpleCalc.ui")[0]
 
 class CalcClass(QMainWindow, form_class):
     def __init__(self, parent=None):
