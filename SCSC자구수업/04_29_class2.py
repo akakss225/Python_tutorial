@@ -8,7 +8,7 @@
 
 # 15 12 6 11 10 2 3 1 8의 숫자를 이용
 
-class Heap:
+class MaxHeap:
     def __init__(self):
         self.h = [None]
     
@@ -46,7 +46,7 @@ class Heap:
         self.heapify_up(self.h.index(key))
         
         
-h = Heap()
+h = MaxHeap()
 h.insert(12)
 h.insert(2)
 h.insert(15)
