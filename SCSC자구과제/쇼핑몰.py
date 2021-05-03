@@ -5,6 +5,9 @@
 마우스 한개당 평균 이익은 얼마인가? 예: 9,200원에 마우스를 팔면 이익은 2,200원이다.
 '''
 import numpy as np
+import math 
+import statistics
+
 
 class MinHeap:
     def __init__(self):
@@ -47,10 +50,10 @@ class MinHeap:
                 if self.has_R_child(temp):
                     if self.h[self.get_L_child(temp)] < self.h[self.get_R_child(temp)]:
                         if self.h[self.get_L_child(temp)] < self.h[temp]:
-                            self.swap(self.get_L_child(temp), temp)
+                            self.swap(self.get_L_child(temp), temp)            
                     else:
                         if self.h[self.get_R_child(temp)] < self.h[temp]:
-                            self.swap(self.get_R_child(temp), temp)
+                            self.swap(self.get_R_child(temp), temp)                            
                 else:
                     if self.h[self.get_L_child(temp)] < self.h[temp]:
                         self.swap(self.get_L_child(temp), temp)
@@ -63,25 +66,22 @@ class MinHeap:
         
     def delete(self):
         self.swap(0, self.size()-1)
-        self.h.pop()
+        temp = self.h.pop()
         self.heapify_up(self.size()-1)
+        return temp
 
 
 
 h = MinHeap()
-h.insert(10)
-h.insert(2)
-h.insert(15)
-h.insert(30)
-h.insert(41)
-h.insert(12)
-h.insert(25)
-h.insert(27)
-h.insert(3)
-h.insert(1)
-h.insert(9)
-print(h.h)
-h.delete()
-print(h.h)
-h.delete()
-print(h.h)
+
+# a = np.random.normal(10000,1000,10) 순서대로 평균/ 표준편차 / 사이즈 의미
+
+result = []
+for i in range(10000):
+    a = np.random.normal(10000,1000)
+    h.insert(round(a))
+    if h.size() > 10:
+        result.append(h.delete() - 7000)
+    
+profit = statistics.mean(result)
+print(profit)
