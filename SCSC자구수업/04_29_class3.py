@@ -14,7 +14,10 @@ class MinHeap:
         return idx * 2 + 2
     
     def hasParent(self, idx):
-        return self.getParent(idx) != None
+        if idx == 0:
+            return False
+        else:
+            return self.getParent(idx) >= 0
     
     def hasLchild(self, idx):
         return self.getLchild(idx) < len(self.h)
@@ -26,18 +29,13 @@ class MinHeap:
         self.h[a], self.h[b] = self.h[b], self.h[a]
         
     def heapufy_down(self, idx):
-        while self.hasLchild(idx) or self.hasRchild(idx):
-            if self.h[idx] < self.h[self.getLchild(idx)] or self.h[idx] < self.h[self.getRchild(idx)]:
-                if self.h[self.getLchild(idx)] > self.h[self.getRchild(idx)]:
-                    self.swap(idx, self.getLchild(idx))
-                    idx = self.getLchild(idx)
-                else:
-                    self.swap(idx, self.getRchild(idx))
-                    idx = self.getRchild(idx)
+        while (self.hasParent(idx) and self.h[idx] < self.h[self.getParent(idx)]):
+            self.swap(idx, self.getParent(idx))
+            idx = self.getParent(idx)
             
     def insert(self, key):
         self.h.append(key)
-        self.heapufy_down(0)
+        self.heapufy_down(self.h.index(key))
         
     def getMin(self):
         return self.h[0]
