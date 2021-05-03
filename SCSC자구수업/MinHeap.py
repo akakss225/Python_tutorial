@@ -52,21 +52,31 @@ class MinHeap:
     
     def heapify_up(self, idx):
         if self.has_parent(idx):
-            temp = self.get_parent(idx)
-            while temp >= 0:
-                if self.has_R_child(temp):
-                    if self.h[self.get_L_child(temp)] < self.h[self.get_R_child(temp)]:
-                        if self.h[self.get_L_child(temp)] < self.h[temp]:
-                            self.swap(self.get_L_child(temp), temp)            
+            t = self.get_parent(idx)
+            while t >= 0:
+                if self.has_R_child(t):
+                    if self.h[self.get_R_child(t)] < self.h[self.get_L_child(t)]:
+                        if self.h[self.get_R_child(t)] < self.h[t]:
+                            self.swap(self.get_R_child(t), t)
                     else:
-                        if self.h[self.get_R_child(temp)] < self.h[temp]:
-                            self.swap(self.get_R_child(temp), temp)                            
+                        if self.h[self.get_L_child(t)] < self.h[t]:
+                            self.swap(self.get_L_child(t), t)
                 else:
-                    if self.h[self.get_L_child(temp)] < self.h[temp]:
-                        self.swap(self.get_L_child(temp), temp)
-                temp -= 1
-                        
-            
+                    if self.h[self.get_L_child(t)] < self.h[t]:
+                        self.swap(self.get_L_child(t), t)
+                t -= 1
+                
+    def heapify_down(self, idx):
+        while self.has_L_child(idx) or self.has_R_child(idx):
+            if self.h[self.get_L_child(idx)] < self.h[self.get_R_child(idx)]:
+                if self.h[idx] > self.h[self.get_L_child(idx)]:
+                    self.swap(idx, self.get_L_child(idx))
+                    idx = self.get_L_child(idx)
+            else:
+                if self.h[idx] > self.h[self.get_R_child(idx)]:
+                    self.swap(idx, self.get_R_child(idx))
+                    idx = self.get_R_child(idx)
+                    
     def insert(self, key):
         self.h.append(key)
         self.heapify_up(self.h.index(key))
@@ -74,7 +84,7 @@ class MinHeap:
     def delete(self):
         self.swap(0, self.size()-1)
         temp = self.h.pop()
-        self.heapify_up(self.size()-1)
+        self.heapify_down(0)
         return temp
         
 

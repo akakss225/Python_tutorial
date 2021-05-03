@@ -5,8 +5,7 @@
 마우스 한개당 평균 이익은 얼마인가? 예: 9,200원에 마우스를 팔면 이익은 2,200원이다.
 '''
 import numpy as np
-import math 
-import statistics
+import math
 
 
 class MinHeap:
@@ -76,12 +75,18 @@ h = MinHeap()
 
 # a = np.random.normal(10000,1000,10) 순서대로 평균/ 표준편차 / 사이즈 의미
 
+# 10개의 재고를 유지하면서, 가장 가격이 싼 제품을 담을 list를 생성해놓는다.
 result = []
-for i in range(10000):
+for i in range(1000):
+    # 평균이 10000이고, 표준편차가 1000인 임의의 금액을 heap에 넣어준다.
     a = np.random.normal(10000,1000)
     h.insert(round(a))
+    print(h.h)
+    # 힙의 크기가 10개가 넘어가면, 가장 작은값을 결과에 넣어준다.
     if h.size() > 10:
+        # 이때, 이윤의 평균을 구하기위해 원가인 7000원을 뺀 상태로 넣어준다.
         result.append(h.delete() - 7000)
-    
-profit = statistics.mean(result)
-print(profit)
+
+# 리스트 내부 값의 평균을 구하는 mean함수 사용 
+profit = np.mean(result)
+print(profit) 
