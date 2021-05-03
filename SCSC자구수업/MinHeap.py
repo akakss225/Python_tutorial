@@ -68,14 +68,20 @@ class MinHeap:
                 
     def heapify_down(self, idx):
         while self.has_L_child(idx) or self.has_R_child(idx):
-            if self.h[self.get_L_child(idx)] < self.h[self.get_R_child(idx)]:
-                if self.h[idx] > self.h[self.get_L_child(idx)]:
-                    self.swap(idx, self.get_L_child(idx))
-                    idx = self.get_L_child(idx)
+            if self.has_R_child(idx):
+                if self.h[self.get_L_child(idx)] > self.h[self.get_R_child(idx)]:
+                    if self.h[idx] > self.h[self.get_R_child(idx)]:
+                        self.swap(idx, self.get_R_child(idx))
+                        idx = self.get_R_child(idx)
+                else:
+                    if self.h[idx] > self.h[self.get_L_child(idx)]:
+                        self.swap(idx, self.get_L_child(idx))
+                        idx = self.get_L_child(idx)
             else:
-                if self.h[idx] > self.h[self.get_R_child(idx)]:
-                    self.swap(idx, self.get_R_child(idx))
-                    idx = self.get_R_child(idx)
+                if self.h[idx] > self.h[self.get_L_child(idx)]:
+                        self.swap(idx, self.get_L_child(idx))
+                        idx = self.get_L_child(idx)
+                        
                     
     def insert(self, key):
         self.h.append(key)
@@ -87,8 +93,6 @@ class MinHeap:
         self.heapify_down(0)
         return temp
         
-
-            
 
 h = MinHeap()
 
@@ -112,5 +116,7 @@ h.insert(13)
 h.insert(12)
 print(h.h)
 
+h.delete()
+print(h.h)
 h.delete()
 print(h.h)

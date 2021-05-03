@@ -20,3 +20,20 @@ print(b)
 >>Mutable의 경우 주소자체를 공유하기 때문에 영향을 미칠 수 있다.
 다만 이때 vartest2를 통해 생성된 b와 전역변수 b는 엄연히 다른 것이다.
 
+
+    def heapify_up(self, idx):
+        if self.has_parent(idx):
+            temp = self.get_parent(idx)
+            while temp >= 0:
+                if self.has_R_child(temp):
+                    if self.h[self.get_L_child(temp)] < self.h[self.get_R_child(temp)]:
+                        if self.h[self.get_L_child(temp)] < self.h[temp]:
+                            self.swap(self.get_L_child(temp), temp)            
+                    else:
+                        if self.h[self.get_R_child(temp)] < self.h[temp]:
+                            self.swap(self.get_R_child(temp), temp)                            
+                else:
+                    if self.h[self.get_L_child(temp)] < self.h[temp]:
+                        self.swap(self.get_L_child(temp), temp)
+                temp -= 1
+

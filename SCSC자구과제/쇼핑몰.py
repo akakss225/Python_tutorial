@@ -8,6 +8,7 @@ import numpy as np
 import math
 
 
+
 class MinHeap:
     def __init__(self):
         self.h = []
@@ -58,7 +59,6 @@ class MinHeap:
                         self.swap(self.get_L_child(temp), temp)
                 temp -= 1
                         
-            
     def insert(self, key):
         self.h.append(key)
         self.heapify_up(self.h.index(key))
