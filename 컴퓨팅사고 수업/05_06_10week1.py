@@ -15,3 +15,10 @@ print(np.random.rand(5)) # 0~1 사이의 random한 n개의 수 출력, 이때 �
 print(np.random.choice(6, 10)) # 6미만의 random한 수 10개가 중복을 허용하고 나옴
 print(np.random.choice(10, 6, replace=False)) # 중복을 허용하지 않고 나옴
 
+# 0으로 이루어진 크기가 10인 배열
+print(np.zeros(10))
+
+# 연속된 숫자의 array
+print(np.arange(3))
+print(np.arange(3, 7))
+print(np.arange(3, 7, 2))
