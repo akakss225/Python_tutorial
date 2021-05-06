@@ -58,7 +58,7 @@ class MinHeap:
                     if self.h[self.get_L_child(temp)] < self.h[temp]:
                         self.swap(self.get_L_child(temp), temp)
                 temp -= 1
-                        
+
     def insert(self, key):
         self.h.append(key)
         self.heapify_up(self.h.index(key))
@@ -77,7 +77,7 @@ h = MinHeap()
 
 # 10개의 재고를 유지하면서, 가장 가격이 싼 제품을 담을 list를 생성해놓는다.
 result = []
-for i in range(1000):
+for i in range(20):
     # 평균이 10000이고, 표준편차가 1000인 임의의 금액을 heap에 넣어준다.
     a = np.random.normal(10000,1000)
     h.insert(round(a))
