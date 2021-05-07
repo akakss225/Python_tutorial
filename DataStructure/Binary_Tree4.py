@@ -70,7 +70,6 @@ class BST:
             if tmp_x.key != key: # 즉 삭제될 값이 트리 내부에 없는 경우 None을 return해줌
                 return None
             else: # 삭제 될 값이 트리 내부에 존재할 경우 진행
-                
                 if tmp_x.parent != None: # 삭제 될 값이 루트가 아닌 경우
                     if tmp_l != None: # 삭제 될 node의 왼쪽 자식이 있는 경우
                         tmp_x = tmp_l # 삭제될 자리에 왼쪽 자식을 넣어줌
@@ -103,7 +102,6 @@ class BST:
         if self.size == 0:
             return None
         else:
-            
             # 삭제 될 node
             x = self.find_loc(key)
             # 삭제 될 node의 왼쪽 자식

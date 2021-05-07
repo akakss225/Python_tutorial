@@ -21,4 +21,4 @@ print(np.zeros(10))
 # 연속된 숫자의 array
 print(np.arange(3))
 print(np.arange(3, 7))
-print(np.arange(3, 7, 2))
+print(np.arange(3, 7, 2)) # 3~ 7사이의 수를 2개씩 더하며 출력

@@ -8,7 +8,6 @@ import numpy as np
 import math
 
 
-
 class MinHeap:
     def __init__(self):
         self.h = []
