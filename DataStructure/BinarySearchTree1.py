@@ -56,9 +56,7 @@ class BST:
     def print(self):
         self.root.inOrder()
                 
-    
-                
-      
+
 b = BST()
 
 b.insert(16)
