@@ -57,55 +57,56 @@ class BST:
         if self.size == 0:
             return None
         else:
-            temp_c = self.find(key)
-            temp_p = temp_c.parent
-            temp_l = temp_c.left
-            temp_r = temp_c.right
-            temp_m = temp_l
-            if temp_p.key != key:
-                return None
+            d = self.find(key)
+            l = d.left
+            r = d.right
+            p = d.parent
+            m = d.left
+            
+            if d.key != key:
+                print('key값이 존재하지 않습니다.')
             else:
-                if temp_p != None:
-                    if temp_c.key < temp_p.key:
-                        if temp_l != None:
-                            temp_c = temp_l
-                            temp_c.parent = temp_p
-                            temp_p.left = temp_c
-                            while temp_m != None:
-                                temp_m = temp_m.right
-                            if temp_r != None:
-                                temp_m.right = temp_r
-                                temp_r.parent = temp_m
+                if p != None:
+                    if l != None:
+                        if key < p.key:
+                            d = l
+                            d.parent = p
+                            p.left = d
+                            while m != None:
+                                m = m.right
+                            if r != None:
+                                m.right = r
+                                r.parent = m
                         else:
-                            temp_c = temp_r
-                            temp_c.parent = temp_p
-                            temp_p.left = temp_c
+                            d = l
+                            d.parent = p
+                            p.right = d
+                            while m != None:
+                                m = m.right
+                            if r != None:
+                                m.right = r
+                                r.parent = m
                     else:
-                        if temp_l != None:
-                            temp_c = temp_l
-                            temp_c.parent = temp_p
-                            temp_p.right = temp_c
-                            while temp_m != None:
-                                temp_m = temp_m.right
-                            if temp_r != None:
-                                temp_m.right = temp_r
-                                temp_r.parent = temp_m
+                        if key < p.key:
+                            d = r
+                            d.parent = p
+                            p.left = d
                         else:
-                            temp_c = temp_r
-                            temp_c.parent = temp_p
-                            temp_p.left = temp_c
+                            d = r
+                            d.parent = p
+                            p.right = d
                 else:
-                    if temp_l != None:
-                        temp_c = temp_l
-                        while temp_m != None:
-                            temp_m = temp_m.right
-                        if temp_r != None:
-                            temp_m.right = temp_r
-                            temp_r.parent = temp_m
+                    if l != None:
+                        d = l
+                        d.parent = None
+                        while m != None:
+                            m = m.right
+                        if r != None:
+                            m.right = r
+                            r.parent = m
                     else:
-                        temp_c = temp_r
-                        temp_c.parent = temp_p
-                        temp_p.left = temp_c
+                        d = r
+                        d.parent = None
         self.size -= 1
         
     def print(self):
@@ -134,6 +135,6 @@ b.insert(12)
 b.print()
 print(b.size)
 
-b.delete(1)
+b.delete(2)
 b.print()
 print(b.size)
