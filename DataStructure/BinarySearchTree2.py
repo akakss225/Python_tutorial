@@ -58,10 +58,10 @@ class BST:
             return None
         else:
             d = self.find(key)
-            l = d.left
-            r = d.right
-            p = d.parent
-            m = d.left
+            l = self.find(key).left
+            r = self.find(key).right
+            p = self.find(key).parent
+            m = self.find(key).left
             
             if d.key != key:
                 print('key값이 존재하지 않습니다.')
@@ -69,18 +69,16 @@ class BST:
                 if p != None:
                     if l != None:
                         if key < p.key:
-                            d = l
-                            d.parent = p
-                            p.left = d
+                            l.parent = p
+                            p.left = l
                             while m != None:
-                                m = m.right
+                                m = m.right 
                             if r != None:
                                 m.right = r
                                 r.parent = m
                         else:
-                            d = l
-                            d.parent = p
-                            p.right = d
+                            l.parent = p
+                            p.right = l
                             while m != None:
                                 m = m.right
                             if r != None:
@@ -88,25 +86,21 @@ class BST:
                                 r.parent = m
                     else:
                         if key < p.key:
-                            d = r
-                            d.parent = p
-                            p.left = d
+                            r.parent = p
+                            p.left = r
                         else:
-                            d = r
-                            d.parent = p
-                            p.right = d
+                            r.parent = p
+                            p.right = r
                 else:
                     if l != None:
-                        d = l
-                        d.parent = None
+                        self.root = l
                         while m != None:
                             m = m.right
                         if r != None:
                             m.right = r
                             r.parent = m
                     else:
-                        d = r
-                        d.parent = None
+                        self.root = r
         self.size -= 1
         
     def print(self):
@@ -135,6 +129,6 @@ b.insert(12)
 b.print()
 print(b.size)
 
-b.delete(2)
+b.delete(28)
 b.print()
 print(b.size)
