@@ -58,10 +58,10 @@ class BST:
             return None
         else:
             d = self.find(key)
-            l = self.find(key).left
-            r = self.find(key).right
-            p = self.find(key).parent
-            m = self.find(key).left
+            l = d.left
+            r = d.right
+            p = d.parent
+            m = d.left
             
             if d.key != key:
                 print('key값이 존재하지 않습니다.')
@@ -85,12 +85,19 @@ class BST:
                                 m.right = r
                                 r.parent = m
                     else:
-                        if key < p.key:
-                            r.parent = p
-                            p.left = r
+                        if r != None:
+                            if key < p.key:
+                                r.parent = p
+                                p.left = r
+                            else:
+                                r.parent = p
+                                p.right = r
                         else:
-                            r.parent = p
-                            p.right = r
+                            d = None
+                            if key < p.key:
+                                p.left = None
+                            else:
+                                p.right = None
                 else:
                     if l != None:
                         self.root = l
@@ -100,7 +107,10 @@ class BST:
                             m.right = r
                             r.parent = m
                     else:
-                        self.root = r
+                        if r != None:
+                            self.root = r
+                        else:
+                            self.root = None
         self.size -= 1
         
     def print(self):
@@ -129,6 +139,6 @@ b.insert(12)
 b.print()
 print(b.size)
 
-b.delete(28)
+b.delete(1)
 b.print()
 print(b.size)
