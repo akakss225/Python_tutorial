@@ -76,8 +76,12 @@ class BST:
                             pre.right = max.left
                             max.left.parent = pre
                         else:
-                            d.key = max.key
-                            pre.right = None
+                            if key < p.key:
+                                d.key = max.key
+                                pre.left = None
+                            else:
+                                d.key = max.key
+                                pre.right = None
                     else:
                         if r != None:
                             if key < p.key:
@@ -104,7 +108,6 @@ class BST:
                         else:
                             self.root.key = max.key
                             pre.right = None
-                            max = None
                     else:
                         if r != None:
                             self.root = r
@@ -138,6 +141,6 @@ b.insert(12)
 b.print()
 print(b.size)
 
-b.delete(2)
+b.delete(8)
 b.print()
 print(b.size)
