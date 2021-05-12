@@ -58,37 +58,58 @@ class BST:
             return None
         else:
             d = self.find(key)
-            l = d.left
             r = d.right
+            l = d.left
             p = d.parent
-            m = d.left
-            pre = d.left
-            if p != None:
-                if l != None:
-                    while m != None:
-                        pre = m
-                        m = m.right
-                    d.key = pre.key
-                    pre.parent.right = pre.left
-                    pre.left.parent = pre.parent
-                else:
-                    if r != None:
-                        d = r
-                        if key < p.key:
-                            p.left = d
-                        else:
-                            p.right = d
+            max = d.left
+            
+            if d.key != key:
+                print('key값이 존재하지 않습니다.')
             else:
-                if l != None:
-                    while m != None:
-                        pre = m
-                        m = m.right
-                    d.key = m.key
-                    pre.right = m.left
-                    m.left.parent = pre
+                if p != None:
+                    if l != None:
+                        while max.right != None:
+                            max = max.right
+                        pre = max.parent
+                        if max.left != None:
+                            d.key = max.key
+                            pre.right = max.left
+                            max.left.parent = pre
+                        else:
+                            d.key = max.key
+                            pre.right = None
+                    else:
+                        if r != None:
+                            if key < p.key:
+                                p.left = r
+                                r.parent = p
+                            else:
+                                p.right = r
+                                r.parent = p
+                        else:
+                            if key < p.key:
+                                p.left = None
+                            else:
+                                p.right = None
                 else:
-                    if r != None:
-                        self.root = r
+                    if l != None:
+                        while max.right != None:
+                            max = max.right
+                        pre = max.parent
+                        if max.left != None:
+                            self.root.key = max.key
+                            pre.right = max.left
+                            max.left.parent = pre
+                            max = None
+                        else:
+                            self.root.key = max.key
+                            pre.right = None
+                            max = None
+                    else:
+                        if r != None:
+                            self.root = r
+                        else:
+                            self.root = None
         self.size -= 1
             
     def print(self):
@@ -117,6 +138,6 @@ b.insert(12)
 b.print()
 print(b.size)
 
-b.delete(28)
+b.delete(2)
 b.print()
 print(b.size)
