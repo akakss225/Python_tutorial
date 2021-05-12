@@ -7,3 +7,5 @@ df = pd.read_html('https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_ta
  # print(df) # 이 상태로 불러오면 가독성이 떨어짐.
  
 print(df[1]) # 인덱싱을 해주면, 가독성이 올라감.
+
+# 헤더를 열 이름으로 지정하고, 나라 이름을 인덱스 이름으로 지정하는 속성 추가

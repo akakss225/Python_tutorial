@@ -9,4 +9,4 @@ df = pd.read_html('https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_ta
 summer = df[1].iloc[:,:5]
 summer.columns = ['경기수', '금', '은', '동', '계'] # 열 이름을 바꿀 수 있음.
 
-print(summer.sort_values('금', ascending=False))
+print(summer.sort_values('금', ascending=False)) # ascending = False 는 내림차순, True는 오름차순.

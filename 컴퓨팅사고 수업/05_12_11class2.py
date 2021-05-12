@@ -15,6 +15,5 @@ print(df2)
 
 print(df.T) # 행과 열을 바꿔주기
 
-df['D'] = df['A'] / df['B']
-
+df['D'] = df['A'] / df['B'] # 행 별로 계산이 되어 D에 추가됨.
 print(df)
