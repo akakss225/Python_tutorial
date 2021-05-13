@@ -11,4 +11,3 @@ df = pd.DataFrame(data)
 sort_df = df.sort_values('운행계통', ascending=True)
 
 print(sort_df.iloc[:,0:5:4])
-

@@ -71,7 +71,7 @@ class BST:
                         if key < p.key:
                             l.parent = p
                             p.left = l
-                            while m != None:
+                            while m.right != None:
                                 m = m.right 
                             if r != None:
                                 m.right = r
@@ -79,7 +79,7 @@ class BST:
                         else:
                             l.parent = p
                             p.right = l
-                            while m != None:
+                            while m.right != None:
                                 m = m.right
                             if r != None:
                                 m.right = r
@@ -101,7 +101,7 @@ class BST:
                 else:
                     if l != None:
                         self.root = l
-                        while m != None:
+                        while m.right != None:
                             m = m.right
                         if r != None:
                             m.right = r

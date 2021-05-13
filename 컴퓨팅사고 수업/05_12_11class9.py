@@ -29,5 +29,5 @@ print(df.tail(3))
 print(df['학번'])
 
 # 외부의 데이터 읽기
-df3 = pd.read_excel('/Users/sumin/Desktop/Python/하계올림픽메달.xlsx')
+df3 = pd.read_excel('/Users/sumin/Desktop/Python/하계올림픽메달.xlsx') # read_파일형식('경로')
 print(df3)

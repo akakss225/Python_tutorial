@@ -71,17 +71,21 @@ class BST:
                         while max.right != None:
                             max = max.right
                         pre = max.parent
-                        if max.left != None:
-                            d.key = max.key
-                            pre.right = max.left
-                            max.left.parent = pre
-                        else:
-                            if key < p.key:
-                                d.key = max.key
-                                pre.left = None
+                        templ = max.left
+                        d.key = max.key
+                        if max == l:
+                            if templ != None:
+                                d.left = templ
+                                templ.parent = d
                             else:
-                                d.key = max.key
+                                d.left = None
+                        else:
+                            if templ != None:
+                                pre.right = templ
+                                templ.parent = pre
+                            else:
                                 pre.right = None
+                                max.parent = None
                     else:
                         if r != None:
                             if key < p.key:
@@ -141,6 +145,10 @@ b.insert(12)
 b.print()
 print(b.size)
 
-b.delete(8)
+b.delete(2)
+b.print()
+print(b.size)
+
+b.delete(22)
 b.print()
 print(b.size)
