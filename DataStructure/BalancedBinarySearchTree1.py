@@ -8,8 +8,6 @@
 # 일정 높이 이상으로 넘어가면, rotation즉, 회전을 시켜서 높이를 줄여준다.
 # right rotation , left rotation
 
-from numpy.lib.type_check import nan_to_num
-
 
 class Node:
     def __init__(self, key = None):
@@ -142,12 +140,12 @@ class BBST:
             return None
         else:
             z = self.find(key)
-            p = z.parent
-            x = z.left
-            b = x.right
             if z == None:
                 return
             else:
+                p = z.parent
+                x = z.left
+                b = x.right
                 if p != None:
                     if x != None:
                         if key < p.key:
@@ -269,6 +267,6 @@ t.print_in()
 t.delete(19)
 t.print_pre()
 t.print_in()
-t.rotation_r(10)
+t.rotation_r(9)
 t.print_pre()
 t.print_in()
