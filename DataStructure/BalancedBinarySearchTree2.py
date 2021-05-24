@@ -8,6 +8,7 @@ class Node:
         self.left = None
         self.right = None
         self.parent = None
+        self.height = 0 # 각 노드별 높이가 주어진다.
     
     def inOrder(self):
         if self.key != None:
@@ -73,6 +74,7 @@ class BST:
                 else:
                     preNode.right = newNode
         self.size += 1
+        return newNode
                     
     def delete(self, key):
         if self.size == 0:
@@ -137,7 +139,6 @@ class BST:
                         else:
                             return None
         self.size -= 1
-                      
                     
     def printpre(self):
         self.root.preOrder()
@@ -151,21 +152,8 @@ class BST:
         self.root.postOrder()
         print()
         
-t = BST()
-t.insert(10)
-t.insert(2)
-t.insert(1)
-t.insert(11)
-t.insert(5)
-t.insert(9)
-t.insert(3)
-t.insert(17)
-
-t.printpre()
-t.printin()
-t.printpost()
-
-t.delete(3)
-t.printpre()
-t.printin()
-t.printpost()
+class AVL(BST):
+    def insert(self, key):
+        v = super(AVL, self).insert(key)
+        
+    
