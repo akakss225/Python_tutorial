@@ -10,7 +10,7 @@ numbers의 길이는 1 이상 100,000 이하입니다.
 numbers의 원소는 0 이상 1,000 이하입니다.
 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
 '''
-
+'''
 def solution(numbers):
     result = ''
     for i in range(len(numbers)):
@@ -58,7 +58,7 @@ def solution(numbers):
 numbers = [6,10,2]
 
 print(solution(numbers))
-
+'''
 '''
 def solution(numbers):
     answer = ''
@@ -91,3 +91,14 @@ def solution(numbers):
 numbers = [90,908,89,898,10,101,1,8,9]
 print(solution(numbers))
 '''
+
+def solution(numbers):
+    numbers = list(map(str, numbers))
+    numbers.sort(key=lambda x: x*3, reverse=True)
+    return str(''.join(numbers))
+#numbers = [6,10,2]
+#numbers = [3, 30, 34, 5, 9]
+#numbers = [114, 115, 23, 28, 9, 93]
+#numbers = [90,908,89,898,10,101,1,8,9]
+numbers = [10, 100, 110, 111, 101,0]
+print(solution(numbers))
