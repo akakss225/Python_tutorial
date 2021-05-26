@@ -95,10 +95,10 @@ print(solution(numbers))
 def solution(numbers):
     numbers = list(map(str, numbers))
     numbers.sort(key=lambda x: x*3, reverse=True)
-    return str(''.join(numbers))
+    return str(int(''.join(numbers)))
+
 #numbers = [6,10,2]
 #numbers = [3, 30, 34, 5, 9]
-#numbers = [114, 115, 23, 28, 9, 93]
+numbers = [114, 115, 23, 28, 9, 93]
 #numbers = [90,908,89,898,10,101,1,8,9]
-numbers = [10, 100, 110, 111, 101,0]
 print(solution(numbers))
