@@ -11,6 +11,8 @@
 def prime(num):
     if num <= 1:
         return False
+    elif num == 2 or num == 3:
+        return True
     else:
         for i in range(2, num):
             if num % i == 0:
@@ -19,18 +21,104 @@ def prime(num):
 
 def solution(numbers):
     temp_list = []
-    for i in numbers:
-        number = list(map(str, numbers))
-        number.remove(i)
-        for j in number:
-            if prime(int(i+j)) == True:
-                if (i+j) not in temp_list:
-                    temp_list.append(i+j)
-            if prime(int(i)) == True:
-                if i != j:
-                    temp_list.append(i)
+    if len(numbers) < 3:
+        for i in numbers:
+            number = list(map(str, numbers)).sort()
+            number.remove(i)
+            for j in number:
+                if prime(int(i+j)) == True:
+                    if (i+j) not in temp_list:
+                        temp_list.append(i+j)
+                if prime(int(i)) == True:
+                    if i != j:
+                        temp_list.append(i)
+    elif len(numbers) == 3:
+        for i in numbers:
+            number = list(map(str, numbers))
+            number.remove(i)
+            for j in number:
+                number.remove(j)
+                for k in number:
+                    if prime(int(i+j+k)) == True:
+                        if (i+j) not in temp_list:
+                            temp_list.append(i+j)
+                    if prime(int(i)) == True:
+                        if i != j:
+                            temp_list.append(i)
+    elif len(numbers) == 4:
+        for i in numbers:
+            number = list(map(str, numbers))
+            number.remove(i)
+            for j in number:
+                number.remove(j)
+                for k in number:
+                    number.remove(k)
+                    for x in number:
+                        if prime(int(i+j+k+x)) == True:
+                            if (i+j) not in temp_list:
+                                temp_list.append(i+j)
+                        if prime(int(i)) == True:
+                            if i != j:
+                                temp_list.append(i)
+    elif len(numbers) == 5:
+        for i in numbers:
+            number = list(map(str, numbers))
+            number.remove(i)
+            for j in number:
+                number.remove(j)
+                for k in number:
+                    number.remove(k)
+                    for x in number:
+                        number.remove(x)
+                        for y in number:
+                            if prime(int(i+j+k+x+y)) == True:
+                                if (i+j) not in temp_list:
+                                    temp_list.append(i+j)
+                            if prime(int(i)) == True:
+                                if i != j:
+                                    temp_list.append(i)
+    elif len(numbers) == 6:
+        for i in numbers:
+            number = list(map(str, numbers))
+            number.remove(i)
+            for j in number:
+                number.remove(j)
+                for k in number:
+                    number.remove(k)
+                    for x in number:
+                        number.remove(x)
+                        for y in number:
+                            number.remove(y)
+                            for z in number:
+                                if prime(int(i+j+k+x+y+z)) == True:
+                                    if (i+j) not in temp_list:
+                                        temp_list.append(i+j)
+                                if prime(int(i)) == True:
+                                    if i != j:
+                                        temp_list.append(i)
+    elif len(numbers) == 7:
+        for i in numbers:
+            number = list(map(str, numbers))
+            number.remove(i)
+            for j in number:
+                number.remove(j)
+                for k in number:
+                    number.remove(k)
+                    for x in number:
+                        number.remove(x)
+                        for y in number:
+                            number.remove(y)
+                            for z in number:
+                                number.remove(z)
+                                for u in number:
+                                    if prime(int(i+j+k+x+y+z+u)) == True:
+                                        if (i+j) not in temp_list:
+                                            temp_list.append(i+j)
+                                    if prime(int(i)) == True:
+                                        if i != j:
+                                            temp_list.append(i)
     answer = len(temp_list)
     return answer
 
-numbers = "011"
+numbers = "0135231"
 print(solution(numbers))
