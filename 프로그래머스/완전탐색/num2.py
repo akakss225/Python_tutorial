@@ -18,19 +18,19 @@ def prime(num):
         return True
 
 def solution(numbers):
-    list = []
-    answer = len(list)
+    temp_list = []
     for i in numbers:
         number = list(map(str, numbers))
         number.remove(i)
         for j in number:
             if prime(int(i+j)) == True:
-                if (i+j) not in list:
-                    list.append(i+j)
+                if (i+j) not in temp_list:
+                    temp_list.append(i+j)
             if prime(int(i)) == True:
                 if i != j:
-                    list.append(i)
+                    temp_list.append(i)
+    answer = len(temp_list)
     return answer
 
-numbers = "177"
+numbers = "011"
 print(solution(numbers))
