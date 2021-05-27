@@ -13,30 +13,17 @@
 
 
 def solution(n):
+    num = sorted(n,reverse=True)
+    size = []
     h = 0
-    max = 0
-    if len(n) == 1:
-        if n[0] == 0:
-            return h
-        elif h <= n[0]:
-            h += 1
-            return h        
-    else:
-        for i in n:
-            if h < i:
-                h += 1
-        for i in n:
-            if h <= i:
-                max += 1
-        if max < h:
-            while max < h:
-                h -= 1
-                for i in n:
-                    if h <= i:
-                        max += 1
+    for i in range(len(num)):
+        size.append(i+1)
+    for i in range(len(num)):
+        if size[i] <= num[i]:
+             h += 1
     return h
+        
             
-
-n = [3, 0, 6, 1, 5]
+n = [22,42,5]
 
 print(solution(n))
