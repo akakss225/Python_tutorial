@@ -4,7 +4,7 @@
 
 import sys
 import heapq
-
+'''
 # 오름차순 힙 정렬
 def heapsort(iterable):
     h = []
@@ -28,8 +28,7 @@ def heapsort2(iterable):
     for i in range(len(h)):
         result.append(-heapq.heappop(h))
     return result
-
-
+'''
 
 input = sys.stdin.readline
 
@@ -41,8 +40,6 @@ n, m = map(int, input().split())
 start = int(input())
 # 각 노드에 연결되어 있는 노드에 대한 정보를 담는 리스트 만들기
 graph = [[] for i in range(n + 1)]
-# 방문한 적이 있는지 체크하는 목적의 리스트 만들기
-visited = [False] * (n + 1)
 # 최단 거리 테이블을 모두 무한으로 초기화
 distance = [INF] * (n + 1)
 
@@ -72,7 +69,7 @@ def dijkstra(start):
                 heapq.heappush(q,(cost,i[0]))
                 
 
-     # 다익스트라 알고리즘 수행
+# 다익스트라 알고리즘 수행
 dijkstra(start)
 
 # 모든 노드로 가기 위한 최단 거리를 출력

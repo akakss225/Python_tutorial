@@ -7,6 +7,7 @@ graph = [(0, 1, 7), (0, 4, 3), (0, 5, 10), (1, 2, 4), (1, 4, 2),
          (1, 5, 6), (1, 3, 10), (2, 3, 2),(3, 5, 9), (3, 6, 4), (4, 6, 5)]
 nodes = set()
 for node in graph:
+    # 각 노드 집합을 구하기
     nodes.add(node[0])
     nodes.add(node[1])
 
@@ -18,6 +19,8 @@ visits = set()
 cost = {}
 
 for node in nodes:
+    # 딕셔너리로 cost를 지정해줌. 노드의 이름을 key값으로 사용하여, 순서대로 Key : cost , 부모 순서대로 넣어준다. 
+    # 이때 아직 방문하지 않은 곳의 경우 충분히 큰 값을 넣어준다.
     cost[node] = [float("inf"),None]
 
 # 시작과 끝 노드를 정의한다.

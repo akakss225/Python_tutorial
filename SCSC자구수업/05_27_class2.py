@@ -2,6 +2,7 @@ class Dijkstra:
     def __init__(self,nodes):
         self.g = {}
         self.dist = {}
+        self.nodes = ()
         for node in nodes:
             self.g[node] = {}
             self.dist[node] = [float("inf"), "none"]
@@ -17,7 +18,7 @@ class Dijkstra:
         self.dist[curNode][0] = 0
         while True:
             visits.add(curNode)
-            nodes.remove(curNode)
+            self.nodes.remove(curNode)
             neighbors = self.g[curNode]
 
             for node in neighbors:
@@ -25,8 +26,8 @@ class Dijkstra:
                     self.dist[node][0] = min(self.dist[node][0], self.dist[curNode][0] + self.g[curNode][node])
                     self.dist[node][1] = curNode
 
-            if len(nodes) > 0:
-                curNode = min(dictfilt(self.dist, nodes), key=dictfilt(self.dist, nodes).get)
+            if len(self.nodes) > 0:
+                curNode = min(dictfilt(self.dist, self.nodes), key=dictfilt(self.dist, self.nodes).get)
             else:
                 break
 
