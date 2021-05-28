@@ -7,6 +7,8 @@
 # numbers는 길이 1 이상 7 이하인 문자열입니다.
 # numbers는 0~9까지 숫자만으로 이루어져 있습니다.
 # "013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
+import math
+from itertools import permutations
 
 def prime(num):
     if num <= 1:
@@ -20,9 +22,19 @@ def prime(num):
         return True
 
 def solution(numbers):
-    temp_list = []
-    
-    answer = len(temp_list)
+    answer = 0
+    lists = []
+
+    for i in range(1,len(numbers)+1): #answer로 만들수 있는 모든 순열을 lists에 저장
+        lists = lists + (list(permutations(list(numbers), i)))
+
+    for i in range(len(lists)): #lists의 인자들이 ['1','0']이렇게 저장되있기때문에 숫자로 변환하고 둘을 붙여줌
+        lists[i] = int("".join(lists[i]))
+
+    for i in list(set(lists)): #만약에 소수라면 answer에 1을 더해줌, list(set(lists))로 unique한 값만 추출
+        if prime(i):
+            answer += 1
+
     return answer
 
 numbers = "0135231"
