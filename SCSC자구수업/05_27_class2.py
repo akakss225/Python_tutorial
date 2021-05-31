@@ -1,9 +1,15 @@
+import folium
+import csv
+import tkinter as tk
+import webbrowser
+import heapq
+
+
 class Dijkstra:
-    def __init__(self,nodes):
-        self.g = {}
+    def __init__(self, graph):
+        self.g = {graph}
         self.dist = {}
-        self.nodes = ()
-        for node in nodes:
+        for node in graph:
             self.g[node] = {}
             self.dist[node] = [float("inf"), "none"]
 
@@ -18,7 +24,7 @@ class Dijkstra:
         self.dist[curNode][0] = 0
         while True:
             visits.add(curNode)
-            self.nodes.remove(curNode)
+            nodes.remove(curNode)
             neighbors = self.g[curNode]
 
             for node in neighbors:
@@ -26,8 +32,8 @@ class Dijkstra:
                     self.dist[node][0] = min(self.dist[node][0], self.dist[curNode][0] + self.g[curNode][node])
                     self.dist[node][1] = curNode
 
-            if len(self.nodes) > 0:
-                curNode = min(dictfilt(self.dist, self.nodes), key=dictfilt(self.dist, self.nodes).get)
+            if len(nodes) > 0:
+                curNode = min(dictfilt(self.dist, nodes), key=dictfilt(self.dist, nodes).get)
             else:
                 break
 
@@ -40,4 +46,5 @@ class Dijkstra:
             end = self.dist[end][1]
 
         return path[::-1], dist[::-1]
-
+    
+        
