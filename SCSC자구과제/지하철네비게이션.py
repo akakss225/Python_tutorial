@@ -22,7 +22,9 @@ class WindowClass(QMainWindow, form_class):
 
 class Dijkstra:
     def __init__(self,nodes):
+        # 그래프를 받고, 그 그래프의 각 노드를 딕셔너리 형태로 받는다.
         self.g = {}
+        # 최단거리를 구하기위한 새로운 딕셔너리 생성
         self.dist = {}
         for node in nodes:
             self.g[node] = {}
@@ -43,8 +45,8 @@ class Dijkstra:
             neighbors = self.g[curNode]
 
             for node in neighbors:
-                if min(self.dist[node][0], self.dist[curNode][0] + self.g[curNode][node]) < self.dist[node][0]:
-                    self.dist[node][0] = min(self.dist[node][0], self.dist[curNode][0] + self.g[curNode][node])
+                if min(self.dist[node][0], self.dist[curNode][0] + int(self.g[curNode][node])) < self.dist[node][0]:
+                    self.dist[node][0] = min(self.dist[node][0], self.dist[curNode][0] + int(self.g[curNode][node]))
                     self.dist[node][1] = curNode
 
             if len(nodes) > 0:
@@ -76,8 +78,8 @@ dj = Dijkstra(nodes)
 for g in graph:
     dj.setEdge(g[0],g[1],g[2])
 
-print(dj.getPath("서울역(1)","신도림(2)"))
 
+print(dj.getPath("서울역(1)","신도림(2)"))
 
 
 
