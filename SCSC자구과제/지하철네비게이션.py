@@ -7,14 +7,24 @@
 
 import folium
 import csv
-import tkinter as tk
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5 import uic
 import webbrowser
 
+form_class = uic.loadUiType("/Users/sumin/Desktop/Python/Subway.ui")[0]
+
+class WindowClass(QMainWindow, form_class):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        
+
 class Dijkstra:
-    def __init__(self, graph):
+    def __init__(self,nodes):
         self.g = {}
         self.dist = {}
-        for node in graph:
+        for node in nodes:
             self.g[node] = {}
             self.dist[node] = [float("inf"), "none"]
 
@@ -29,7 +39,7 @@ class Dijkstra:
         self.dist[curNode][0] = 0
         while True:
             visits.add(curNode)
-            self.g.remove(curNode)
+            nodes.remove(curNode)
             neighbors = self.g[curNode]
 
             for node in neighbors:
@@ -37,8 +47,8 @@ class Dijkstra:
                     self.dist[node][0] = min(self.dist[node][0], self.dist[curNode][0] + self.g[curNode][node])
                     self.dist[node][1] = curNode
 
-            if len(self.g) > 0:
-                curNode = min(dictfilt(self.dist, self.g), key=dictfilt(self.dist, self.g).get)
+            if len(nodes) > 0:
+                curNode = min(dictfilt(self.dist, nodes), key=dictfilt(self.dist, nodes).get)
             else:
                 break
 
@@ -53,12 +63,30 @@ class Dijkstra:
         return path[::-1], dist[::-1]
 
 
-        
-        
-        
-window=tk.Tk()
 
-window.title("Subway Navy")
-window.geometry("640x400+100+100")
-window.resizable(False, False)
+f = open('subway.csv')
+graph = list(csv.reader(f))
 
+nodes = set()
+for edge in graph:
+    nodes.add(edge[0])
+    nodes.add(edge[1])
+
+dj = Dijkstra(nodes)
+for g in graph:
+    dj.setEdge(g[0],g[1],g[2])
+
+print(dj.getPath("서울역(1)","신도림(2)"))
+
+
+
+
+'''
+app = QApplication(sys.argv)
+mainWindow = WindowClass()
+mainWindow.show()
+app.exec_()
+
+
+dj = Dijkstra(graph)
+'''
