@@ -24,12 +24,17 @@ class WindowClass(QMainWindow, form_class):
         self.Add.clicked.connect(self.locationAdd)
         self.Delete.clicked.connect(self.locationDelete)
         self.Run.clicked.connect(self.programRun)
+        self.List.itemDoubleClicked.connect(self.locationAdd)
+        self.selectedList.itemDoubleClicked.connect(self.locationDelete)
     
     def locationAdd(self):
         self.currentItem.addItem(self.selectedList)
     def locationDelete(self):
         self.removeItemRow = self.selectedList.currentRow()
-        
+        self.selectedList.takeItem(self.removeItemRow)
+    def programRun(self):
+        print('Click!')
+    
 
 class Dijkstra:
     def __init__(self,nodes):
@@ -125,7 +130,6 @@ point = findLocation(dj.getPath("서울역(1)","신도림(2)"), location)
 
 print(point_Map((point)))
 
-f.close()
 
 '''
 if __name__ == "__main__" :
@@ -134,3 +138,5 @@ if __name__ == "__main__" :
     myWindow.show()
     app.exec_()
 '''
+
+f.close()
