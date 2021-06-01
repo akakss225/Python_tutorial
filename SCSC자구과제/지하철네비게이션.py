@@ -10,7 +10,9 @@ import csv
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import webbrowser
+import io
+
+from folium.map import Marker
 
 form_class = uic.loadUiType("/Users/sumin/Desktop/Python/Subway.ui")[0]
 
@@ -18,6 +20,15 @@ class WindowClass(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        
+        self.Add.clicked.connect(self.locationAdd)
+        self.Delete.clicked.connect(self.locationDelete)
+        self.Run.clicked.connect(self.programRun)
+    
+    def locationAdd(self):
+        self.currentItem.addItem(self.selectedList)
+    def locationDelete(self):
+        self.removeItemRow = self.selectedList.currentRow()
         
 
 class Dijkstra:
@@ -62,12 +73,16 @@ class Dijkstra:
             dist.append(self.dist[end][0])
             end = self.dist[end][1]
 
-        return path[::-1], dist[::-1]
+        return path[::-1]
 
 
 
 f = open('subway.csv')
 graph = list(csv.reader(f))
+
+f2 = open('subwayLocation.csv')
+location = list(csv.reader(f2))
+
 
 nodes = set()
 for edge in graph:
@@ -79,16 +94,43 @@ for g in graph:
     dj.setEdge(g[0],g[1],g[2])
 
 
-print(dj.getPath("서울역(1)","신도림(2)"))
+def findLocation(nodes, location):
+    point = []
+    for node in nodes:
+        for i in location:
+            if node[-4::-1] == i[0][-1::-1]:
+                point.append([float(i[1]),float(i[2])])
+                break
+    return point
+
+def point_Map(nodes):
+    m = folium.Map(
+        location=nodes[0],
+        tiles='openstreetmap',
+        zoom_start=13,
+        )
+    for point in nodes:
+        folium.Marker(
+            point,
+            icon=folium.Icon(color='red')
+            ).add_to(m)
+    folium.PolyLine(nodes,color='red').add_to(m)
+    m.save('map2.html')
+    
 
 
+
+#print(dj.getPath('서울역(1)', '신도림(2)'))
+point = findLocation(dj.getPath("서울역(1)","신도림(2)"), location)
+
+print(point_Map((point)))
+
+f.close()
 
 '''
-app = QApplication(sys.argv)
-mainWindow = WindowClass()
-mainWindow.show()
-app.exec_()
-
-
-dj = Dijkstra(graph)
+if __name__ == "__main__" :
+    app = QApplication(sys.argv) 
+    myWindow = WindowClass() 
+    myWindow.show()
+    app.exec_()
 '''
