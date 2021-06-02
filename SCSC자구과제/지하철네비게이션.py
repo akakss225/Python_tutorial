@@ -10,11 +10,26 @@ import csv
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-
-
 from folium.map import Marker
 
 form_class = uic.loadUiType("/Users/sumin/Desktop/Python/Subway.ui")[0]
+
+f = open('subway.csv')
+graph = list(csv.reader(f))
+
+f2 = open('subwayLocation.csv')
+location = list(csv.reader(f2))
+
+
+def new_func(graph):
+    nodes = set()
+    for edge in graph:
+        nodes.add(edge[0])
+        nodes.add(edge[1])
+    return nodes
+
+nodes = new_func(graph)
+
 
 class WindowClass(QMainWindow, form_class):
     def __init__(self):
@@ -87,24 +102,9 @@ class Dijkstra:
         return path[::-1]
 
 
-
-f = open('subway.csv')
-graph = list(csv.reader(f))
-
-f2 = open('subwayLocation.csv')
-location = list(csv.reader(f2))
-
-
-nodes = set()
-for edge in graph:
-    nodes.add(edge[0])
-    nodes.add(edge[1])
-
 dj = Dijkstra(nodes)
 for g in graph:
     dj.setEdge(g[0],g[1],g[2])
-
-
 
 def findLocation(nodes, location):
     point = []
@@ -129,13 +129,12 @@ def point_Map(nodes):
             ).add_to(m)
     folium.PolyLine(nodes,color='red').add_to(m)
     m.save('map2.html')
-    
+
 
 if __name__ == "__main__" :
     app = QApplication(sys.argv)
     myWindow = WindowClass()
     myWindow.show()
     app.exec_()
-
 
 f.close()
