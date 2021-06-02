@@ -10,7 +10,7 @@ import csv
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-import io
+
 
 from folium.map import Marker
 
@@ -29,18 +29,18 @@ class WindowClass(QMainWindow, form_class):
         self.Run.clicked.connect(self.programRun)
         self.List.itemDoubleClicked.connect(self.locationAdd)
         self.SelectedList.itemDoubleClicked.connect(self.locationDelete)
-    
+
     def locationAdd(self):
         self.SelectedList.addItem(graph[self.List.currentRow()][0])
     def locationDelete(self):
         self.removeItemRow = self.SelectedList.currentRow()
         self.SelectedList.takeItem(self.removeItemRow)
     def programRun(self):
-        start = self.SelectedList.item(1)
-        end = self.SelectedList.item(2)
+        start = self.SelectedList.item(0).text()
+        end = self.SelectedList.item(1).text()
         find = findLocation(dj.getPath(start, end), location)
         point_Map(find)
-    
+
 
 class Dijkstra:
     def __init__(self,nodes):
@@ -105,6 +105,7 @@ for g in graph:
     dj.setEdge(g[0],g[1],g[2])
 
 
+
 def findLocation(nodes, location):
     point = []
     for node in nodes:
@@ -113,6 +114,7 @@ def findLocation(nodes, location):
                 point.append([float(i[1]),float(i[2])])
                 break
     return point
+
 
 def point_Map(nodes):
     m = folium.Map(
@@ -128,6 +130,7 @@ def point_Map(nodes):
     folium.PolyLine(nodes,color='red').add_to(m)
     m.save('map2.html')
     
+
 if __name__ == "__main__" :
     app = QApplication(sys.argv)
     myWindow = WindowClass()
