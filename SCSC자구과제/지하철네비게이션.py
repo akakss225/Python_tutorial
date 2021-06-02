@@ -21,19 +21,25 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
         
+        for i in graph:
+            self.List.addItem(i[0])
+        
         self.Add.clicked.connect(self.locationAdd)
         self.Delete.clicked.connect(self.locationDelete)
         self.Run.clicked.connect(self.programRun)
         self.List.itemDoubleClicked.connect(self.locationAdd)
-        self.selectedList.itemDoubleClicked.connect(self.locationDelete)
+        self.SelectedList.itemDoubleClicked.connect(self.locationDelete)
     
     def locationAdd(self):
-        self.currentItem.addItem(self.selectedList)
+        self.SelectedList.addItem(graph[self.List.currentRow()][0])
     def locationDelete(self):
-        self.removeItemRow = self.selectedList.currentRow()
-        self.selectedList.takeItem(self.removeItemRow)
+        self.removeItemRow = self.SelectedList.currentRow()
+        self.SelectedList.takeItem(self.removeItemRow)
     def programRun(self):
-        print('Click!')
+        start = self.SelectedList.item(1)
+        end = self.SelectedList.item(2)
+        find = findLocation(dj.getPath(start, end), location)
+        point_Map(find)
     
 
 class Dijkstra:
@@ -122,21 +128,11 @@ def point_Map(nodes):
     folium.PolyLine(nodes,color='red').add_to(m)
     m.save('map2.html')
     
-
-
-
-#print(dj.getPath('서울역(1)', '신도림(2)'))
-point = findLocation(dj.getPath("서울역(1)","신도림(2)"), location)
-
-print(point_Map((point)))
-
-
-'''
 if __name__ == "__main__" :
-    app = QApplication(sys.argv) 
-    myWindow = WindowClass() 
+    app = QApplication(sys.argv)
+    myWindow = WindowClass()
     myWindow.show()
     app.exec_()
-'''
+
 
 f.close()
