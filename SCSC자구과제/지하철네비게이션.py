@@ -129,7 +129,11 @@ def point_Map(nodes):
             ).add_to(m)
     folium.PolyLine(nodes,color='red').add_to(m)
     m.save('map2.html')
+'''
+point = findLocation(dj.getPath('종로3가(1)','성내(2)'),location)
 
+point_Map(point)
+'''
 
 if __name__ == "__main__" :
     app = QApplication(sys.argv)
