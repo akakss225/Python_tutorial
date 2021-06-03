@@ -19,6 +19,7 @@ def isEmpty(a):
 def solution(progresses, speeds):
     answer = []
     stack = progresses
+    speed = speeds
     while len(stack) != 0:
         count = 0
         for i in range(len(stack)):
@@ -26,6 +27,7 @@ def solution(progresses, speeds):
         while isEmpty(stack) == False:
             if stack[0] >= 100:
                 stack.pop(0)
+                speed.pop(0)
                 count += 1
             else:
                 break
