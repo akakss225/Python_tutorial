@@ -10,7 +10,30 @@
 # 작업 진도는 100 미만의 자연수입니다.
 # 작업 속도는 100 이하의 자연수입니다.
 # 배포는 하루에 한 번만 할 수 있으며, 하루의 끝에 이루어진다고 가정합니다. 예를 들어 진도율이 95%인 작업의 개발 속도가 하루에 4%라면 배포는 2일 뒤에 이루어집니다.
+def isEmpty(a):
+    if len(a) == 0:
+        return True
+    else:
+        return False
 
 def solution(progresses, speeds):
     answer = []
+    stack = progresses
+    while len(stack) != 0:
+        count = 0
+        for i in range(len(stack)):
+            stack[i] = stack[i] + speeds[i]
+        while isEmpty(stack) == False:
+            if stack[0] >= 100:
+                stack.pop(0)
+                count += 1
+            else:
+                break
+        if count >= 1:
+            answer.append(count)
     return answer
+
+p = [20,20,10,20,10,0,30]
+s = [10,10,10,10,10,10,10]
+
+print(solution(p,s))
