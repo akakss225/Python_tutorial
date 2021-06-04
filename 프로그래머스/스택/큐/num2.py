@@ -17,28 +17,22 @@
 
 
 def solution(priorities, location):
-    # 리스트에서 최댓값찾기
-    m = max(priorities)
-    # priorities의 값들에 numbering하기
+    answer = 0
     numbering = []
-    for i in range(len(priorities)):
-        numbering.append(i+1)
+    for i, value in enumerate(priorities):
+        numbering.append([i, value])
     while True:
-        # 주어진 리스트의 맨 첫번째값이 가중치가 가장 높은값이 아니라면
-        if priorities[0] != m:
-            # 0번째 인덱스 값을 맨뒤로 보내줌
-            priorities.append(priorities.pop(0))
-            # 위치를 1칸 앞으로 당기기
-            location -= 1
+        temp = numbering.pop(0)
+        if any(temp[1] < q[1] for q in numbering):
+            numbering.append(temp)
         else:
-            # 0번째 인덱스가 최댓값이면 반복문 탈출
-            break
-    # 위치구하기
-    return numbering[location]
+            answer += 1
+            if temp[0] == location:
+                return answer
 
-# 5
-priorities = [2,2,2,1,3,4,6,2,1,8,8,4,3]
-location = 10
+# 2
+priorities = [1,1,9,1,1,1]
+location = 0
 
 
 print(solution(priorities, location))
