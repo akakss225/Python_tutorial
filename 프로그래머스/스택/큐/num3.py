@@ -20,61 +20,87 @@
 # weight는 1 이상 10,000 이하입니다.
 # truck_weights의 길이는 1 이상 10,000 이하입니다.
 # 모든 트럭의 무게는 1 이상 weight 이하입니다.
+from typing import Counter
 
-def solution(bridge_length, weight, truck_weights):
-    answer = 0
-    # 각 트럭의 소요시간
-    dic = {}
-    for i in truck_weights:
-        dic[i] = 0
-    # 총 트럭의 수
-    n = len(truck_weights)
-    # 대기중인 트럭
-    q = truck_weights
-    # 이동중인 트럭
-    r = []
-    # 이동이 끝난 트럭
-    f = []
-    bridge_weight = 0
-    while len(f) != n:
-        if len(q) == n:
-            r.append(q.pop(0))
-            dic[0] += 1
-            bridge_weight += r[0]
-        else:
-            if bridge_weight + q[0] <= weight:
-                r.append(q.pop(0))
-                bridge_weight += r[-1]
+
+class Queue:
+    def __init__(self):
+        self.q = []
     
-    return answer
+    def size(self):
+        return len(self.q)
+    
+    def enQueue(self, n):
+        self.q.append(n)
+    
+    def deQueue(self):
+        if self.size() == 0:
+            return None
+        else:
+            return self.q.pop(0)
+        
+    def isEmpty(self):
+        if self.size() == 0:
+            return True
+        else:
+            return False
+        
+
+def solution(bridge_length, weight, truck_weights): 
+    answer = 0
+    size = len(truck_weights)
+    bridge = Queue()
+    arrive = []
+    now = 0
+    while True:
+        for i in range(bridge_length):
+            if len(truck_weights) != 0:
+                if now + truck_weights[0] <= weight:
+                    now += truck_weights[0]
+                    bridge.enQueue(truck_weights.pop(0))
+                else:
+                    bridge.enQueue(0)
+            else:
+                bridge.enQueue(0)
+        arrive.append(bridge.deQueue())
+        now -= arrive[-1]
+        answer += 1
+        if len(truck_weights) == 0 and bridge.isEmpty:
+            return bridge_length + answer
+
+bridge_length = 2
+weight = 10
+truck_weights = [7,4,5,6]
+
+# bridge_length = 100
+# weight = 100
+# truck_weights = [10]
+
+# bridge_length = 100
+# weight = 100
+# truck_weights = [10,10,10,10,10,10,10,10,10,10]
+
+print(solution(bridge_length, weight, truck_weights))
 
 
 
-
-
-
-
-    # n = len(truck_weights)
-    # # 대기트럭
-    # q = truck_weights
-    # # 이동중인 트럭
-    # r = []
-    # # 이동이 끝난 트럭
-    # f = []
-    # # 이동중인 트럭들의 무게 합
-    # bridge_weight = 0
-    # while len(f) != n:
-    #     answer += 1
-    #     if len(q) == n:
-    #         r.append(q.pop(0))
-    #         bridge_weight += r[0]
-    #     else:
-    #         if bridge_weight + q[0] < weight:
-    #             r.append(q.pop(0))
-    #             bridge_weight += r[-1]
-    #         else:
-    #             continue
-    #     if 
-            
+# def solution(bridge_length, weight, truck_weights): 
+#     answer = 0
+#     n = len(truck_weights)
+#     bridge = Queue()
+#     bridge.enQueue(0)
+#     arrive = Queue()
+#     now = 0
+#     while True:
+#         for i in range(bridge_length):
+#             if now + truck_weights[0] <= weight:
+#                 now += truck_weights[0]
+#                 bridge.enQueue(truck_weights.pop(0))
+#             else:
+#                 bridge.enQueue(0)
+#             answer += 1
+#         arrive.enQueue(bridge.deQueue())
+#         if arrive.size() == n:
+#             return answer
         
     

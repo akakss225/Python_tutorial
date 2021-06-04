@@ -80,8 +80,8 @@
 #                 break
 #     return answer
 
-# 스택을 사용한 방법. 가장 빠르면 O(2n)의 시간으로 해결 가능.
 
+# 스택을 사용한 방법. 가장 빠르면 O(2n)의 시간으로 해결 가능.
 def solution(prices):
     # answer = 몇초 후 가격이 떨어지는지 저장하는 배열
     answer = []
@@ -97,6 +97,7 @@ def solution(prices):
             
             # 주식 가격이 떨어졌다면
             if prices[index] > prices[i]:
+                # 현재 시점과 스택에서 꺼낸 값의 차를 저장한다.
                 answer[index] = i - index
                 stack.pop()
             
