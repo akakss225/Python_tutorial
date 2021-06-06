@@ -20,65 +20,66 @@
 # weight는 1 이상 10,000 이하입니다.
 # truck_weights의 길이는 1 이상 10,000 이하입니다.
 # 모든 트럭의 무게는 1 이상 weight 이하입니다.
-from typing import Counter
 
-
-class Queue:
-    def __init__(self):
-        self.q = []
+# class Queue:
+#     def __init__(self):
+#         self.q = []
     
-    def size(self):
-        return len(self.q)
+#     def size(self):
+#         return len(self.q)
     
-    def enQueue(self, n):
-        self.q.append(n)
+#     def enQueue(self, n):
+#         self.q.append(n)
     
-    def deQueue(self):
-        if self.size() == 0:
-            return None
-        else:
-            return self.q.pop(0)
+#     def deQueue(self):
+#         if self.size() == 0:
+#             return None
+#         else:
+#             return self.q.pop(0)
+    
+#     def peek(self):
+#         return self.q[0]
         
-    def isEmpty(self):
-        if self.size() == 0:
-            return True
-        else:
-            return False
+#     def isEmpty(self):
+#         if self.size() == 0:
+#             return True
+#         else:
+#             return False
         
 
 def solution(bridge_length, weight, truck_weights): 
-    answer = 0
-    size = len(truck_weights)
-    bridge = Queue()
+    bridge = []
     arrive = []
+    n = len(truck_weights)
     now = 0
+    answer = 0
     while True:
-        for i in range(bridge_length):
-            if len(truck_weights) != 0:
-                if now + truck_weights[0] <= weight:
-                    now += truck_weights[0]
-                    bridge.enQueue(truck_weights.pop(0))
-                else:
-                    bridge.enQueue(0)
-            else:
-                bridge.enQueue(0)
-        arrive.append(bridge.deQueue())
-        now -= arrive[-1]
         answer += 1
-        if len(truck_weights) == 0 and bridge.isEmpty:
-            return bridge_length + answer
+        if len(truck_weights) != 0:
+            if now + truck_weights[0] <= weight:
+                bridge.append(truck_weights.pop(0))
+                now += bridge[-1]
+            else:
+                bridge.append(0)
+        if answer >= bridge_length:
+            if len(bridge) == 0:
+                return answer
+            else:
+                arrive.append(bridge.pop(0))
+                now -= arrive[-1]
+        
 
-bridge_length = 2
-weight = 10
-truck_weights = [7,4,5,6]
+# bridge_length = 2
+# weight = 10
+# truck_weights = [7,4,5,6]
 
 # bridge_length = 100
 # weight = 100
 # truck_weights = [10]
 
-# bridge_length = 100
-# weight = 100
-# truck_weights = [10,10,10,10,10,10,10,10,10,10]
+bridge_length = 100
+weight = 100
+truck_weights = [10,10,10,10,10,10,10,10,10,10]
 
 print(solution(bridge_length, weight, truck_weights))
 
