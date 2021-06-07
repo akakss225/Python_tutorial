@@ -32,16 +32,18 @@ class SparseMatrix:
     def add(cls, q, p):
         c = SparseMatrix(q.m, q.n)
         u = set()
-        for i in range(1, q.sm[0][2]+1):
-            u.add((q.sm[i][0], q.sm[i][1]))
-        for i in range(1, p.sm[0][2]+1):
-            u.add((p.sm[i][0], p.sm[i][1]))
-        
-        for i in list(u):
-            temp = p.getValue(i[0], i[1]) + q.getValue(i[0], i[1])
-            if temp != 0:
-                c.append([i[0], i[1], temp])
-        return c
+        if q.sm[0][0] != p.sm[0][0] or q.sm[0][1] != p.sm[0][1]:
+            return None
+        else:
+            for i in range(1, q.sm[0][2]+1): # 중복값 허용 x 
+                u.add((q.sm[i][0], q.sm[i][1]))
+            for i in range(1, p.sm[0][2]+1): # 따라서 값이 존재하는 좌표(?)만 담음 
+                u.add((p.sm[i][0], p.sm[i][1]))
+            for i in list(u): # 값이 존재하는 모든 좌표를 리스트 형태로 호출
+                temp = p.getValue(i[0], i[1]) + q.getValue(i[0], i[1]) # 값이 있는 좌표의 합 을 구해 리뉴얼시킴.
+                if temp != 0:
+                    c.append([i[0], i[1], temp])
+            return c
             
         
 A = SparseMatrix(3,3)
