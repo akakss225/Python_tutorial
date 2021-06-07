@@ -29,6 +29,7 @@ import heapq as hq
 #             return -1    
 #     return answer
 
+
 def solution(scoville, K):
     answer = 0
     hq.heapify(scoville)
@@ -40,7 +41,7 @@ def solution(scoville, K):
             answer += 1
         else:
             break
-        if len(scoville) == 1:
+        if len(scoville) == 1 and scoville[0] < K:
             return -1
     return answer
 
