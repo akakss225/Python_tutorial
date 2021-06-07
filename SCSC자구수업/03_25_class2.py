@@ -21,13 +21,17 @@ class SparseMatrix:
         return 0
 
     def print(self):
+        # 모든 값이 0 인 3x3 marix생성
         mat = np.zeros((self.m, self.n))
+        # 0번째 인덱스는 초기 설정 cell이기 때문에, 출력하지 않는다.
         for i in range(1, len(self.sm)):
+            # 3x3 matrix의 각 항에 해당되는 sm[i][2]값을 넣어준다.
             mat[self.sm[i][0] - 1, self.sm[i][1] - 1] = self.sm[i][2]
         print(mat)
     
     @classmethod
     def add(cls, a, b):
+        # 행렬의 덧셈의 경우 같은 size의 행렬만 덧셈이 가능하기에, 아무 matrix의 행렬 size를 가져온다.
         c = SparseMatrix(a.m, a.n)
         if a.sm[0][0] != b.sm[0][0] or a.sm[0][1] != b.sm[0][1]:
             return None
@@ -35,15 +39,17 @@ class SparseMatrix:
         else:
             # 세트(set) 는 중복을 허용하지 않는 집합이다.
             u = set()
-            
-            for i in range(1, a.sm[0][2] + 1):
+            # a.sm의 첫번째 인덱스는 초기값 이기 때문에 1번부터 시작, 또한, 값이 들어있는 항의 갯수는 a.sm[0][2]개 이기 때문에 a.sm[0][2]번까지 반복.
+            for i in range(1, a.sm[0][2]+1):
+                # set(집합)은 중복을 허용하지 않기 때문에, 같은 값은 같은 곳에 저장됨.
                 u.add((a.sm[i][0], a.sm[i][1]))
-            for i in range(1, b.sm[0][2]):
+            for i in range(1, b.sm[0][2]+1):
                 u.add((b.sm[i][0], b.sm[i][1]))
+            # 집합을 돌면서, 값이 0 이 아닌 것을 새로운 matrix에 append해준다.
             for term in list(u):
                 _tmp = a.getValue(term[0], term[1]) + b.getValue(term[0], term[1])
                 if _tmp != 0:
-                    # 
+                    
                     c.append([term[0], term[1], _tmp])
             return c
 
