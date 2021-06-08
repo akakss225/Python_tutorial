@@ -54,5 +54,3 @@ for i in range(12):
 
 print(t.t)
 print(t.getChild('C'))
-
-      

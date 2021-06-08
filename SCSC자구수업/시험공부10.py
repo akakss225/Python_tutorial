@@ -81,8 +81,7 @@ class BST:
                 else:
                     curNode = curNode.parent
                     print('\'%s\''%curNode.item)
-                
-    
+
     def insert(self, item):
         newNode = Node(item)
         curNode = self.find(item)
@@ -98,7 +97,7 @@ class BST:
                 curNode.left = newNode
                 newNode.parent = curNode
         self.size += 1
-    
+
     def delete(self, item):
         if self.size == 0:
             return None
@@ -189,5 +188,4 @@ b.print()
 
 b.getLchild(12)
 b.getRchild(12)
-b.getParent(15)
 b.getParent(16)
