@@ -13,6 +13,29 @@ class CL:
         self.size = 0
         self.current = self.root
     
+    def setCurrent(self, item):
+        curNode = self.root
+        if self.size == 0:
+            return None
+        else:
+            a = 0
+            while curNode.item != item:
+                curNode = curNode.right
+                a += 1
+                if a > self.size:
+                    print('목록에 존재하지 않는 item입니다.')
+                    break
+            self.current = curNode
+            print('현재 위치는 \'%s\' 입니다.'%curNode.item)
+            
+    def moveRight(self):
+        self.current = self.current.right
+        print('현재 위치는 \'%s\' 입니다.'%self.current.item)
+    
+    def moveLeft(self):
+        self.current = self.current.left
+        print('현재 위치는 \'%s\' 입니다.'%self.current.item)
+    
     def append(self, item):
         newNode = Node(item)
         curNode = self.root
@@ -44,27 +67,28 @@ class CL:
     
     def delete(self, item):
         curNode = self.root
+        preNode = self.root
         if self.size == 0:
             return None
         else:
-            temp = self.root
+            a = 0
             if self.root.item == item:
                 curNode = curNode.right
-                for i in range(self.size):
-                    temp = temp.right
-                curNode.left = temp
+                for i in range(self.size-1):
+                    preNode = preNode.right
                 self.root = curNode
-                
-            a = 0
-            while curNode.item != item:
-                preNode = curNode
-                curNode = curNode.right
-                a += 1
-                if a > self.size:
-                    print('\'%s\'는 리스트에 존재하지 않습니다.'%item)
-                    break
-            preNode.right = curNode.right
-            curNode.right.left = preNode
+                self.root.left = preNode
+                preNode.right = self.root
+            else:
+                while curNode.item != item:
+                    preNode = curNode
+                    curNode = curNode.right
+                    a += 1
+                    if a > self.size + 1:
+                        print('목록 내에 존재하지 않는 item입니다.')
+                        break
+                preNode.right = curNode.right
+                curNode.right.left = preNode
         self.size -= 1
         
     def print(self):
@@ -75,7 +99,7 @@ class CL:
             for i in range(self.size):
                 print(curNode.item,end=" ")
                 curNode = curNode.right
-            
+        print()
             
         
 a = CL()
@@ -89,9 +113,17 @@ a.append('체리')
 a.append('망고')
 a.append('수박')
 a.print()
-a.delete('망고')
+a.delete('사과')
 a.print()
-# a.insert(2, '망고')
-# a.print()
-# a.delete('사과')
-# a.print()
+a.insert(2, '망고')
+a.print()
+a.delete('사과')
+a.print()
+
+
+a.setCurrent('배')
+
+a.moveRight()
+a.moveRight()
+a.moveLeft()
+
