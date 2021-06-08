@@ -1,5 +1,5 @@
 # Stack
-# Last in Last out
+# Last in First out
 
 class Stack:
     def __init__(self):
