@@ -66,3 +66,5 @@ g1['G'] = ['D','E','F']
 
 g = Graph(g1,'A')
 print(g.dfs())
+
+print(g1)

@@ -89,12 +89,11 @@ class MinHeap:
         return height
     
     def delete(self):
-        self.swap(0, self.size()-1)
-        temp = self.h.pop()
-        self.heapifyUp(self.size()-1)
+        self.swap(0, self.size()-1) # 가장 작은값을 리스트의 마지막 항목과 바꿔줌.
+        temp = self.h.pop() # 인덱스 지정을 안하면, 리스트의 마지막 항목을 빼서 제거함.즉, 가장 작은값이 제거됨
+        self.heapifyUp(self.size()-1) # 이후, 리스트의 마지막 인덱스부터 차례대로 up시켜줘, 리스트 첫번째 값을 최솟값으로 유지해줌.
         return temp
     
-            
             
 h = MinHeap()
 h.insert(29)
