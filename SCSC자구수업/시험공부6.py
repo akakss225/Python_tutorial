@@ -14,7 +14,7 @@ class DL:
         self.root = Node()
         self.size = 0
         self.current = self.root
-    
+
     def append(self, item):
         curNode = self.root
         newNode = Node(item)

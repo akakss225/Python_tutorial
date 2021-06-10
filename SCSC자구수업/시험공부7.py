@@ -1,4 +1,5 @@
 # Circle LinkedList
+# setCurrent, moveRiht, moveLeft, append, insert, delete, print 
 
 class Node:
     def __init__(self, item = None):

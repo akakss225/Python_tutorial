@@ -45,3 +45,5 @@ print(q.q)
 print(q.isEmpty())
 print(q.deQueue())
 print(q.peek())
+
+print(q.q)

@@ -36,7 +36,7 @@ end = 3
 
 # 시작노드의 거리는 0으로 설정한다.
 curNode = start
-cost[curNode][0] = 0    
+cost[curNode][0] = 0
 
 def _neighbor(curNode):
     # curNode에 연결된 이웃노드를 리스트로 리턴한다.
@@ -59,6 +59,7 @@ def _getWeight(n1, n2):
     # graph = [(0, 1, 7), (0, 4, 3), (0, 5, 10), (1, 2, 4), (1, 4, 2), 
     #         (1, 5, 6), (1, 3, 10), (2, 3, 2),(3, 5, 9), (3, 6, 4), (4, 6, 5)]
     for node in graph:
+        # node n1과 n2사이의 가중치를 구하고자 할때, 엣지가 설정되어있다면, 값을 넣어주고, 아니면 넘어간다. 이때, 양방향이기 때문에 두가지로 설정한다.
         if node[0] == n1 and node[1] == n2:
             return node[2]
         elif node[0] == n2 and node[1] == n1:
@@ -68,6 +69,9 @@ def _getWeight(n1, n2):
 def dicFilter(cost, nodes):
     import sys
     mini = sys.maxsize
+    # cost = {0 : [9999, None], 1 : [9999, None], 4 : [9999, None], 
+    #         5 : [9999, None], 2 : [9999, None], 3 : [9999, None],
+    #         6 : [9999, None]}
     for key, value in cost.items():
         if key in nodes:
             if value[0] < mini:

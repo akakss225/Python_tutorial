@@ -27,7 +27,7 @@ class SparseMatrix:
             if i == 0:
                 c.sm[0][2] = self.sm[0][2]
             else:
-                c.sm.append([self.sm[i][1], self.sm[i][0], self.sm[i][2]])
+                c.sm.append([self.sm[i][1], self.sm[i][0], self.sm[i][2]]) # 그냥 바꿔치기만 하면댐
         return c
 
     def print(self):

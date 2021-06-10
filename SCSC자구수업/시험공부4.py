@@ -4,12 +4,15 @@ from numpy.matrixlib.defmatrix import matrix
 
 class SparseMatrix:
     def __init__(self, m, n): # 행렬 size받기
+        # 행렬내부 값이 존재하는 좌표와 값을 담아두는 list의 첫 값은, matrix의 크기와 값이 담겨져있는 좌표의 수를 return해준다.
         self.sm = [[m, n, 0]]
         self.m = m
         self.n = n
     
     def append(self, cell):
+        # list에 값을 append해주고
         self.sm.append(cell)
+        # 값이 추가되었으니 첫번쨰 인덱스의 세번째 인덱스값에 + 1 을 해준다.
         self.sm[0][2] += 1
         
     def shape(self):
@@ -17,9 +20,12 @@ class SparseMatrix:
     
     # row와 column값을 주면 그에 대한 값을 반환해 주는 함수(메소드)
     def getValue(self, row, col):
+        # 첫번쨰 인덱스는 행렬의 사이즈를 나타내는 것이기에 제외하고 반복문을 시행해준다.
         for i in range(1, len(self.sm)):
+            # for loop을 돌면서 row값과 col값이 일치하는 리스트의 값을 리턴해준다.
             if row == self.sm[i][0] and col == self.sm[i][1]:
                 return self.sm[i][2]
+        # for loop이 끝나고 나오면 return 0을 해줌. << 왜냐하면 없기때문.
         return 0
     
     def print(self):
@@ -32,8 +38,10 @@ class SparseMatrix:
     def add(cls, q, p):
         c = SparseMatrix(q.m, q.n)
         u = set()
+        # 행렬의 크기가 다르다면 덧셈을 실행할 수 없기 때문에 return None
         if q.sm[0][0] != p.sm[0][0] or q.sm[0][1] != p.sm[0][1]:
             return None
+        # 행렬의 크기가 같다면 실행
         else:
             for i in range(1, q.sm[0][2]+1): # 중복값 허용 x 
                 u.add((q.sm[i][0], q.sm[i][1]))

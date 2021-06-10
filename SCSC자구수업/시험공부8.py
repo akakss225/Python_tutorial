@@ -21,7 +21,7 @@ class Stack:
         if self.isEmpty():
             return None
         else:
-            return self.s.pop(-1)
+            return self.s.pop()
     
     def peek(self):
         if self.isEmpty():
@@ -36,8 +36,13 @@ print(s.isEmpty())
 print(s.peek())
 
 s.push('사과')
+s.push('배')
+s.push('포도')
 
 print(s.isEmpty())
+print(s.peek())
+
+print(s.pop())
 print(s.peek())
 
 print(s.pop())
