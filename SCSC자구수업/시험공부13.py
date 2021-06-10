@@ -34,7 +34,7 @@ class Graph:
     def __init__(self, graph):
         self.graph = graph
     
-    def bfs(self, start):
+    def bfs(self, start): # 현재 위치에 인접한 node를 먼저 다 보고 그 다음에 다음 level로 진행.
         # 방문한 리스트 생성. 처음에 start를 넣어줌.
         visited = [start]
         q = Queue()
@@ -50,7 +50,7 @@ class Graph:
             item = q.deQueue()
             # 만약 item이 방문목록에 없다면,
             if item not in visited:
-                # 이 item의 edge값들을 다시 q에 넣어줌. 이는 방문할 목록이 된다.
+                # 이 item의 edge값들을 다시 q에 넣어줌. 이는 다음 레벨에 방문할 목록이 된다.
                 for _item in self.graph[item]:
                     q.enQueue(_item)
                 # 다 넣었으면, item을 방문목록에 넣는다.
