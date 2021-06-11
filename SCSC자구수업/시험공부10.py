@@ -8,7 +8,15 @@ class Node:
         self.parent = None
         self.left = None
         self.right = None
-        
+
+    def preOrder(self):
+        if self.item != None:
+            print(self.item, end=" ")
+            if self.left:
+                self.left.preOrder()
+            if self.right:
+                self.right.preOrder()
+
     def inOrder(self):
         if self.item != None:
             if self.left:
@@ -16,7 +24,15 @@ class Node:
             print(self.item, end=" ")
             if self.right:
                 self.right.inOrder()
-    
+
+    def postOrder(self):
+        if self.item != None:
+            if self.left:
+                self.left.postOrder()
+            if self.right:
+                self.right.postOrder()
+            print(self.item, end=" ")
+
 
 class BST:
     def __init__(self):
