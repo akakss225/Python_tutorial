@@ -14,19 +14,33 @@
 # 3	[[1, 1, 0], [1, 1, 1], [0, 1, 1]]	1
 
 def solution(n, computers):
-    link = n
+    node = []
+    edge = set()
     for i in range(n):
-        for j in range(i+1,n):
-            com1 = computers[i][j]
-            com2 = computers[j][i]
-            if com1 == 1 and com2 == 1:
-                link -= 1
-            elif computers[i][j] == 0 and computers[j][i] == 0:
-                continue
+        for j in range(n):
+            if computers[i][j] == 1:
+                if i != j:
+                    if (j+1, i+1) not in edge:
+                        edge.add((i+1, j+1))
+    for i in edge:
+        node.append(list(i))
+    link = len(node)
+    while node:
+        temp = []
+        d = node.pop(0)
+        for i in range(len(node)):
+            if d[1] == node[i][0]:
+                temp.append(i)
+        for i in temp:
+            node.pop(i)
+        link -= 1
     return link
 
 
-n = 5
-computers = [[1, 1, 0, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 0, 1, 1]]
+
+# n = 5
+# computers = [[1, 1, 0, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 0, 1, 1]]
+n = 3
+computers = [[1, 1, 0], [1, 1, 1], [0, 1, 1]]
 
 print(solution(n, computers))
