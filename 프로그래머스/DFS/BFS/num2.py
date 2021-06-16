@@ -14,33 +14,28 @@
 # 3	[[1, 1, 0], [1, 1, 1], [0, 1, 1]]	1
 
 def solution(n, computers):
-    node = []
-    edge = set()
-    for i in range(n):
-        for j in range(n):
-            if computers[i][j] == 1:
-                if i != j:
-                    if (j+1, i+1) not in edge:
-                        edge.add((i+1, j+1))
-    for i in edge:
-        node.append(list(i))
-    link = len(node)
-    while node:
-        temp = []
-        d = node.pop(0)
-        for i in range(len(node)):
-            if d[1] == node[i][0]:
-                temp.append(i)
-        for i in temp:
-            node.pop(i)
-        link -= 1
-    return link
+    answer = 0
+    bfs = []
+    visited = [0]*n
+
+    while 0 in visited:
+        bfs.append(visited.index(0))
+        while bfs:
+            node = bfs.pop(0)
+            visited[node] = 1
+            for i in range(n):
+                if visited[i] == 0 and computers[node][i] == 1:
+                    bfs.append(i)
+        answer += 1
+    return answer
 
 
 
-# n = 5
-# computers = [[1, 1, 0, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 0, 1, 1]]
-n = 3
-computers = [[1, 1, 0], [1, 1, 1], [0, 1, 1]]
+n = 5
+computers = [[1, 1, 0, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 0, 1, 1]]
+# n = 3
+# computers = [[1, 1, 0], [1, 1, 1], [0, 1, 1]]
+# n = 3
+# computers = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]
 
 print(solution(n, computers))
