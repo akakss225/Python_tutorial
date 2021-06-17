@@ -8,3 +8,4 @@ def reculsive(i):
     print(i,'번째 재귀함수를 종료합니다.')
     
 reculsive(1)
+
