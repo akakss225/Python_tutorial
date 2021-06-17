@@ -14,19 +14,19 @@
 # 3	[[1, 1, 0], [1, 1, 1], [0, 1, 1]]	1
 
 def solution(n, computers):
-    answer = 0
-    bfs = []
-    visited = [0]*n
+    answer = 0 # 네트워크 갯수를 저장할 주소
+    bfs = [] # 탐색을 위한 큐
+    visited = [0]*n # 방문한 노드를 표시할 리스트
 
-    while 0 in visited:
-        bfs.append(visited.index(0))
-        while bfs:
-            node = bfs.pop(0)
-            visited[node] = 1
-            for i in range(n):
-                if visited[i] == 0 and computers[node][i] == 1:
-                    bfs.append(i)
-        answer += 1
+    while 0 in visited: # 모든 노드를 방문할 때까지 반복
+        bfs.append(visited.index(0)) # 순차적으로 방문하지 않은 노드를 방문하고자 큐에 추가해주기
+        while bfs: # 시작 컴퓨터의 모든 네트워크를 확인할 때 까지
+            node = bfs.pop(0) # 큐의 맨 앞 값을 뺴주고
+            visited[node] = 1 # 방문표시를 해준다.
+            for i in range(n): # 인접 네트워크를 확인하기위한 반복문
+                if visited[i] == 0 and computers[node][i] == 1: # 아직 방문하지 않았고, 인접해있다면
+                    bfs.append(i) # 큐에 넣어준다.
+        answer += 1 
     return answer
 
 
