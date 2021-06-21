@@ -24,36 +24,73 @@
 # 예제 #2
 # target인 "cog"는 words 안에 없기 때문에 변환할 수 없습니다.
 
+
+# def solution(begin, target, words):
+#     answer = 0
+#     if not target in words:
+#         return answer
+    
+#     graph = []
+#     for i in words:
+#         temp = []
+#         for j in i:
+#             temp.append(ord(j) - 96)
+#         graph.append(temp)
+    
+#     start = []
+#     end = []
+#     for i in range(len(begin)):
+#         start.append(ord(begin[i])-96)
+#         end.append(ord(target[i])-96)
+
+#     i = 0
+#     while len(list(set(end) - set(start))) != 1:
+#         if len(list(set(graph[i]) - set(start))) == 1:
+#             start = graph[i]
+#             answer += 1
+#             graph.pop(i)
+#             if len(graph) == i:
+#                 i = 0
+#         else:
+#             i += 1
+#     answer += 1
+#     return answer
+
+
 def solution(begin, target, words):
     answer = 0
-    if not target in words:
+    if target not in words:
         return answer
-    start = list(map(str, begin))
-    end = list(map(str, target))
-    while start != end:
-        for i in words:
-            temp = list(map(str, i))
-            count = len(start)
-            tempcount = len(start)
+    
+    
+    start = list(begin)
+    end = list(target)
+    
+    stack = [start]
+    while True:
+        cur = stack[-1]
+        differ1 = 0
+        for i in range(len(cur)):
+            if cur[i] != end[i]: differ1 += 1
+        
+        if differ1 == 1: return len(stack)
+                
+        for word in words:
+            differ2 = 0
             for j in range(len(start)):
-                if start[j] != temp[j]:
-                    count -= 1
-            if count == len(start) - 1:
-                for j in range(len(start)):
-                    if temp[j] in end and start[j] not in end:
-                        change = temp[j]
-                        start[j] = change
-                        answer += 1
-            if count == len(start) - 1:
-                for j in range(len(start)):
-                    if start[j] != end[j]:
-                        tempcount -= 1
-                if tempcount == len(start) - 1:
-                    return answer
-
+                if cur[j] != word[j]: differ2 += 1
+            if differ2 == 1:
+                stack.append(list(word))
+                words.remove(word)
+                break
 
 begin = 'hit'
 target = 'cog'
+words = ['cog', 'log', 'lot', 'dog', 'dot', 'hot'] 
 words = ["hot", "dot", "dog", "lot", "log", "cog"]
+
+begin = "hit"
+target = "hhh"
+words = ["hhh","hht"]
 
 print(solution(begin, target, words))

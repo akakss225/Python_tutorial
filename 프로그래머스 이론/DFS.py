@@ -1,6 +1,6 @@
 # 깊이우선탐색, Stack을 이용해 구현함.
 
-def dfs(graph, v, visited): # 정보가 기록된 graph와, 시작할 노드, 방문처리를 진행할 리스트 세가지를 인자로 사용한다.
+def dfs(graph, v, visited): # 정보가 기록된 graph와, 시작할 노드(인덱스,,?), 방문처리를 진행할 리스트 세가지를 인자로 사용한다.
     # 현재 노드를 방문 처리
     visited[v] = True
     print(v, end=" ")
