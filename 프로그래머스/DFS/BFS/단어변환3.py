@@ -59,30 +59,29 @@
 
 def solution(begin, target, words):
     answer = 0
+    # target이 목록 내에 없다면 0 을 리턴
     if target not in words:
         return answer
     
+    start = list(begin) # 시작 단어를 list형태로 저장. 쉬운 비교를 위함.
+    end = list(target) # 표적 단어또한 똑같이.
     
-    start = list(begin)
-    end = list(target)
-    
-    stack = [start]
+    stack = [start] # DFS를 위한 스택 생성
     while True:
-        cur = stack[-1]
-        differ1 = 0
+        cur = stack[-1] # 최종적으로 탐색 순서를 stack의 길이로 출력하기 위해 pop이 아닌 peek으로.
+        differ1 = 0 # 목적하는 단어와의 차이를 확인하기 위한 변수
         for i in range(len(cur)):
             if cur[i] != end[i]: differ1 += 1
-        
         if differ1 == 1: return len(stack)
-                
-        for word in words:
+        
+        for word in words: # 목록을 돌면서 확인 시작
             differ2 = 0
-            for j in range(len(start)):
-                if cur[j] != word[j]: differ2 += 1
-            if differ2 == 1:
-                stack.append(list(word))
-                words.remove(word)
-                break
+            for j in range(len(start)): 
+                if cur[j] != word[j]: differ2 += 1 # stack의 마지막 원소와 목록 내의 단어의 구성이 다를떄마다 differ += 1
+            if differ2 == 1: # 만약 차이가 1개뿐이면,
+                stack.append(list(word)) # 스택에 넣어주고
+                words.remove(word) # 그 단어를 지워줌.
+                break # 스택에 넣었으면 for 문을 종료 << while 문을 통해 다시 for 문으로 돌아올 예정.
 
 begin = 'hit'
 target = 'cog'

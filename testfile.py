@@ -1,7 +1,3 @@
-begin = 'hot'
-end = 'cog'
+tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
 
-
-start = list(begin)
-
-print(start)
+print(set(tickets[0]) - set(["ICN"]))
