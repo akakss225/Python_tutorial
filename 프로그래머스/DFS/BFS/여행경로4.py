@@ -22,27 +22,54 @@
 # 예제 #2
 
 # ["ICN", "SFO", "ATL", "ICN", "ATL", "SFO"] 순으로 방문할 수도 있지만 ["ICN", "ATL", "ICN", "SFO", "ATL", "SFO"] 가 알파벳 순으로 앞섭니다.
-
-from collections import deque
+'''
+def solution(tickets):
+    path = dict()
+    tickets.sort(reverse = True)
+    
+    for x,y in tickets:
+        if x in path.keys():
+            path[x].append(y)
+        else:
+            path[x] = [y]
+    
+    stack = ['ICN']
+    visite = []
+    while stack:
+        cur = stack.pop()
+        visite.append(cur)
+        for i in path.keys():
+            if cur == i and len(path[i]) != 0:
+                stack.append(path[i].pop())
+    
+    return visite
+'''
 
 def solution(tickets):
-    answer = []
-    queue = deque(['ICN'])
-    while queue:
-        current = queue.popleft()
-        answer += [current]
-        index = []
-        for i in range(len(tickets)):
-            if current == tickets[i][0]:
-                queue += set(tickets[i]) - set([current])
-                index.append(tickets[i])
-        sorted(queue)
-        for i in index:
-            tickets.remove(i)
-    return answer
+    tickets.sort(reverse=True)
+    routes = dict()
+    for t1, t2 in tickets:
+        if t1 in routes:
+            routes[t1].append(t2)
+        else:
+            routes[t1] = [t2]
+    st = ['ICN']
+    ans = []
+    while st:
+        top = st[-1]
+        if top not in routes or len(routes[top])==0:
+            ans.append(st.pop())
+        else:
+            st.append(routes[top].pop())
+    ans.reverse()
+    return ans
+
+
 
 
 tickets = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
+tickets = [['ICN','A'],['A','B'],['A','C'],['C','A'],['B','D']]
+#tickets = [["ICN","A"],["ICN","A"],["A","ICN"]]
 
 # return ["ICN", "ATL", "ICN", "SFO", "ATL", "SFO"]
 
