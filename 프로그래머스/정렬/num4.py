@@ -12,18 +12,32 @@
 
 
 
+# def solution(n):
+#     num = sorted(n,reverse=True)
+#     size = []
+#     h = 0
+#     for i in range(len(num)):
+#         size.append(i+1)
+#     for i in range(len(num)):
+#         if size[i] <= num[i]:
+#              h += 1
+#     return h
+
+
 def solution(n):
-    num = sorted(n,reverse=True)
-    size = []
-    h = 0
-    for i in range(len(num)):
-        size.append(i+1)
-    for i in range(len(num)):
-        if size[i] <= num[i]:
-             h += 1
-    return h
-        
+    n.sort(reverse = True)
+    h = dict()
+    for i in range(1, len(n)+1):
+        h[i] = n[i-1]
+    
+    for i in range(1, len(h)+1):
+        if i == h[i]:
+            return i
+        elif i > h[i]:
+            return i - 1
+    return max(h.keys())
             
-n = [22,42,5]
+n = [25,8,5,3,3]
+
 
 print(solution(n))
