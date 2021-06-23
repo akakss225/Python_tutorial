@@ -26,7 +26,7 @@ if result:
 else:
     print(-1) 
 '''
-
+'''
 graph = [
     [2,3,8],
     [1,7],
@@ -44,3 +44,10 @@ for i in enumerate(graph, start= 1):
     vertax.append(i)
     
 print(vertax)
+'''
+
+p1 = [1,2,3,4,5] * 8
+p2 = [2,1,2,3,2,4,2,5] * 5
+p3 = [3,3,1,1,2,2,4,4,5,5] * 4
+
+print(list(zip(p1,p2,p3)))

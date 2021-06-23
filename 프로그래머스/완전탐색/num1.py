@@ -11,6 +11,10 @@
 # 문제의 정답은 1, 2, 3, 4, 5중 하나입니다.
 # 가장 높은 점수를 받은 사람이 여럿일 경우, return하는 값을 오름차순 정렬해주세요.
 
+
+
+
+'''
 def solution(answers):
     answer = []
     count = [0,0,0]
@@ -63,7 +67,7 @@ def solution(answers):
 answers = [1,3,2,4,2]
 
 print(solution(answers))
-
+'''
 '''
 def solution(answers):
     pattern1 = [1,2,3,4,5]
@@ -90,3 +94,32 @@ answers = [1,3,2,4,2]
 
 print(solution(answers))
 '''
+
+def solution(answers):
+    result = []
+    p1 = [1,2,3,4,5] * 8
+    p2 = [2,1,2,3,2,4,2,5] * 5
+    p3 = [3,3,1,1,2,2,4,4,5,5] * 4
+    score = [0, 0, 0]
+    answer = list(zip(p1,p2,p3))
+    for i in range(len(answers)):
+        for j in range(3):
+            if answers[i] == answer[i%40][j]:
+                score[j] += 1
+    for i in range(3):
+        if score[i] == max(score):
+            result.append(i+1)
+    return result
+    
+answers = [1,3,2,4,2]
+
+print(solution(answers))    
+    
+    
+    
+
+
+
+
+
+
