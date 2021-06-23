@@ -1,5 +1,3 @@
-from collections import deque
-
 graph = {
         'A': ['B'],
         'B': ['A', 'C', 'H'],
@@ -18,15 +16,15 @@ graph = {
 
 start = 'A'
 
-def bfs(graph, start):
-    visite = []
-    queue = deque([start])
+def dfs(graph, start):
+    answer = []
+    stack = [start]
     
-    while queue:
-        cur = queue.popleft()
-        if cur not in visite:
-            visite.append(cur)
-            queue.extend(graph[cur])
-    return visite
+    while stack:
+        cur = stack.pop()
+        if cur not in answer:
+            answer.append(cur)
+            stack.extend(sorted(graph[cur], reverse= True))
+    return answer
 
-print(bfs(graph, start))
+print(dfs(graph, start))
