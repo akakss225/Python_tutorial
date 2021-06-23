@@ -91,7 +91,7 @@ def solution(numbers):
 numbers = [90,908,89,898,10,101,1,8,9]
 print(solution(numbers))
 '''
-
+'''
 def solution(numbers):
     numbers = list(map(str, numbers))
     numbers.sort(key=lambda x: x*3, reverse=True)
@@ -102,3 +102,38 @@ def solution(numbers):
 numbers = [114, 115, 23, 28, 9, 93]
 #numbers = [90,908,89,898,10,101,1,8,9]
 print(solution(numbers))
+'''
+
+
+def solution(numbers):
+    nums = list(map(str, numbers)) # 문자열의 크기비교시 맨 앞 숫자부터 시작해 차례대로 아스키코드 기준으로 비교하기 때문에, 저장시 str로.
+    nums.sort(key = lambda x : x*3) # 키값을 x * 3 으로 한 이유는, 문제에서 1000자리 이하이기 때문이다.
+    return str(int(''.join(nums))) # 
+
+numbers = [90,908,89,898,10,101,1,8,9]
+
+print(solution(numbers))
+
+
+# from itertools import permutations
+
+# def solution(numbers):
+#     per = list(permutations(numbers, len(numbers)))
+#     l = []
+#     for i in per:
+#         l.append(''.join(map(str, i)))
+#     return max(l)
+    
+
+# numbers = [90,908,89,898,10,101,1,8,9]
+# print(solution(numbers))
+
+
+
+
+
+
+
+
+
+
