@@ -9,7 +9,7 @@
 # "013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
 import math
 from itertools import permutations
-
+'''
 def prime(num):
     if num <= 1:
         return False
@@ -39,3 +39,36 @@ def solution(numbers):
 
 numbers = "0135231"
 print(solution(numbers))
+'''
+def prime(number):
+    if number <= 1:
+        return False
+    elif number == 2 or number == 3:
+        return True
+    else:
+        for i in range(2, number):
+            if number % i == 0:
+                return False
+        return True
+                
+
+def solution(numbers):
+    answer = 0
+    l = []
+    for i in range(1,len(numbers)+1):
+        l += list(permutations(list(numbers), i))
+    temp = set()
+    for i in range(len(l)):
+        temp.add(str(int(''.join(l[i]))))
+    for i in temp:
+        if prime(int(i)):
+            answer += 1
+    return answer
+
+
+numbers = "011"
+print(solution(numbers))
+
+
+
+
