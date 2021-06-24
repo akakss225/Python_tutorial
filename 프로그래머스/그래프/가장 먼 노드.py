@@ -12,27 +12,35 @@
 #    6	    [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]]               3
 
 
+from collections import deque
+
+
 def solution(n, edge):
-    answer = 0
-    stack = [1]
-    visite = []
-    count = 0
+    vertex = dict()
+    for i in range(len(edge)):
+        if edge[i][0] in vertex:
+            vertex[edge[i][0]].append(edge[i][1])
+        else:
+            vertex[edge[i][0]] = [edge[i][1]]
+        if edge[i][1] in vertex:
+            vertex[edge[i][1]].append(edge[i][0])
+        else:
+            vertex[edge[i][1]] = [edge[i][0]]
     route = []
+    visite = []
+    level = 0
+    stack = [1]
     while stack:
-        temp_edge = edge
         cur = stack.pop()
         if cur not in visite:
             visite.append(cur)
-            count += 1
-            for i in edge:
-                if cur in i:
-                    stack.extend(set(i) - set(visite))
-        else:
-            route.append(count)
-            count = 0
-    return route
+            stack.extend(vertex[cur])
+            level += 1
+        elif cur in visite:
+            route.append(level)
+    return visite
 
-n = 6
+
 vertex = [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]]
-
+n = 6
 print(solution(n, vertex))
