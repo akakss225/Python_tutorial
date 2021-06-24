@@ -44,6 +44,7 @@ from collections import deque
 
 def solution(phone_book):
     
+    phone_book.sort(key = len)
     numbers = deque(phone_book)
     while numbers:
         cur = numbers.popleft()
@@ -51,7 +52,7 @@ def solution(phone_book):
             if cur in i[0:len(cur)]:
                 return False
     return True
-
+    
 
 
 phone = ["119", "97674223",  '9763' ,"195524421"]
