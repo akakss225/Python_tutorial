@@ -52,33 +52,36 @@ print(vertax)
 
 # print(list(zip(p1,p2,p3)))
 
-def solution(n, edge):
-    vertex = dict()
-    for i in range(len(edge)):
-        if edge[i][0] in vertex:
-            vertex[edge[i][0]].append(edge[i][1])
-        else:
-            vertex[edge[i][0]] = [edge[i][1]]
-        if edge[i][1] in vertex:
-            vertex[edge[i][1]].append(edge[i][0])
-        else:
-            vertex[edge[i][1]] = [edge[i][0]]
-    route = []
-    stack = [1]
-    visite = []
-    level = 0
-    while stack:
-        cur = stack.pop()
-        if cur not in visite:
-            visite.append(cur)
-            stack.extend(vertex[cur])
-            level += 1
-        elif cur in visite and cur in stack:
-            route.append(level)
+# def solution(n, edge):
+#     vertex = dict()
+#     for i in range(len(edge)):
+#         if edge[i][0] in vertex:
+#             vertex[edge[i][0]].append(edge[i][1])
+#         else:
+#             vertex[edge[i][0]] = [edge[i][1]]
+#         if edge[i][1] in vertex:
+#             vertex[edge[i][1]].append(edge[i][0])
+#         else:
+#             vertex[edge[i][1]] = [edge[i][0]]
+#     route = []
+#     stack = [1]
+#     visite = []
+#     level = 0
+#     while stack:
+#         cur = stack.pop()
+#         if cur not in visite:
+#             visite.append(cur)
+#             stack.extend(vertex[cur])
+#             level += 1
+#         elif cur in visite and cur in stack:
+#             route.append(level)
         
-    return route
+#     return route
 
 
-vertex = [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]]
-n = 6
-print(solution(n, vertex))
+# vertex = [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]]
+# n = 6
+# print(solution(n, vertex))
+
+phone = ["12","123","1235","567","88"]
+
