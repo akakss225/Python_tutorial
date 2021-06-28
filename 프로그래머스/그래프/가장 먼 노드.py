@@ -16,29 +16,30 @@ from collections import deque
 
 
 def solution(n, edge):
-    vertex = dict()
-    for i in range(len(edge)):
-        if edge[i][0] in vertex:
-            vertex[edge[i][0]].append(edge[i][1])
+    d = dict() # 각 노드를 연결하는 link를 딕셔너리로 만들어줌.
+    for x, y in edge:
+        if x in d:
+            d[x].append(y)
         else:
-            vertex[edge[i][0]] = [edge[i][1]]
-        if edge[i][1] in vertex:
-            vertex[edge[i][1]].append(edge[i][0])
+            d[x] = [y]
+        if y in d:
+            d[y].append(x)
         else:
-            vertex[edge[i][1]] = [edge[i][0]]
-    route = []
-    visite = []
-    level = 0
-    stack = [1]
-    while stack:
-        cur = stack.pop()
-        if cur not in visite:
-            visite.append(cur)
-            stack.extend(vertex[cur])
-            level += 1
-        elif cur in visite:
-            route.append(level)
-    return visite
+            d[y] = [x]
+    
+    
+    queue = deque([[1,0]]) # BFS를 위한 queue를 수행시간을 줄이기 위해 deque로 만들어주고, 인자를 각각 [노드,깊이]로 묶어서 넣어준다. 
+    check = [-1] * (n + 1) # 방문표기를 위한 check list를 만들어준다.
+    while queue:
+        index, depth = queue.popleft() # 노드와 깊이를 인자로 가져온다.
+        check[index] = depth # 노드의 깊이를 치환해준다.
+        for i in d[index]: # 현재 노드와 연결된 링크를 확인하면서
+            if check[i] == -1: # 만약 현재노드와 연결된 노드를 방문하지 않았다면,
+                check[i] = 0 # 방문표시를 해주고
+                queue.append([i, depth + 1]) # 방문한 노드와 그 깊이를 치환해준다.(BFS이기 때문에 다음순서에서 무조건 depth는 + 1)
+        depth += 1 # 깊이를 이동했기 때문에 깊이 기본값을 + 1 해준다.
+
+    return check.count(max(check))
 
 
 vertex = [[3, 6], [4, 3], [3, 2], [1, 3], [1, 2], [2, 4], [5, 2]]
