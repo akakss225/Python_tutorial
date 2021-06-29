@@ -26,8 +26,6 @@ def solution(n, edge):
             d[y].append(x)
         else:
             d[y] = [x]
-    
-    
     queue = deque([[1,0]]) # BFS를 위한 queue를 수행시간을 줄이기 위해 deque로 만들어주고, 인자를 각각 [노드,깊이]로 묶어서 넣어준다. 
     check = [-1] * (n + 1) # 방문표기를 위한 check list를 만들어준다.
     while queue:
