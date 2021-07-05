@@ -9,12 +9,13 @@
 # results 배열 각 행 [A, B]는 A 선수가 B 선수를 이겼다는 의미입니다.
 # 모든 경기 결과에는 모순이 없습니다.
 # 입출력 예
-# n	results	return
-# 5	[[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]	2
+#           n	         results	                            return
+#           5	 [[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]   	    2
 # 입출력 예 설명
 # 2번 선수는 [1, 3, 4] 선수에게 패배했고 5번 선수에게 승리했기 때문에 4위입니다.
 # 5번 선수는 4위인 2번 선수에게 패배했기 때문에 5위입니다.
 from collections import deque
+import numpy as np
 
 def find_worst(n, graph):
     check = [0] * n
@@ -34,24 +35,32 @@ def find_best(n, graph):
     
     return check.index(min(check)) + 1
 
+
 def solution(n, results):
-    answer = 0
-    d = dict()
-    for x, y in results: # Keys = 이긴 선수, Values = 진 선수
-        if x in d:
-            d[x].append(y)
-        else:
-            d[x] = [y]
+    wins, loses = {}, {}
+    for i in range(1, n+1):
+        wins[i], loses[i] = set(), set()
     
-    check = [0] * n
-    worst = find_worst(n , d)
-    best = find_best(n, d)
+    for i in range(1, n+1):
+        for battle in results:
+            if battle[0] == i: # i선수가 이기는 선수를 넣는 과정
+                wins[i].add(battle[1])
+            if battle[1] == i: # i선수가 지는 선수를 넣는 과정
+                loses[i].add(battle[0])
+        for winner in loses[i]: # i선수를 이기는 선수에 대하여 그 선수가 이기는 선수들을 모두 추가시켜 준다.
+            wins[winner].update(wins[i])
+        for loser in wins[i]:
+            loses[loser].update(loses[i])
+    
+    cnt = 0
+    for i in range(1, n+1):
+        if len(wins[i]) + len(loses[i]) == n - 1:
+            cnt += 1
+    return cnt
+
+
     
     
-    
-    
-    
-    return [best, worst]
 
 n = 5
 results = [[4,3], [4,2], [3,2], [1,2], [2,5]]
