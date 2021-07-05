@@ -40,6 +40,8 @@ def solution(n, results):
     wins, loses = {}, {}
     for i in range(1, n+1):
         wins[i], loses[i] = set(), set()
+    # wins = key(이긴 선수), value(진 선수)
+    # loses = key(진 선수), value(이긴 선수)
     
     for i in range(1, n+1):
         for battle in results:
@@ -58,9 +60,6 @@ def solution(n, results):
             cnt += 1
     return cnt
 
-
-    
-    
 
 n = 5
 results = [[4,3], [4,2], [3,2], [1,2], [2,5]]

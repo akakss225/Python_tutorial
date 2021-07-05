@@ -11,7 +11,8 @@
 INF = int(1e9) # 무한을 의미하는 값으로 10억을 설정(이론상 무한)
 
 # 노드의 개수 및 간선의 개수를 입력받기
-n, m = int(input())
+n = int(input())
+m = int(input())
 
 
 # 2차원 리스트(그래프 표현)를 만들고, 무한으로 초기화
@@ -44,4 +45,5 @@ for a in range(1, n+1):
         # 도달할 수 있는 경우 거리를 출력
         else:
             print(graph[a][b], end= " ")
-print()
+    print()
+    
