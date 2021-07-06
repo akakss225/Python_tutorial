@@ -119,20 +119,32 @@ print(vertax)
 # param0 = ['/t.z', '/z/z_v2.z', '/a.z', '/d/b.z', '/d/a/t.z']
 
 # print(solution(param0))
-n = 5
-results = [[4,3], [4,2], [3,2], [1,2], [2,5]]
 
-check = [0] * n
 
-d = dict() # 각 노드를 연결하는 link를 딕셔너리로 만들어줌.
-for x, y in results:
-    if x in d:
-        d[x].append(y)
-    else:
-        d[x] = [y]
 
-for i in d.keys():
-    for j in d[i]:
-        check[j-1] += 1
-        check[i-1] -= 1
-print(check.index(min(check))+1)
+# n = 5
+# results = [[4,3], [4,2], [3,2], [1,2], [2,5]]
+
+# check = [0] * n
+
+# d = dict() # 각 노드를 연결하는 link를 딕셔너리로 만들어줌.
+# for x, y in results:
+#     if x in d:
+#         d[x].append(y)
+#     else:
+#         d[x] = [y]
+
+# for i in d.keys():
+#     for j in d[i]:
+#         check[j-1] += 1
+#         check[i-1] -= 1
+# print(check.index(min(check))+1)
+
+
+import heapq
+
+
+jobs = [[24, 10], [28, 39], [43, 20], [37, 5], [47, 22], [20, 47], [15, 34], [15, 2], [35, 43], [26, 1]]
+jobs.sort(key= lambda x : (x[0], x[1]))
+
+print(jobs)

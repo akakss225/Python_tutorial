@@ -19,12 +19,12 @@ def getSmall(distance):
     mini = INF
     index = 0
     for i in range(n):
-        if distance[i] < mini and visit[i] != True:
+        if distance[i] < mini and visit[i] != True: # start의 경우 0이므로, 이를 베제하기 위함.
             mini = distance[i]
             index = i
     return index
 
-def dijkstra(graph, n, start, visit):
+def dijkstra(graph, n, start, visit): # 다익스트라 실제 구현 함수
     d = [INF] * n
     for i in range(n):
         d[i] = graph[start][i]
@@ -38,4 +38,4 @@ def dijkstra(graph, n, start, visit):
                     d[j] = d[cur] + graph[cur][j]
     return d
 
-print(dijkstra(graph, n, 4, visit))
+print(dijkstra(graph, n, 0, visit))
