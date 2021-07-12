@@ -141,10 +141,21 @@ print(vertax)
 # print(check.index(min(check))+1)
 
 
-import heapq
+# import heapq
 
 
-jobs = [[24, 10], [28, 39], [43, 20], [37, 5], [47, 22], [20, 47], [15, 34], [15, 2], [35, 43], [26, 1]]
-jobs.sort(key= lambda x : (x[0], x[1]))
+# jobs = [[24, 10], [28, 39], [43, 20], [37, 5], [47, 22], [20, 47], [15, 34], [15, 2], [35, 43], [26, 1]]
+# jobs.sort(key= lambda x : (x[0], x[1]))
 
-print(jobs)
+# print(jobs)
+
+
+
+
+test = [[False, False], [False, False], [False, False]]
+
+print(test)
+
+test[0][0] = True
+
+print(test)

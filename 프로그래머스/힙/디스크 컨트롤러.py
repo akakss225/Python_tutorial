@@ -42,20 +42,42 @@ def solution(jobs):
         fulltime += i[1]
     
     d = dict()
-    for x, y in jobs:
-        d[x] = [y, 0] # key = 요청시간, value = [소요시간, 대기시간]
+    index = 0
+    while index < len(jobs):
+        for x, y in jobs:
+            d[x] = [y, 0, index]
+            index += 1
+        # key = 요청시간, value = [소요시간, 대기시간, 인덱스]
+    check = []
+    for i in range(len(jobs)):
+        check.append([False, False])
+        
+        # [Start, Finish] 를 확인하기위한 bool list
     
     hq.heapify(jobs)
     queue = deque()
+    id = 0
     for i in range(fulltime):
-        if len(queue) > 0:
-            if i == queue[0][1]:
-                queue.popleft()
-        for k in range(len(jobs)):
-            if i == jobs[k][0]:
-                queue.append(jobs[k])
-        for k in queue:
-            d[k[0]][1] += 1
+        for j in jobs:
+            if i == j[0]:
+                queue.append(j)
+                if d[j[0]][2] == 0:
+                    check[d[j[0]][2]][0] = True
+            
+        for j in queue:
+            id = d[j[0]][2]
+            if id == 0 and (i - jobs[id][0]) == jobs[id][1]:
+                check[id][1] = True
+                check[id+1][0] = True
+            else:
+                if check[id][0] == True and d[j[0]][1] == jobs[id-1][1] - jobs[id][0] + jobs[id][1]:
+                    check[id][1] = True
+                    check[id+1][0] = True
+                    break
+        for j in queue:
+            id = d[j[0]][2]
+            if check[id][1] == False:
+                d[j[0]][1] += 1
     
     runTime = 0
     for i in d:
@@ -67,7 +89,6 @@ def solution(jobs):
 
 
 jobs = [[0, 3], [1, 9], [2, 6]]
-
 print(solution(jobs))
 # return = 9
 
