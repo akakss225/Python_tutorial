@@ -152,10 +152,57 @@ print(vertax)
 
 
 
-test = [[False, False], [False, False], [False, False]]
+import random
 
-print(test)
+list_num = []
+while True:
+    randomnumber = random.randint(-20,20)
+    if randomnumber != 0:
+        list_num.append(randomnumber)
+    if len(list_num) == 10:
+        break
+    
+print(list_num)
 
-test[0][0] = True
+def State(n):
+    if -20 <= n < -12:
+        state = "'sad'"
+    elif -12 <= n < -4:
+        state = "'happy'"
+    elif -4 <= n < 5:
+        state = "'angry'"
+    elif 5 <= n < 13:
+        state = "'mad'"
+    else:
+        state = "'good'"
+    return state
 
-print(test)
+emotions = [["'sad'",0],["'happy'", 0],["'angry'",0],["'mad'",0],["'good'",0]]
+
+while True:
+    n = int(input("값 입력 : "))
+    if n not in list_num:
+        print("Value X,'chaos'")
+        state = None
+    else:
+        index = list_num.index(n)
+        state = State(n)
+        print("index =",index,',',state)
+
+    if state == "'sad'":
+        emotions[0][1] += 1
+    elif state == "'happy'":
+        emotions[1][1] += 1
+    elif state == "'angry'":
+        emotions[2][1] += 1
+    elif state == "'mad'":
+        emotions[3][1] += 1
+    elif state == "'good'":
+        emotions[4][1] += 1
+
+    if emotions[1][1] >= 2 and emotions[2][1] >= 1:
+        break
+
+
+print(emotions)
+print('Today is',max(emotions)[0])
