@@ -51,43 +51,88 @@
 # 입출력 예 #3
 
 # 오른손잡이가 [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]를 순서대로 누르면 사용한 손은 "LLRLLRLLRL"이 됩니다.
-from collections import deque
+INF = int(1e9);
+graph = [
+    [0, INF, INF, INF, INF, INF, INF, INF, 1, INF, 1, 1], # 숫자패드 0
+    [INF, 0, 1, INF, 1, INF, INF, INF, INF, INF, INF, INF], # 숫자패드 1
+    [INF, 1, 0, 1, INF, 1, INF, INF, INF, INF, INF ,INF], # 숫자패드 2
+    [INF, INF , 1, 0, INF , INF, 1, INF, INF, INF, INF, INF ], # 숫자패드 3
+    [INF, 1, INF, INF, 0, 1, INF, 1, INF, INF, INF, INF], # 숫자패드 4
+    [INF, INF, 1, INF, 1, 0, 1, INF, INF, INF, INF, INF], # 숫자패드 5
+    [INF, INF, INF, 1, INF, 1, 0, INF, INF, 1, INF, INF], # 숫자패드 6
+    [INF, INF, INF, INF, 1, INF, INF, 0, 1, INF, 1, INF], # 숫자패드 7
+    [INF, INF, INF, INF, INF, 1, INF, 1, 0, 1, INF, INF], # 숫자패드 8
+    [INF, INF, INF, INF, INF, INF, 1, INF, 1, 0, INF, 1], # 숫자패드 9
+    [1, INF, INF, INF, INF, INF, INF, 1, INF, INF, 0, INF], # 숫자패드 *
+    [1, INF, INF, INF, INF, INF, INF, INF, INF, 1, INF, 0] # 숫자패드 #
+]
+n = len(graph)
 
-graph = {
-        0 : [10, 11, 8],
-        1 : [2, 4],
-        2 : [1, 3, 5],
-        3 : [2, 6],
-        4 : [1, 5, 7],
-        5 : [2, 4, 6, 8],
-        6 : [3, 5, 9],
-        7 : [4, 8 , 10],
-        8 : [5, 7, 9, 0],
-        9 : [6, 8, 11],
-        10 : [7, 0],
-        11 : [9, 0]
-    }
+visit = [False] * n # 방문여부 확인
+distance = [INF] * n # 최단거리 저장
 
-def bfs(graph, strat, end):
-    visite = []
-    queue = deque([strat])
-    count = 0
-    while queue:
-        cur = queue.popleft()
-        if end not in graph[cur]:
-            if cur not in visite:
-                visite.append(cur)
-                queue.extend(graph[cur])
-        else:
-            return count
-    return count
+def getSmall(distance):
+    mini = INF
+    index = 0
+    for i in range(n):
+        if distance[i] < mini and visit[i] != True: # start의 경우 0이므로, 이를 베제하기 위함.
+            mini = distance[i]
+            index = i
+    return index
+
+def dijkstra(graph, n, start, end, visit):
+    d = [INF] * n
+    endIdx = end
+    for i in range(n):
+        d[i] = graph[start][i]
+    visit[start] = True
+    for i in range(n):
+        cur = getSmall(d)
+        visit[cur] = True
+        for j in range(n):
+            if visit[j] != True:
+                if d[cur] + graph[cur][j] < d[j]:
+                    d[j] = d[cur] + graph[cur][j]
+    return d[endIdx]
+
+
 
 def solution(numbers, hand):
+    lHand = 10 # 숫자패드 * 인덱스넘버
+    rHand = 11 # 숫자패드 # 인덱스넘버
     answer = []
-    return answer
     
-# LRLLLRLLRRL    
+    for i in numbers:
+        tempL = dijkstra(graph, n, lHand, i, visit)
+        tempR = dijkstra(graph, n, rHand, i, visit)
+        if i == 2 or i == 5 or i == 8 or i == 0:
+            if tempR > tempL:
+                answer.append("L")
+                lHand = i
+            elif tempL == tempR:
+                if hand == "right":
+                    answer.append("R")
+                    rHand = i
+                else:
+                    answer.append("L")
+                    lHand = i
+            else:
+                answer.append("R")
+                rHand = i
+        elif i == 1 or i == 4 or i == 7:
+            answer.append("L")
+            lHand = i
+        else:
+            answer.append("R")
+            rHand = i
+    return "".join(answer)
+
+# LRLLLRLLRRL    lrlllrllrrl
 numbers = [1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5]
 hand = "right"
 
-print(bfs(graph, 10, 2))
+# LLRLLRLLRL
+numbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
+
+print(solution(numbers2, hand))
