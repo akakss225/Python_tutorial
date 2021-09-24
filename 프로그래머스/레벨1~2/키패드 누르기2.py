@@ -51,85 +51,74 @@
 # 입출력 예 #3
 
 # 오른손잡이가 [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]를 순서대로 누르면 사용한 손은 "LLRLLRLLRL"이 됩니다.
-class DIJK:
-    def __init__(self, graph):
-        self.graph = graph
-        self.n = len(graph)
-        self.visit = [False] * self.n
-        self.distance = [INF] * self.n
-        
-    def getSmall(self):
-        mini = 10000000000
-        index = 0
-        for i in range(self.n):
-            if self.distance[i] < mini and self.visit[i] != True: # start의 경우 0이므로, 이를 베제하기 위함.
-                mini = self.distance[i]
-                index = i
-        return index
-    
-    def dijkstra(self, start, end):
-        d = [INF] * self.n
-        endIdx = end
-        for i in range(self.n):
-            d[i] = self.graph[start][i]
-        self.visit[start] = True
-        for i in range(self.n):
-            cur = self.getSmall()
-            self.visit[cur] = True
-            for j in range(self.n):
-                if self.visit[j] != True:
-                    if d[cur] + self.graph[cur][j] < d[j]:
-                        d[j] = d[cur] + self.graph[cur][j]
-        return d[endIdx]
-
-
-INF = int(1e9);
-graph = [
-    [0, INF, INF, INF, INF, INF, INF, INF, 1, INF, 1, 1], # 숫자패드 0
-    [INF, 0, 1, INF, 1, INF, INF, INF, INF, INF, INF, INF], # 숫자패드 1
-    [INF, 1, 0, 1, INF, 1, INF, INF, INF, INF, INF ,INF], # 숫자패드 2
-    [INF, INF , 1, 0, INF , INF, 1, INF, INF, INF, INF, INF ], # 숫자패드 3
-    [INF, 1, INF, INF, 0, 1, INF, 1, INF, INF, INF, INF], # 숫자패드 4
-    [INF, INF, 1, INF, 1, 0, 1, INF, 1, INF, INF, INF], # 숫자패드 5
-    [INF, INF, INF, 1, INF, 1, 0, INF, INF, 1, INF, INF], # 숫자패드 6
-    [INF, INF, INF, INF, 1, INF, INF, 0, 1, INF, 1, INF], # 숫자패드 7
-    [1, INF, INF, INF, INF, 1, INF, 1, 0, 1, INF, INF], # 숫자패드 8
-    [INF, INF, INF, INF, INF, INF, 1, INF, 1, 0, INF, 1], # 숫자패드 9
-    [1, INF, INF, INF, INF, INF, INF, 1, INF, INF, 0, INF], # 숫자패드 *
-    [1, INF, INF, INF, INF, INF, INF, INF, INF, 1, INF, 0] # 숫자패드 #
-]
-        
 
 def solution(numbers, hand):
-    lHand = 10 # 숫자패드 * 인덱스넘버
-    rHand = 11 # 숫자패드 # 인덱스넘버
-    tempL = DIJK(graph)
-    tempR = DIJK(graph)
     answer = []
+    keyPad = [ # 10 == * / 11 == #
+        [10, 7, 4, 1],
+        [0, 8, 5, 2],
+        [11, 9, 6, 3]
+    ]
+    leftHand = 10
+    leftLocation = 0
+    rightHand = 11
+    rightLocation = 2
+    
+    
     
     for i in numbers:
-        curL = tempL.dijkstra(lHand, i)
-        curR = tempR.dijkstra(rHand, i)
-        if i == 2 or i == 5 or i == 8 or i == 0:
-            if curR > curL:
-                answer.append("L")
-                lHand = i
-            elif curL == curR:
-                if hand == "right":
-                    answer.append("R")
-                    rHand = i
-                else:
-                    answer.append("L")
-                    lHand = i
-            else:
-                answer.append("R")
-                rHand = i
-        elif i == 1 or i == 4 or i == 7:
+        lCount = 0
+        rCount = 0
+        if i == 10 or i == 7 or i == 4 or i == 1:
+            leftHand = i
+            leftLocation = 0
             answer.append("L")
-            lHand = i
-        else:
+        elif i == 11 or i == 9 or i == 6 or i ==3:
+            rightHand = i
+            rightLocation = 2
             answer.append("R")
-            rHand = i
+        else:
+            if leftLocation != 1:
+                lCount += 1
+                if keyPad[1].index(i) > keyPad[0].index(leftHand):
+                    lCount += keyPad[1].index(i) - keyPad[0].index(leftHand)
+                else:
+                    lCount += keyPad[0].index(leftHand) - keyPad[1].index(i)
+            else:
+                if keyPad[1].index(i) > keyPad[1].index(leftHand):
+                    lCount += keyPad[1].index(i) - keyPad[1].index(leftHand)
+                else:
+                    lCount += keyPad[1].index(leftHand) - keyPad[1].index(i)
+                
+            if rightLocation != 1:
+                rCount += 1
+                if keyPad[1].index(i) > keyPad[2].index(rightHand):
+                    rCount += keyPad[1].index(i) - keyPad[2].index(rightHand)
+                else:
+                    rCount += keyPad[2].index(rightHand) - keyPad[1].index(i)
+            else:
+                if keyPad[1].index(i) > keyPad[1].index(rightHand):
+                    rCount += keyPad[1].index(i) - keyPad[1].index(rightHand)
+                else:
+                    rCount += keyPad[1].index(rightHand) - keyPad[1].index(i)
+            
+            if lCount > rCount:
+                rightHand = i
+                rightLocation = 1
+                answer.append("R")
+            elif lCount < rCount:
+                leftHand = i
+                leftLocation = 1
+                answer.append("L")
+            else:
+                if hand == "right":
+                    rightHand = i
+                    rightLocation = 1
+                    answer.append("R")
+                else:
+                    leftHand = i
+                    leftLocation = 1
+                    answer.append("L")
     return "".join(answer)
 
 
@@ -144,6 +133,4 @@ hand2 = "right"
 numbers3 = [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2]
 hand3 = "left"
 
-print(solution(numbers3, hand3))
-
-
+print(solution(numbers2, hand2))

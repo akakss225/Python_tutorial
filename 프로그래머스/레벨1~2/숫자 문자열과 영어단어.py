@@ -77,6 +77,6 @@ def solution(s):
         tempList = []
     return int("".join(answer))
 
-s = "23four5six7"
+s = "23four5sixseven"
 
 print(solution(s))
