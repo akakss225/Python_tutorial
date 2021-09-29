@@ -1,26 +1,12 @@
-def solution(numbers, hand):
-    answer = []
-    arr = numbers
-    main = hand
-    
-    key = [
-        [10, 7, 4, 1],
-        [0, 8, 5, 2],
-        [11, 9, 6, 3]
-    ]
-    lHand = 10
-    rHand = 11
-    
-    for i in arr:
-        if i == 1 or i == 4 or i == 7:
-            answer.append("L")
-            lHand = key[0].index[i]
-        elif i == 3 or i == 6 or i == 9:
-            answer.append("R")
-            rHand = key[2].index[i]
-        else:
-            
-    
-    return answer
+def solution(board, moves):
+    answer = 0
+    for i in board:
+        i.reverse()
+    return board
 
 
+board = [[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]]
+moves = [1,5,3,5,1,2,1,4]
+
+# 4
+print(solution(board, moves))
