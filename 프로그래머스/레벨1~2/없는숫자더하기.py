@@ -16,3 +16,11 @@
 # 입출력 예 #2
 
 # 1, 2, 3이 numbers에 없으므로, 1 + 2 + 3 = 6을 return 해야 합니다.
+
+def solution(numbers):
+    answer = 45
+    for i in numbers: answer -= i
+    return answer
+
+numbers = [1,2,3,4,6,7,8,0]
+print(solution(numbers))
