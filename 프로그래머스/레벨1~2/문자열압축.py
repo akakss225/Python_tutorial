@@ -43,13 +43,17 @@
 # 문자열은 제일 앞부터 정해진 길이만큼 잘라야 합니다.
 # 따라서 주어진 문자열을 x / ababcdcd / ababcdcd 로 자르는 것은 불가능 합니다.
 # 이 경우 어떻게 문자열을 잘라도 압축되지 않으므로 가장 짧은 길이는 17이 됩니다.
+from collections import deque
 
 def solution(s):
-    answer = list(s)
+    answer = deque(s)
     maxLength = int(len(s) / 2)
+    fullLength = len(s)
+    compare = []
     
+            
     
-    return maxLength
+    return answer
 
 
 s = "aabbaccc"
