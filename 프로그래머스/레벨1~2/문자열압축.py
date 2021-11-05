@@ -43,18 +43,36 @@
 # 문자열은 제일 앞부터 정해진 길이만큼 잘라야 합니다.
 # 따라서 주어진 문자열을 x / ababcdcd / ababcdcd 로 자르는 것은 불가능 합니다.
 # 이 경우 어떻게 문자열을 잘라도 압축되지 않으므로 가장 짧은 길이는 17이 됩니다.
-from collections import deque
 
 def solution(s):
-    answer = deque(s)
-    maxLength = int(len(s) / 2)
-    fullLength = len(s)
-    compare = []
-    
-            
-    
-    return answer
-
+    length = []
+    result = ""
+    # 주어진 문자열의 길이가 1일 경우
+    if len(s) == 1:
+        return 1
+    # 아닌경우 
+    # 0 으로 자르는 경우는 제외하고 반복문 시작. 반복횟수의 최댓값은 총 길이의 절반을 넘기지 않기 때문에 len(s) // 2 + 1로 제한해준다.
+    for cut in range(1, len(s) // 2 + 1):
+        # 문자를 자르는 단위별로 반복횟수를 입력해줄 변수 count 생성
+        count = 1
+        # 시작 글자를 먼저 잘라서 담아놓는다
+        tempStr = s[:cut]
+        # 시작 글자 다음부터 반복글자만큼씩 자르는 반복문 시작
+        for i in range(cut, len(s), cut):
+            if s[i:i+cut] == tempStr:
+                count += 1
+            else:
+                if count == 1:
+                    count = ""
+                result += str(count) + tempStr
+                tempStr = s[i:i+cut]
+                count = 1
+        if count == 1:
+            count = ""
+        result += str(count) + tempStr
+        length.append(len(result))
+        result = ""
+    return min(length)
 
 s = "aabbaccc"
 print(solution(s))

@@ -1,20 +1,39 @@
-def solution(record):
-    answer = []
-    enter = "님이 들어왔습니다."
-    leave = "님이 나갔습니다."
-    dic = {}
-    for i in record:
-        if i.split()[0] == "Enter" or i.split()[0] == "Change":
-            dic[i.split()[1]] = i.split()[2]
-            dic[i.split()[1]] = i.split()[2]
-    for i in record:
-        if(i.split()[0] == "Enter"):
-            answer.append(dic[i.split()[1]] + enter)
-        elif(i.split()[0] == "Leave"):
-            answer.append(dic[i.split()[1]] + leave)
+import math
+
+def nums(n):
+    result = 0
+    for i in range(1, n+1):
+        result += int(math.pow(3,i))
+    return result
+
+def threepow(n):
+    count = 1
+    while True:
+        if nums(count) >= n:
+            return count
+        else:
+            count += 1
     
-    return answer
-record = ["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"]
-
-print(solution(record))
-
+print(threepow(39))
+# 1 0 2
+# # 11 > 42
+# 1 1 0
+# # 12 > 44
+# 1 1 1
+# # 13 > 111
+# 1 1 2
+# # 14 > 112
+# 1 2 0
+# # 15 > 114
+# 1 2 1 
+# # 16 > 121
+# 1 2 2
+# # 17 > 122
+# 2 0 0
+# # 18 > 124
+# 2 0 1
+# # 19 > 141
+# 2 0 2
+# # 20 > 142
+# 2 1 0
+# # 21 > 144
