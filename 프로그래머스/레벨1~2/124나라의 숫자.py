@@ -1,31 +1,21 @@
-import math
-
-def threepow(n):
-    result = 0
-    for i in range(1, n+1):
-        result += int(math.pow(3,i))
-    return result
-
-def nums(n):
-    count = 1
-    while True:
-        if threepow(count) >= n:
-            return count
-        else:
-            count += 1
+from collections import deque
 
 def solution(n):
-    answer = ''
-    shareList = []
-    if n < 4:
-        return str(n)
-    
-    count = nums(n)
-    
-    
-    
+    answer = ""
+    temp = n
+    while temp != 0:
+        share = temp // 3
+        trash = temp % 3
+        if trash != 0:
+            if trash == 1:
+                answer = "1" + answer
+            else:
+                answer = "2" + answer
+        else:
+            answer = "4" + answer
+            share -= 1
+        temp = share
     return answer
 
-n = 12
-
-print(solution(n))
+print(solution(5))
+    
