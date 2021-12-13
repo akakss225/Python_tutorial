@@ -33,6 +33,7 @@ result = 0       # 최솟값을 갖는 지역의 연령대별 인구 비율을 �
 for row in data :
     if name in row[0] :
         home = np.array(row[3:], dtype=int)/int(row[2])
+        break
 for row in data :
     away = np.array(row[3:], dtype=int)/int(row[2])
     s = np.sum((home-away)**2)
