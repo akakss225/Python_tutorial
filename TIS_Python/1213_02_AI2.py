@@ -4,6 +4,12 @@ from sklearn.neighbors import KNeighborsClassifier
 import matplotlib.pyplot as plt
 from matplotlib import rc
 
+# 1. 데이터 준비 - 훈련데이터, 훈련타겟 / 평가데이터, 평가타겟 >> scale작업
+# 2. 훈련 - 어떤 알고리즘을 사용할 것인가?
+# 3. 평가 - 0 ~ 1 : 1에 가까울수록 훈련이 잘 됨을 의미
+# 4. 예측 or 판정 - predict. 예측에 사용할 데이터 >> 필요하면 scale 작업
+
+
 # 지도 학습 : 정답을 알려줌 ( target 존재 )
 # 비지도 학습 : 정답을 안알려줌 ( target 없음 )
 
@@ -19,9 +25,6 @@ fish_weight = [242.0, 290.0, 340.0, 363.0, 430.0, 450.0, 500.0, 390.0, 450.0, 50
 fish_data = np.column_stack((fish_length, fish_weight))
 
 fish_target = np.concatenate((np.ones(35), np.zeros(14)))
-
-print(fish_data)
-print(fish_target)
 
 # 사이킷 런을 이용해 데이터 나누기. 훈련을 시켜주는 메소드 train_test_split()
 # 반드시 기억해야할 메소드
@@ -40,3 +43,21 @@ kn.score(test_input, test_target)
 # 판정
 print(kn.predict(test_input))
 
+# 평균
+mean = np.mean(train_input, axis=0)
+# 표준편차
+std = np.std(train_input, axis=0)
+
+# (훈련 데이터 - 평균) / 표준편차 = 정제된 훈련된 데이터임. >> x축 y축 스케일을 맞추는 작업
+train_scaled = (train_input - mean) / std
+
+# train_scaled로 다시 훈련 시키기
+kn.fit(train_scaled, train_target )
+
+# 평가 데이터도 스케일을 맞춰줌
+test_scaled = (test_input - mean) / std
+# 판정
+kn.score(test_scaled, test_target)
+
+new = ([25, 150] - mean) / std
+print(kn.predict([new]))
