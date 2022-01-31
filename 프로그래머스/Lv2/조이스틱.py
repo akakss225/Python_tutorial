@@ -28,30 +28,48 @@
 def solution(name):
     count = 0
     route = [min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name]
-    
     cur = 0
     first = 1
-    while True:
+    while sum(route) != 0:
         count += route[cur]
         route[cur] = 0
-        if cur != 0:
+        r = l = 1
+        if first == 1 and cur != 0:
             first = 0
-            
         if sum(route) == 0:
             return count
-        
-        r = l = 1
-        while route[cur - l] == 0:
-            l += 1
-        while route[cur + r] == 0:
+        while route[cur + r] == 0 and cur + r < len(name) -1:
             r += 1
+        while route[cur - l] == 0 and abs(cur - l) < len(name) - 1:
+            l += 1
         
-        if first == 1:
-            rr = ll = 2
+        if first == 1 and l != r:
+            ll = l + 1
             while route[cur - ll] == 0 and abs(cur - ll) < len(name) - 1:
                 ll += 1
+            ll - 1
+            if ll < l:
+                cur += r
+                count += r
+            else:
+                cur -= l
+                count += l
+            continue
+        
+        if l == r:
+            rr = ll = r + 1
             while route[cur + rr] == 0 and cur + rr < len(name) - 1:
                 rr += 1
+            while route[cur - ll] == 0 and abs(cur - ll) < len(name) - 1:
+                ll += 1
+            # if first == 1:
+            #     if ll - 1 >= l:
+            #         cur += r
+            #         count += r
+            #     else:
+            #         cur -= l
+            #         count += l
+            # else:
             if ll < rr:
                 cur += r
                 count += r
@@ -65,15 +83,17 @@ def solution(name):
             else:
                 cur -= l
                 count += l
+    return -1
 
 name = "JEROEN"
 # name = "ABAAB"
 name = "JAN"
 # name = "JAZ"
-name = "ABAAAAAABB"
+name = "AABAAAAABBA"
 # name = "AAAA"
 # name = "BAABA"
 # name = "BBABAAAB"
-# name = "BBBBAABABA"
+# name = "ABAAAAAAAAABA"
+# name = "BBBBAAAABA"
 
 print(solution(name))
