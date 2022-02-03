@@ -24,70 +24,372 @@
 # "JEROEN"	56
 # "JAN"	23
 
-
 def solution(name):
-    count = 0
-    route = [min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name]
-    cur = 0
-    first = 1
-    while sum(route) != 0:
-        count += route[cur]
-        route[cur] = 0
+    answer = 0
+    count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
+    idx = 0
+    while True:
+        answer += count[idx]
+        count[idx] = 0
+        if sum(count) == 0:
+            return answer
+        
         r = l = 1
-        if first == 1 and cur != 0:
-            first = 0
-        if sum(route) == 0:
-            return count
-        while route[cur + r] == 0 and cur + r < len(name) -1:
-            r += 1
-        while route[cur - l] == 0 and abs(cur - l) < len(name) - 1:
-            l += 1
+        idx_r = 1 + idx
+        idx_l = idx - 1
         
-        if first == 1 and l != r:
-            ll = l + 1
-            while route[cur - ll] == 0 and abs(cur - ll) < len(name) - 1:
-                ll += 1
-            ll - 1
-            if ll < l:
-                cur += r
-                count += r
+        while count[idx_r] == 0:
+            if idx_r >= len(name):
+                idx_r = 0
+                r += 1
             else:
-                cur -= l
-                count += l
-            continue
+                idx_r += 1
+                r += 1
+        while count[idx_l] == 0:
+            if idx_l < -(len(name)):
+                idx_l = -1
+                l += 1
+            else:
+                idx_l -= 1
+                l += 1
+    
+        if l > r:
+            answer += r
+            idx += r
+        else:
+            answer += l
+            idx -= l
+
+
+# def solution(name):
+#     count = 0
+#     route = [min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name]
+#     cur = 0
+#     first = 1
+#     while sum(route) != 0:
+#         count += route[cur]
+#         route[cur] = 0
+#         r = l = 1
+#         if first == 1 and cur != 0:
+#             first = 0
+#         if sum(route) == 0:
+#             return count
+#         while route[cur + r] == 0 and cur + r < len(name) -1:
+#             r += 1
+#         while route[cur - l] == 0 and abs(cur - l) < len(name) - 1:
+#             l += 1
         
-        if l == r:
-            rr = ll = r + 1
-            while route[cur + rr] == 0 and cur + rr < len(name) - 1:
-                rr += 1
-            while route[cur - ll] == 0 and abs(cur - ll) < len(name) - 1:
-                ll += 1
-            # if first == 1:
-            #     if ll - 1 >= l:
-            #         cur += r
-            #         count += r
-            #     else:
-            #         cur -= l
-            #         count += l
-            # else:
-            if ll < rr:
-                cur += r
-                count += r
+#         if first == 1 and l != r:
+#             ll = l + 1
+#             while route[cur - ll] == 0 and abs(cur - ll) < len(name) - 1:
+#                 ll += 1
+#             ll - 1
+#             if ll < l:
+#                 cur += r
+#                 count += r
+#             else:
+#                 cur -= l
+#                 count += l
+#             continue
+        
+#         if l == r:
+#             rr = ll = r + 1
+#             while route[cur + rr] == 0 and cur + rr < len(name) - 1:
+#                 rr += 1
+#             while route[cur - ll] == 0 and abs(cur - ll) < len(name) - 1:
+#                 ll += 1
+#             # if first == 1:
+#             #     if ll - 1 >= l:
+#             #         cur += r
+#             #         count += r
+#             #     else:
+#             #         cur -= l
+#             #         count += l
+#             # else:
+#             if ll < rr:
+#                 cur += r
+#                 count += r
+#             else:
+#                 cur -= l
+#                 count += l
+#         else:
+#             if l > r:
+#                 cur += r
+#                 count += r
+#             else:
+#                 cur -= l
+#                 count += l
+#     return -1
+
+# def solution(name):
+#     answer = 0
+#     count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
+#     idx = 0
+#     check = 1
+#     while True:
+#         answer += count[idx]
+#         count[idx] = 0
+#         if idx != 0:
+#             check = 0
+#         if sum(count) == 0:
+#             return answer
+        
+#         r = l = 1
+#         idx_r = 1 + idx
+#         idx_l = idx - 1
+        
+#         while count[idx_r] == 0:
+#             if idx_r >= len(name):
+#                 idx_r = 0
+#                 r += 1
+#             else:
+#                 idx_r += 1
+#                 r += 1
+#         while count[idx_l] == 0:
+#             if idx_l < -(len(name)):
+#                 idx_l = -1
+#                 l += 1
+#             else:
+#                 idx_l -= 1
+#                 l += 1
+        
+#         if check == 1:
+#             rr = ll = 1
+#             if r >= len(name) - 1:
+#                 idx_rr = 0
+#             else:
+#                 idx_rr = r + 1
+#             if l < -len(name) + 1:
+#                 idx_ll = -1
+#             else:
+#                 idx_ll = l - 1
+            
+#             while count[idx_rr] == 0:
+#                 if idx_rr >= len(name):
+#                     idx_rr = 0
+#                     rr += 1
+#                 else:
+#                     idx_rr += 1
+#                     rr += 1
+#             while count[idx_ll] == 0:
+#                 if idx_ll < -len(name):
+#                     idx_ll = -1
+#                     ll += 1
+#                 else:
+#                     idx_ll -= 1
+#                     ll += 1
+            
+#             if ll < rr:
+#                 answer += r
+#                 idx += r
+#             else:
+#                 answer += l
+#                 idx -= l
+#         else:
+#             if l > r:
+#                 answer += r
+#                 idx += r
+#             else:
+#                 answer += l
+#                 idx -= l
+                
+# def solution(name):
+#     answer = 0
+#     count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
+#     idx = 0
+#     check = 1
+#     while True:
+#         answer += count[idx]
+#         count[idx] = 0
+#         if idx != 0:
+#             check = 0
+#         if sum(count) == 0:
+#             return answer
+        
+#         r = l = 1
+#         if idx + 1 > len(name) - 1:
+#             idx_r = 0
+#         else:
+#             idx_r = 1 + idx
+#         if idx - 1 < -len(name):
+#             idx_l = -1
+#         else:
+#             idx_l = idx - 1
+        
+#         while count[idx_r] == 0:
+#             if idx_r >= len(name):
+#                 idx_r = 0
+#                 r += 1
+#             else:
+#                 idx_r += 1
+#                 r += 1
+#         while count[idx_l] == 0:
+#             if idx_l < -(len(name)):
+#                 idx_l = -1
+#                 l += 1
+#             else:
+#                 idx_l -= 1
+#                 l += 1
+#         if check == 1 and len(name) > 3:
+#             rr = ll = 1
+#             if r + 1 > len(name) - 1:
+#                 idx_rr = 0
+#             else:
+#                 idx_rr = r + 1
+#             if l - 1 < -len(name):
+#                 idx_ll = -1
+#             else:
+#                 idx_ll = l - 1
+            
+#             while count[idx_rr] == 0:
+#                 if idx_rr > len(name) - 1:
+#                     idx_rr = 0
+#                     rr += 1
+#                 else:
+#                     idx_rr += 1
+#                     rr += 1
+#             while count[idx_ll] == 0:
+#                 if idx_ll < -len(name):
+#                     idx_ll = -1
+#                     ll += 1
+#                 else:
+#                     idx_ll -= 1
+#                     ll += 1
+#             if ll <= rr:
+#                 answer += r
+#                 idx += r
+#             else:
+#                 answer += l
+#                 idx -= l
+#         else:
+#             if l > r:
+#                 answer += r
+#                 idx += r
+#             else:
+#                 answer += l
+#                 idx -= l
+                
+def solution(name):
+    answer = 0
+    count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
+    idx = 0
+    check = 1
+    while True:
+        answer += count[idx]
+        count[idx] = 0
+        if idx != 0:
+            check = 0
+        if sum(count) == 0:
+            return answer
+        
+        r = l = 1
+        if idx + 1 > len(name) - 1:
+            idx_r = 0
+        else:
+            idx_r = 1 + idx
+        if idx - 1 < -len(name):
+            idx_l = -1
+        else:
+            idx_l = idx - 1
+        
+        while count[idx_r] == 0 and idx_r != idx:
+            if idx_r >= len(name):
+                idx_r = 0
+                r += 1
             else:
-                cur -= l
-                count += l
+                idx_r += 1
+                r += 1
+        while count[idx_l] == 0 and idx_r != idx:
+            if idx_l < -(len(name)):
+                idx_l = -1
+                l += 1
+            else:
+                idx_l -= 1
+                l += 1
+        if check == 1:
+            if r + 1 > len(name) - 1:
+                rr = 0
+            else:
+                rr = r + 1
+            if l - 1 < -len(name):
+                ll = -1
+            else:
+                ll = l - 1
+            rc = lc = 0
+            while count[rr] != 0 and rr != idx_r:
+                if rr > len(name) - 1:
+                    rr = 0
+                    rc += 1
+                else:
+                    rr += 1
+                    rc += 1
+            while count[ll] != 0 and ll != idx_l:
+                if ll < -len(name):
+                    ll = -1
+                    lc += 1
+                else:
+                    ll -= 1
+                    lc += 1
+            if lc > rc:
+                answer += r
+                idx += r
+            else:
+                answer += l
+                idx -= l
         else:
             if l > r:
-                cur += r
-                count += r
+                answer += r
+                idx += r
             else:
-                cur -= l
-                count += l
-    return -1
+                answer += l
+                idx -= l
+                
+def solution(name):
+    answer = 0
+    count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
+    idx = 0
+    while True:
+        answer += count[idx]
+        count[idx] = 0
+        if sum(count) == 0:
+            return answer
+        
+        r = l = 1
+        if idx + 1 > len(name) - 1:
+            idx_r = 0
+        else:
+            idx_r = 1 + idx
+        if idx - 1 < -len(name):
+            idx_l = -1
+        else:
+            idx_l = idx - 1
+        
+        while count[idx_r] == 0 and idx_r != idx:
+            if idx_r >= len(name):
+                idx_r = 0
+                r += 1
+            else:
+                idx_r += 1
+                r += 1
+        while count[idx_l] == 0 and idx_l != idx:
+            if idx_l < -(len(name)):
+                idx_l = -1
+                l += 1
+            else:
+                idx_l -= 1
+                l += 1
+    
+        if l >= r:
+            answer += r
+            idx += r
+        else:
+            answer += l
+            idx -= l
+
 
 name = "JEROEN"
 # name = "ABAAB"
-name = "JAN"
+# name = "JAN"
 # name = "JAZ"
 name = "AABAAAAABBA"
 # name = "AAAA"

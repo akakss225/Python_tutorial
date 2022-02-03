@@ -27,6 +27,7 @@ def solution(places):
                     s.append([curR, nextY, nextX])
                 elif places[curR][nextY][nextX] == "P":
                     answer[curR] = 0
+                    s.clear()
                     while q:
                         if q[0][0] == curR:
                             q.popleft()
@@ -52,7 +53,6 @@ def solution(places):
                         q.popleft()
                     else:
                         break
-    
     return answer
 
 
@@ -88,15 +88,15 @@ places = [
         "PXPXP"]
     ]
 
-places = [["OOPOO", 
-           "OPOOO", 
-           "OOOOO", 
-           "OOOOO", 
-           "OOOOO"],
-          ["PXPXP", 
-           "XPXPX", 
-           "PXPXP", 
-           "XPXPX", 
-           "PXPXP"]]
+# places = [["OOPOO", 
+#            "OPOOO", 
+#            "OOOOO", 
+#            "OOOOO", 
+#            "OOOOO"],
+#           ["PXPXP", 
+#            "XPXPX", 
+#            "PXPXP", 
+#            "XPXPX", 
+#            "PXPXP"]]
 
 print(solution(places))
