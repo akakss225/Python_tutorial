@@ -34,6 +34,24 @@ def solution(numbers):
     per = map(lambda x: int("".join(map(str, x))), permutations(numbers, len(numbers)))
     return str(max(per))
 
+def solution(numbers):
+    answer = ""
+    a = numbers
+    for i in range(len(a)):
+        if a[i] < 10:
+            a[i] = [str(a[i]) * 6,str(a[i])]
+        elif 10 <= a[i] < 100:
+            a[i] = [str(a[i]) * 3, str(a[i])]
+        else:
+            a[i] = [str(a[i]) * 2, str(a[i])]
+    a.sort(reverse=True)
+    
+    for i in a:
+        answer += i[1]
+    if answer.count("0") == len(answer):
+        return "0"
+    return answer
+
 
 numbers = [3, 30, 34, 5, 9]
 numbers = [114, 115, 23, 28, 9, 93]
