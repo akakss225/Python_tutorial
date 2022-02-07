@@ -40,7 +40,7 @@ def solution(clothes):
     for i in d:
         answer *= d[i] + 1
     
-    return answer
+    return answer - 1
 
 clothes = [["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]]
 # clothes = [["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"], ["mask", "face"]]
