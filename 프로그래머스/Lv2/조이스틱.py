@@ -348,50 +348,162 @@ def solution(name):
     answer = 0
     count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
     idx = 0
+    first = 1
     while True:
         answer += count[idx]
         count[idx] = 0
+        
         if sum(count) == 0:
             return answer
         
-        r = l = 1
-        if idx + 1 > len(name) - 1:
-            idx_r = 0
-        else:
-            idx_r = 1 + idx
-        if idx - 1 < -len(name):
-            idx_l = -1
-        else:
-            idx_l = idx - 1
-        
-        while count[idx_r] == 0 and idx_r != idx:
-            if idx_r >= len(name):
-                idx_r = 0
+        if first == 1:
+            r = l = 1
+            while count[r] == 0:
                 r += 1
-            else:
-                idx_r += 1
-                r += 1
-        while count[idx_l] == 0 and idx_l != idx:
-            if idx_l < -(len(name)):
-                idx_l = -1
+            while count[-l] == 0:
                 l += 1
+                
+            if 0 in count[1:] and len(count) > 3:
+                rr = r + 1
+                ll = l + 1
+                rrcount = llcount = 1
+                
+                while count[rr] != 0:
+                    if rr > len(count) - 1:
+                        rr = 0
+                        rrcount += 1
+                    else:
+                        rr += 1
+                        rrcount += 1
+                while count[-ll] != 0:
+                    if -ll < -len(count):
+                        ll = -1
+                        llcount += 1
+                    else:
+                        ll += 1
+                        llcount += 1
+                if ll >= rr:
+                    idx += r
+                    answer += r
+                else:
+                    idx -= l
+                    answer += l
             else:
-                idx_l -= 1
-                l += 1
+                if l > r:
+                    idx += r
+                    answer += r
+                else:
+                    idx -= l
+                    answer += l
+            first = 0
+        else:
+            r = idx + 1
+            l = idx - 1
+            rcount = lcount = 1
+            while count[r] == 0:
+                if r == len(count) - 1:
+                    r = 0
+                    rcount += 1
+                else:
+                    r += 1
+                    rcount += 1
+            while count[l] == 0:
+                if l == 0 or l == -len(count):
+                    l = len(count) - 1
+                    lcount += 1
+                else:
+                    l -= 1
+                    lcount += 1
+            
+            if lcount >= rcount:
+                idx += rcount
+                answer += rcount
+            else:
+                idx -= lcount
+                answer += lcount
+
+
+def dfs(node, graph):
     
-        if l >= r:
-            answer += r
-            idx += r
+    result = []
+    for i in graph[node]:
+        s = [i]
+        route = [node]
+        
+        while True:
+            cur = s.pop()
+            
+            if cur not in route:
+                route.append(cur)
+                s.extend(graph[cur])
+            else:
+                result.append(route)
+                break
+    return result
+
+def solution(name):
+    answer = 0
+    count = list(min(ord(i) - ord("A"), ord("Z") - ord(i) + 1) for i in name)
+    
+    index = 0
+    while True:
+        answer += count[index]
+        count[index] = 0
+        if sum(count) == 0:
+            return answer
+        left_route = []
+        right_route = []
+        left, right = 0, 0
+        
+        for i in range(1, len(count)):
+            x = index - i
+            if x < -len(count):
+                x = -1
+            left_route.append([x, count[x]])
+            left += count[x] + 1
+        for i in range(-1, -len(count), -1):
+            if left_route[i][1] == 0:
+                left -= 1
+            else:
+                break
+        
+        for i in range(1, len(count)):
+            x = index + i
+            if x > len(count) - 1:
+                x = 0
+            right_route.append([x, count[x]])
+            right += count[x] + 1
+        
+        for i in range(-1, -len(count), -1):
+            if right_route[i][1] == 0:
+                right -= 1
+            else:
+                break
+        
+        ll, rr = 1, 1
+        while count[index + rr] == 0:
+            rr += 1
+        while count[index - ll] == 0:
+            ll += 1
+        
+        if left > right:
+            index += rr
+            answer += rr
         else:
-            answer += l
-            idx -= l
+            index -= ll
+            answer += ll
+    
+
+
+
+
 
 
 name = "JEROEN"
-# name = "ABAAB"
+name = "ABAAB"
 # name = "JAN"
 # name = "JAZ"
-name = "AABAAAAABBA"
+# name = "AABAAAAABBA"
 # name = "AAAA"
 # name = "BAABA"
 # name = "BBABAAAB"
