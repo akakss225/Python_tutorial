@@ -480,18 +480,18 @@ def solution(name):
             else:
                 break
         
-        ll, rr = 1, 1
-        while count[index + rr] == 0:
-            rr += 1
-        while count[index - ll] == 0:
-            ll += 1
+        l, r = 1, 1
+        while count[index + r] == 0:
+            r += 1
+        while count[index - l] == 0:
+            l += 1
         
         if left > right:
-            index += rr
-            answer += rr
+            answer += r
+            index += r
         else:
-            index -= ll
-            answer += ll
+            answer += l
+            index -= l
     
 
 
@@ -503,7 +503,7 @@ name = "JEROEN"
 name = "ABAAB"
 # name = "JAN"
 # name = "JAZ"
-# name = "AABAAAAABBA"
+name = "AABAAAAABBA"
 # name = "AAAA"
 # name = "BAABA"
 # name = "BBABAAAB"
