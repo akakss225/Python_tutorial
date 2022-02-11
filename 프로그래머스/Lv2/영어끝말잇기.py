@@ -1,5 +1,4 @@
 def solution(n, words):
-    answer = 0
     d = dict()
     for i in range(len(words)):
         if words[i] not in d:
