@@ -12,3 +12,7 @@ print(9 ^ 27)
 
 a = "77777"
 print(len(set(a)))
+
+l = [1,2,4]
+l.insert(-1, 3)
+print(l)

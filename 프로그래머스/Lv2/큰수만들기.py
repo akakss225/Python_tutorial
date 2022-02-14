@@ -1,4 +1,7 @@
 from collections import deque
+from aem import con
+
+from sklearn.metrics import jaccard_score
 
 def solution(number, k):
     answer = list(number)
@@ -116,15 +119,63 @@ def solution(number, k):
     for i in range(k):
         nums = []
         for j in range(len(number)):
-            if number[:j] + number[j+1:] < number[:j+1] + number[j+2:]:
-                number = number[:j+1] + number[j+2:]
+            lastest = number[:j] + number[j+1:]
+            nums.append(lastest)
+            bigest = max(nums)
+            if lastest != bigest:
+                number = max(nums)
                 break
-            elif number[:j] + number[j+1:] > number[:j+1] + number[j+2:]:
-                number = number[:j] + number[j+1:]
-                break
-            else:
-                continue
     return number
+
+def solution(number, k):
+    for i in range(k):
+        check = len(number)
+        for j in range(1, len(number)):
+            pre = number[:j-1] + number[j:]
+            cur = number[:j] + number[j+1:]
+            if int(pre) > int(cur):
+                number = pre
+                break
+        if check == len(number):
+            number = number[:-1]
+    return number
+
+def solution(number, k):
+    while k != 0:
+        check = len(number)
+        for j in range(1, len(number)):
+            pre = number[:j-1] + number[j:]
+            cur = number[:j] + number[j+1:]
+            if int(pre) > int(cur):
+                number = pre
+                break
+        if check == len(number):
+            number = number[:-1]
+        k -= 1
+    return number
+
+def solution(number, k):
+    idx = 0
+    while k != 0:
+        first = number[0]
+        if idx == 0:
+            for i in range(1, len(number)):
+                if first == number[i]:
+                    idx += 1
+                else:
+                    break
+        check = len(number)
+        for j in range(idx, len(number)-2):
+            pre = number[:j] + number[j+1:]
+            cur = number[:j+1] + number[j+2:]
+            if int(pre) > int(cur):
+                number = pre
+                break
+        if check == len(number):
+            number = number[:-1]
+        k -= 1
+    return number
+
 
 
 # IDEA
@@ -140,12 +191,14 @@ def solution(number, k):
 
 number = "1924"
 k = 2
-number = "1231234"
-k = 3
-
-number = "4177252841"
-k = 4
+# number = "1231234"
+# k = 3
+# number = "4177252841"
+# k = 4
 # number = '77777'
 # k = 1
+# number = "1000000"
+# k = 1
+
 
 print(solution(number, k))
