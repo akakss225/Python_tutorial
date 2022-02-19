@@ -96,6 +96,7 @@ def solution(places):
                         d[i] = [[j, k]]
     for i in d:
         check = 1
+        
         for j in range(len(d[i])):
             for k in range(j+1, len(d[i])):
                 if abs(d[i][j][0] - d[i][k][0]) + abs(d[i][j][1] - d[i][k][1]) == 1:
