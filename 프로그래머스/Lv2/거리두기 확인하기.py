@@ -122,6 +122,58 @@ def solution(places):
             answer.append(1)
     return answer
 
+def solution(places):
+    dy = [0, 1, 0 , -1]
+    dx = [1, 0, -1, 0]
+    room = len(places)
+    answer = [1] * room
+    n = len(places[0])
+    m = len(places[0][0])
+    d = dict()
+    
+    # 사람이 앉아있는 자리 찾기
+    # [방 번호, 열, 자리]
+    for i in range(room):
+        for j in range(n):
+            for k in range(m):
+                if places[i][j][k] == "P":
+                    if i in d:
+                        d[i].append([j, k])
+                    else:
+                        d[i] = deque([[j, k]])
+    
+    for i in d:
+        s = []
+        while d[i]:
+            curY, curX = d[i].popleft()
+            check = 0
+            for j in range(4):
+                nextY = curY + dy[j]
+                nextX = curX + dx[j]
+                if 0 <= nextX < 5 and 0 <= nextY < 5:
+                    # 만약 그 주변자리가 O인 경우 우선 s에 넣는다 >> 파티션이 아닌 경우 한번 더 봐야함
+                    if places[i][nextY][nextX] == "O":
+                        s.append([nextY, nextX])
+                        check = 1
+                    elif places[i][nextY][nextX] == "P":
+                        answer[i] = 0
+                        d[i].clear()
+            if check == 0:
+                continue
+            else:
+                while s:
+                    nextY, nextX = s.pop()
+                    for j in range(4):
+                        nextYY = nextY + dy[j]
+                        nextXX = nextX + dx[j]
+                        if 0 <= nextXX < 5 and 0 <= nextYY < 5:
+                            if nextXX != curX and nextYY != curY and places[i][nextYY][nextXX] == "P":
+                                answer[i] = 0
+                                s.clear()
+                                d[i].clear()
+    return answer
+
+
 
 places = [
         ["POOOP", 
@@ -165,5 +217,12 @@ places = [
 #            "PXPXP", 
 #            "XPXPX", 
 #            "PXPXP"]]
+# places = [
+#     ["PXOPX", 
+#     "OXOXP", 
+#     "OXPOX", 
+#     "OXXOP", 
+#     "PXPOX"]
+# ]
 
 print(solution(places))
