@@ -1,4 +1,5 @@
 from collections import deque
+from os import curdir
 
 def solution(places):
     answer = [1] * len(places)
@@ -122,6 +123,8 @@ def solution(places):
             answer.append(1)
     return answer
 
+
+
 def solution(places):
     dy = [0, 1, 0 , -1]
     dx = [1, 0, -1, 0]
@@ -167,11 +170,15 @@ def solution(places):
                         nextYY = nextY + dy[j]
                         nextXX = nextX + dx[j]
                         if 0 <= nextXX < 5 and 0 <= nextYY < 5:
-                            if nextXX != curX and nextYY != curY and places[i][nextYY][nextXX] == "P":
+                            if (nextXX != curX or nextYY != curY) and places[i][nextYY][nextXX] == "P":
                                 answer[i] = 0
                                 s.clear()
                                 d[i].clear()
     return answer
+
+
+
+
 
 
 
