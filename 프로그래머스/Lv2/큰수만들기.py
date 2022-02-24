@@ -1,7 +1,5 @@
 from collections import deque
-from aem import con
 
-from sklearn.metrics import jaccard_score
 
 def solution(number, k):
     answer = list(number)
@@ -155,25 +153,63 @@ def solution(number, k):
     return number
 
 def solution(number, k):
-    idx = 0
-    while k != 0:
-        first = number[0]
-        if idx == 0:
-            for i in range(1, len(number)):
-                if first == number[i]:
-                    idx += 1
-                else:
-                    break
-        check = len(number)
-        for j in range(idx, len(number)-2):
-            pre = number[:j] + number[j+1:]
-            cur = number[:j+1] + number[j+2:]
-            if int(pre) > int(cur):
-                number = pre
+    for i in range(k):
+        for j in range(len(number)-1):
+            cur = number[j]
+            next = number[j+1]
+            if cur == next:
+                continue
+            elif cur > next:
+                number = number[:j+1] + number[j+2:]
                 break
-        if check == len(number):
-            number = number[:-1]
-        k -= 1
+            else:
+                number = number[:j] + number[j+1:]
+                break
+    return number
+
+def solution(number, k):
+    for i in range(k):
+        nums = []
+        check = 0
+        if len(set(number)) == 1:
+            return number[k-i:]
+        for j in range(len(number)):
+            if number[j] == "0":
+                number = number[:j] + number[j+1:]
+                check = 1
+                break
+            lastest = number[:j] + number[j+1:]
+            nums.append(lastest)
+            bigest = max(nums)
+            if lastest != bigest:
+                number = max(nums)
+                check = 1
+                break
+        if check == 0:
+            number = nums[-1]
+    return number
+
+def solution(number, k):
+    while k != 0:
+        idx = 0
+        nums = []
+        if len(set(number)) == 1:
+            return number[k:]
+        while idx < len(number):
+            if number[idx] == "0":
+                number = number[:idx] + number[idx+1:] 
+                k -= 1
+                break
+            nums.append(number[:idx] + number[idx+1:])
+            if idx < len(number) -1 and len(set(number[idx:])) == 1:
+                number = nums[-1]
+                k -= 1
+                break
+            if nums[-1] < max(nums):
+                number = max(nums)
+                k -= 1
+                break
+            idx += 1
     return number
 
 
@@ -195,9 +231,9 @@ k = 2
 # k = 3
 # number = "4177252841"
 # k = 4
-# number = '77777'
-# k = 1
-# number = "1000000"
+# number = '77778'
+# k = 3
+# number = "1000000000000000000000000000000000000000000"
 # k = 1
 
 
