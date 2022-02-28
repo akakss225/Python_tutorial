@@ -1,6 +1,6 @@
 from collections import deque
 
-a = '7777777777777777'
+a = '117777777777777777'
 
-print(set(deque(list(a))))
+print(list(a))
 

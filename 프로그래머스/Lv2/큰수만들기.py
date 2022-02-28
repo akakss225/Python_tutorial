@@ -1,219 +1,3 @@
-from collections import deque
-
-
-def solution(number, k):
-    answer = list(number)
-    
-    n = 0
-    idx = 0
-    while n != k:
-        big = int(answer[idx])
-        if big < int(answer[idx + 1]):
-            answer.remove(str(big))
-            n += 1
-            idx = 0
-        else:
-            idx += 1
-    
-    return "".join(answer)
-
-def solution(number, k):
-    n = 0
-    idx = 0
-    while n != k:
-        check = 0
-        big = int(number[idx])
-        if big < int(number[idx + 1]):
-            number = number[:idx] + number[idx+1:]
-            n += 1
-        else:
-            for i in range(1, k-n+1):
-                if int(number[idx + i]) > big:
-                    number = number[:idx] + number[idx+i:]
-                    n += i
-                    check = 1
-                    break
-            if check == 1:
-                continue
-            else:
-                idx += 1
-    
-    return number
-
-def solution(number, k):
-    n = 0
-    idx = 0
-    while n != k:
-        if len(set(number)) == 1:
-            number = number[k - n:]
-            break
-        big = int(number[idx])
-        if big < int(number[idx + 1]):
-            number = number[:idx] + number[idx+1:]
-            n += 1
-            idx = 0
-        else:
-            idx += 1
-    
-    return number
-
-def solution(number, k):
-    idx = 0
-    while k != 0:
-        if len(set(number)) == 1:
-            number = number[k:]
-            break
-        big = int(number[idx])
-        if big < int(number[idx + 1]):
-            number = number[:idx] + number[idx+1:]
-            k -= 1
-        elif big > int(number[idx + 1]):
-            number = number[:idx+1] + number[idx+2:]
-            k -=1
-        else:
-            idx += 1
-    return number
-
-def solution(number, k):
-    idx = 0
-    while k != 0:
-        if len(set(number)) == 1:
-            number = number[k:]
-            break
-        big = int(number[idx])
-        if big < int(number[idx + 1]):
-            number = number[:idx] + number[idx+1:]
-            k -= 1
-        elif big == int(number[idx + 1]):
-            idx += 1
-        else:
-            count = 1
-            while big > int(number[idx + count]) and idx + count < len(number) - idx - 1:
-                count += 1
-            if count - 1 < k:
-                number = number[:idx] + number[idx+count:]
-                k -= count
-            else:
-                idx += 1
-        
-    return number
-
-def solution(number, k):
-    for i in range(k):
-        for x in range(len(number)):
-            for y in range(x+1, len(number)):
-                if int(number[x]) < int(number[y]):
-                    number = number[:x] + number[x+1:]
-                    break
-                elif int(number[x]) > int(number[y]):
-                    number = number[:y] + number[y+1:]
-                    break
-                else:
-                    continue
-            break
-    return number
-
-def solution(number, k):
-    for i in range(k):
-        nums = []
-        for j in range(len(number)):
-            lastest = number[:j] + number[j+1:]
-            nums.append(lastest)
-            bigest = max(nums)
-            if lastest != bigest:
-                number = max(nums)
-                break
-    return number
-
-def solution(number, k):
-    for i in range(k):
-        check = len(number)
-        for j in range(1, len(number)):
-            pre = number[:j-1] + number[j:]
-            cur = number[:j] + number[j+1:]
-            if int(pre) > int(cur):
-                number = pre
-                break
-        if check == len(number):
-            number = number[:-1]
-    return number
-
-def solution(number, k):
-    while k != 0:
-        check = len(number)
-        for j in range(1, len(number)):
-            pre = number[:j-1] + number[j:]
-            cur = number[:j] + number[j+1:]
-            if int(pre) > int(cur):
-                number = pre
-                break
-        if check == len(number):
-            number = number[:-1]
-        k -= 1
-    return number
-
-def solution(number, k):
-    for i in range(k):
-        for j in range(len(number)-1):
-            cur = number[j]
-            next = number[j+1]
-            if cur == next:
-                continue
-            elif cur > next:
-                number = number[:j+1] + number[j+2:]
-                break
-            else:
-                number = number[:j] + number[j+1:]
-                break
-    return number
-
-def solution(number, k):
-    for i in range(k):
-        nums = []
-        check = 0
-        if len(set(number)) == 1:
-            return number[k-i:]
-        for j in range(len(number)):
-            if number[j] == "0":
-                number = number[:j] + number[j+1:]
-                check = 1
-                break
-            lastest = number[:j] + number[j+1:]
-            nums.append(lastest)
-            bigest = max(nums)
-            if lastest != bigest:
-                number = max(nums)
-                check = 1
-                break
-        if check == 0:
-            number = nums[-1]
-    return number
-
-def solution(number, k):
-    while k != 0:
-        idx = 0
-        nums = []
-        if len(set(number)) == 1:
-            return number[k:]
-        while idx < len(number):
-            if number[idx] == "0":
-                number = number[:idx] + number[idx+1:] 
-                k -= 1
-                break
-            nums.append(number[:idx] + number[idx+1:])
-            if idx < len(number) -1 and len(set(number[idx:])) == 1:
-                number = nums[-1]
-                k -= 1
-                break
-            if nums[-1] < max(nums):
-                number = max(nums)
-                k -= 1
-                break
-            idx += 1
-    return number
-
-
-
 # IDEA
 # 제공된 number의 index는 고정된 상태로, 제거할 숫자의 갯수 k가 주어졌을 때
 # 제거후, 가장 큰 숫자가 되게 해야함
@@ -223,6 +7,52 @@ def solution(number, k):
 # 4. 맨앞에 적당히 큰 숫자가 왔다면, 그 뒤의 숫자 중 작은걸 지우면 됨.
 
 
+# 4 * n * (n - 1) ? 대략 O(4N^2)...
+def solution(number, k):
+    # k 번 반복하는 반복문
+    # 연산을 최소화하기 위해 for문 사용
+    for i in range(k):
+        # 각 숫자를 비교하기 위한 list생성
+        # 반복문을 줄이기 위해 첫번째 element를 미리 넣어줌
+        nums = [number[1:]]
+        
+        # 숫자를 선택했는지 체크함
+        check = 0
+        
+        # 두번째 숫자부터 split하기 때문에 1로 설정
+        idx = 1
+        while idx < len(number):
+            # 만일, 현재 인덱스 넘버가 0 이라면, 지우면됨.
+            # 0 보다 작은 수는 없기 때문
+            if number[idx] == "0":
+                number = number[:idx] + number[idx+1:]
+                check = 1
+                break
+            
+            # 반복되는 숫자를 건너뛰기 위한 반복문
+            while idx < len(number) - 1:
+                if number[idx] == number[idx + 1]:
+                    idx += 1
+                else:
+                    break
+                
+            # 이후 split 된 숫자가 list 마지막 요소보다 크거나 같다면
+            # list에 넣어주고, 다음 숫자를 찾으러 감.
+            num = number[:idx] + number[idx+1:]
+            if nums[-1] <= num:
+                nums.append(num)
+                idx += 1
+            # 만일 split된 숫자가 list 마지막 요소보다 작다면
+            # list 마지막 요소가 가장 큰 수가 됨.
+            else:
+                check = 1
+                number = nums[-1]
+                break
+        # 반복문을 그냥 빠져나온건지 확인
+        # 그냥 빠져나왔다면, 마지막 요소가 가장 큰 수가 됨.
+        if check == 0:
+            number = nums[-1]
+    return number
 
 
 number = "1924"
@@ -231,8 +61,8 @@ k = 2
 # k = 3
 # number = "4177252841"
 # k = 4
-# number = '77778'
-# k = 3
+number = '77777777777777777777778'
+k = 3
 # number = "1000000000000000000000000000000000000000000"
 # k = 1
 
