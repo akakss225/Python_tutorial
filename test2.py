@@ -17,10 +17,10 @@ for i in range(rows):
 
 print(procession)
 
-x1 = 4
-y1 = 0
-x2 = 5
-y2 = 2
+x1 = 1
+y1 = 1
+x2 = 4
+y2 = 3
 cordinate = []
 for j in range(x1, x2+1):
     cordinate.append([j, y1])
