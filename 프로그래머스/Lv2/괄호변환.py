@@ -12,40 +12,6 @@
 
 from collections import deque
 
-from numpy import empty
-
-
-def solution(p):
-    answer = ""
-    v = deque(p)
-    u = deque()
-    if p == "":
-        return ""
-    
-    left = 0
-    right = 0
-    while v:
-        cur = v.popleft()
-        if cur == "(":
-            left += 1
-        else:
-            right += 1
-        u.append(cur)
-        if left == right:
-            break
-    v = "".join(v)
-    if u[0] == ")":
-        while u:
-            cur = u.popleft()
-            if cur == ")":
-                cur = "("
-            else:
-                cur = ")"
-            answer += cur
-    else:
-        answer = "".join(u)
-    return answer+solution(v)
-
 def solution(p):
     answer = ""
     v = deque(p)

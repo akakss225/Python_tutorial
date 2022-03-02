@@ -32,3 +32,5 @@ for j in range(y2-1, y1, -1):
     cordinate.append([x1, j])
         
 print(cordinate)
+
+print("a".upper() == "A")
