@@ -11,17 +11,16 @@
 
 
 # IDEA
-# 1. 두 문자열 str1 / str2 에 대하여, 각각 2문자씩 끊어서 list1 / list2 만듬
+# 1. 두 문자열 str1 / str2 에 대하여, 각각 2문자씩 끊어서 dict1 / dict2 만듬
 # 2. 만약, 두 문자씩 쪼갠것 중에 영문자가 아닌것이 있으면, 없앤다.
-# 3. list를 돌며, 겹치는게 있으면, 교집합 list에 append
-# 4. list1 + list2 = 합집합 list를 만듬
-# 5. float(len(교집합 list) / len(합집합 list) * 65536) return
-
+# 3. dict의 key는 각각의 word이고, value는 나온 횟수이다.
+# 4. dict1을 돌며, 겹치는게 있으면, 교집합에는 min(dict1, dict2) 을 더해준다.
+# 5. dict1을 돌며, 겹치는게 있으면, 합집합에는 max(dict1, dict2) 를 더해주고, 겹치지 않는것도 더해준다.
+# 6. dict2를 돌며, 겹치지 않는것만 합집합에 더해준다.
+# 7. 수식 사용.
 
 
 from curses.ascii import isalpha
-
-from sqlalchemy import union
 
 def solution(str1, str2):
     dict1 = dict()
@@ -65,7 +64,7 @@ def solution(str1, str2):
             uni += dict2[i]
     
     if uni == 0 and inter == 0:
-        return 1
+        return 65536
     return int(float(inter/uni*65536))
 
 str1 = "FRANCE"
