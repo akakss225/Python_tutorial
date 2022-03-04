@@ -38,3 +38,5 @@ print("a".upper() == "A")
 print("-111-111".find("-",1))
 
 print(eval("((100-200)*(300-(500+20)))"))
+
+print(tuple("1,2"))
