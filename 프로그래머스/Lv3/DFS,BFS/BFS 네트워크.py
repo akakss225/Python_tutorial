@@ -3,6 +3,7 @@
 # 2. 즉, 노드간 연결이 없어도 각각의 네트워크는 따로존재 >> 이를 카운트 하기위해 모든 노드를 다 봐야함
 # 3. BFS로 인접한 노드를 확인 하고 넘어가야함.
 # 4. 인접 노드가 더이상 없다고 판단 되는 순간 answer += 1
+
 from collections import deque
 
 def solution(n, computers):
