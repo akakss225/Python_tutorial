@@ -55,8 +55,6 @@ def solution2(n, t, m, p):
             if t == 0:
                 return answer
         num += 1
-    
-    return answer
 
 n = 2
 t = 4
