@@ -4,9 +4,7 @@
 # 3. 시작은 반드시 ICN
 # 4. 알파벳 오름차순을 기준으로 작성
 
-# 5. ticket[0] 기준으로 BFS를 구현
-# 6. 순서가 들어갈 queue에 알파벳 내림차순 순으로 append
-# 7. 순서대로 popleft하며 BFS완성
+# DFS구현해서 해야함!
 
 from audioop import reverse
 from collections import deque
@@ -92,9 +90,51 @@ def solution(tickets):
     
     return visit
 
-def solution(tickets):
-    
 
+def dfs(n, d, visit):
+    
+    if n in d:
+        if d[n]:
+            n = d[n].pop()
+            visit.append(n)
+            dfs(n, d, visit)
+        else:
+            return
+    else:
+        return
+
+def solution(t):
+    d = dict()
+    for i in t:
+        if i[0] in d:
+            d[i[0]].append(i[1])
+        else:
+            d[i[0]] = [i[1]]
+    
+    visit = ["ICN"]
+    dfs("ICN", d, visit)
+    
+    return visit
+
+
+def solution(t):
+    t.sort(reverse=True)
+    d = dict()
+    for i in t:
+        if i[0] in d:
+            d[i[0]].append(i[1])
+        else:
+            d[i[0]] = [i[1]]
+    s = ["ICN"]
+    visit = []
+    while s:
+        cur = s[-1]
+        if cur not in d or len(d[cur]) == 0:
+            visit.append(s.pop())
+        else:
+            s.append(d[cur].pop())
+    visit.reverse()
+    return visit
 
 
 t = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
