@@ -1,7 +1,10 @@
-import re
+from collections import defaultdict 
 
-a = ["a", "b", "c"]
-b = ["a", "b", "d"]
+t = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]
 
-a = "asd"
-b = "asf"
+graph = defaultdict(list)
+
+for x, y in t:
+    graph[x].append(y)
+
+print(graph)

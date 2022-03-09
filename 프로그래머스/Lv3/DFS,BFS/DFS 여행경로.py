@@ -118,19 +118,32 @@ def solution(t):
 
 
 def solution(t):
+    # 알파벳 순서를 지키기 위해 
     t.sort(reverse=True)
+    
+    # map 만들어줌
     d = dict()
     for i in t:
         if i[0] in d:
             d[i[0]].append(i[1])
         else:
             d[i[0]] = [i[1]]
+            
+    # 시작은 무조건 ICN
     s = ["ICN"]
+    # 방문 순서
     visit = []
+    # Stack이 빌때까지 반복
     while s:
+        
+        # Stack 의 가장 마지막 요소를 확인
         cur = s[-1]
+        
+        # cur 에 대하여 더이상 graph에 존재하지않으면,
         if cur not in d or len(d[cur]) == 0:
+            # 방문.
             visit.append(s.pop())
+        # 존재한다면, Stack에 graph[cur] 요소중 가장 마지막에 있는 것을 pop해서 Stack에 넣어줌
         else:
             s.append(d[cur].pop())
     visit.reverse()
