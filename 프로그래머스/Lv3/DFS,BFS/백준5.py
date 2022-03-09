@@ -1,6 +1,5 @@
 import sys
 from collections import defaultdict
-from tkinter import Y
 
 read = sys.stdin.readline
 T = int(read())
@@ -14,7 +13,6 @@ for _ in range(T):
     visit = [[False] * M for i in range(N)]
     place = [[0] * M for i in range(N)]
     position = []
-    
     result = 0
     
     for i in range(K):
@@ -23,7 +21,6 @@ for _ in range(T):
         place[y][x] = 1
     
     for y, x in position:
-        
         if visit[y][x] == False:
             s = [[y, x]]
             while s:

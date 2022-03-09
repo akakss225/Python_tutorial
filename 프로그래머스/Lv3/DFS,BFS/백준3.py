@@ -1,11 +1,11 @@
 import sys
 
-# read = sys.stdin.readline
-# n = int(read())
-# g = []
-# for i in range(n):
-#     temp = list(map(int, read().strip()))
-#     g.append(temp)
+read = sys.stdin.readline
+n = int(read())
+g = []
+for i in range(n):
+    temp = list(map(int, read().strip()))
+    g.append(temp)
 
 
 def bfs(n, graph):
@@ -37,6 +37,7 @@ def bfs(n, graph):
     for i in answer:
         print(i)
     
+bfs(n, g)
 
 dy = [0, -1, 0, 1]
 dx = [1, 0, -1, 0]
@@ -60,5 +61,3 @@ g = [
     [0,1,1,1,1,1,0],
     [0,1,1,1,0,0,0]
 ]
-
-bfs(n, g)
