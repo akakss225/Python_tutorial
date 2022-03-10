@@ -4,9 +4,10 @@ from collections import deque
 
 read = sys.stdin.readline
 
-n, m, v = map(int, read().split())
+N, M, V = map(int, read().split())
+
 g = []
-for i in range(m):
+for i in range(M):
     x, y = map(int, read().split())
     g.append([x, y])
 
@@ -47,9 +48,9 @@ def bfs(v, g):
             if cur in d:
                 q.extend(d[cur])
 
-dfs(v, g)
+dfs(V, g)
 print()
-bfs(v, g)
+bfs(V, g)
 
 
 
