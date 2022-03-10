@@ -1,6 +1,26 @@
-def dfs(start, place, visit):
+import sys
+
+read = sys.stdin.readline
+
+N = int(read())
+place = []
+big = 0
+for _ in range(N):
+    temp = list(map(int, read().split()))
+    if max(temp) > big:
+        big = max(temp)
+    place.append(temp)
+
+
+
+dy = [1, 0, -1, 0]
+dx = [0, -1, 0, 1]
+
+def dfs(start, place):
     global N
     global dy, dx
+    visit = [[False] * N for _ in range(N)]
+    
     result = 0
     for a in range(N):
         for b in range(N):
@@ -18,16 +38,7 @@ def dfs(start, place, visit):
                 result += 1
     return result
 
-N = 5
-dy = [1, 0, -1, 0]
-dx = [0, -1, 0, 1]
-visit = [[False] * N for i in range(N)]
-place = [
-[6 ,8 ,2 ,6 ,2],
-[3 ,2 ,3 ,4 ,6],
-[6 ,7 ,3 ,3 ,2],
-[7 ,2 ,5 ,3 ,6],
-[8 ,9 ,5 ,2 ,7]
-]
-
-print(dfs(5, place, visit))
+answer = []
+for i in range(big+1):
+    answer.append(dfs(i, place))
+print(max(answer))
