@@ -51,6 +51,3 @@ def bfs(v, g):
 dfs(V, g)
 print()
 bfs(V, g)
-
-
-
