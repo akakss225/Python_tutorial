@@ -12,12 +12,12 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from folium.map import Marker
 
-form_class = uic.loadUiType("/Users/sumin/Desktop/Python/Subway.ui")[0]
+form_class = uic.loadUiType("/Users/sumin/Desktop/All_things/Programming_Languages/Python/Subway.ui")[0]
 
-f = open('subway.csv')
+f = open('/Users/sumin/Desktop/All_things/Programming_Languages/Python/subway.csv')
 graph = list(csv.reader(f))
 
-f2 = open('subwayLocation.csv')
+f2 = open('/Users/sumin/Desktop/All_things/Programming_Languages/Python/subwayLocation.csv')
 location = list(csv.reader(f2))
 
 
@@ -47,14 +47,17 @@ class WindowClass(QMainWindow, form_class):
 
     def locationAdd(self):
         self.SelectedList.addItem(graph[self.List.currentRow()][0])
+    
     def locationDelete(self):
         self.removeItemRow = self.SelectedList.currentRow()
         self.SelectedList.takeItem(self.removeItemRow)
+    
     def programRun(self):
         start = self.SelectedList.item(0).text()
         end = self.SelectedList.item(1).text()
         find = findLocation(dj.getPath(start, end), location)
         point_Map(find)
+        
 
 
 class Dijkstra:
