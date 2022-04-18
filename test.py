@@ -143,4 +143,9 @@
 from math import ceil
 
 
-print(ceil(3.1))
+
+
+
+a = ['java', 'backend', 'junior', 'pizza']
+b = ['java', 'backend', 'junior']
+print(b in a)
