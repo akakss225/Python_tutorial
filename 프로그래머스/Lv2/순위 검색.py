@@ -1,72 +1,5 @@
-
-def solution(info, query):
-    answer = [0] * len(query)
-    people = dict()
-    for i in range(len(info)):
-        people[i] = info[i].split(" ")
-    conditions = []
-    for i in range(len(query)):
-        temp = query[i].split(" ")
-        while "-" in temp or "and" in temp:
-            if "-" in temp:
-                temp.remove("-")
-            if "and" in temp:
-                temp.remove("and")
-        conditions.append(temp)
-    
-    for i in range(len(people)):
-        for condition in range(len(conditions)):
-            check = 1
-            for c in conditions[condition]:
-                if c in people[i]:
-                    continue
-                else:
-                    if c.isdigit():
-                        if int(people[i][-1]) >= int(c):
-                            continue
-                        else:
-                            check = 0
-                            break
-                    else:
-                        check = 0
-                        break
-            if check == 1:
-                answer[condition] += 1
-    
-    return answer
-
-def solution(info, query):
-    answer = [0] * len(query)
-    conditions = []
-    for i in range(len(query)):
-        temp = query[i].split(" ")
-        while "-" in temp or "and" in temp:
-            if "-" in temp:
-                temp.remove("-")
-            if "and" in temp:
-                temp.remove("and")
-        conditions.append(temp)
-    
-    for i in range(len(info)):
-        for condition in range(len(conditions)):
-            check = 1
-            for c in conditions[condition]:
-                if c in info[i]:
-                    continue
-                else:
-                    if c.isdigit():
-                        if int(info[i][-3:]) >= int(c):
-                            continue
-                        else:
-                            check = 0
-                            break
-                    else:
-                        check = 0
-                        break
-            if check == 1:
-                answer[condition] += 1
-    return answer
-
+from itertools import combinations
+from bisect import bisect_left
 
 # 시간효율 그지...
 def solution(info, query):
@@ -91,26 +24,68 @@ def solution(info, query):
                 answer[j] += 1
     return answer
 
+# 조금 개선.
 def solution(info, query):
-    answer = 0
-    information = dict()
+    answer = [0] * len(query)
     for i in range(len(info)):
-        information[i] = info[i].split(" ")[:-1]
-        information[i].append(int(info[i].split(" ")[-1]))
-    conditions = dict()
-    for i in range(len(query)):
-        condition = []
-        for j in query[i].split(" "):
-            if j == "and" or j == "-":
-                continue
-            else:
-                if j.isdigit():
-                    condition.append(int(j))
+        person = info[i].split(" ")
+        for j in range(len(query)):
+            check = 1
+            for condition in query[j].split(" "):
+                if condition == "-" or condition == "and":
+                    continue
+                if condition.isdigit():
+                    if int(condition) > int(person[-1]):
+                        check = 0
+                        break
                 else:
-                    condition.append(j)
-        conditions[i] = condition
+                    if condition not in person:
+                        check = 0
+                        break
+            if check:
+                answer[j] += 1
+    return answer
+
+def solution(information, query):
+    answer = []
+    info_dict = dict()
+    for i in range(len(information)):
+        info = information[i].split()
+        info_key = info[:-1]
+        info_value = info[-1]
+        
+        for j in range(len(info_key)+1):
+            for c in combinations(info_key, j):
+                temp = "".join(c)
+                if temp in info_dict:
+                    info_dict[temp].append(int(info_value))
+                else:
+                    info_dict[temp] = [int(info_value)]
+    for k in info_dict:
+        info_dict[k].sort()
     
-    return conditions
+    for q in query:
+        condition = q.split()
+        condition_key = condition[:-1]
+        condition_val = condition[-1]
+        
+        while "and" in condition_key:
+            condition_key.remove("and")
+        while "-" in condition_key:
+            condition_key.remove("-")
+        condition_key = "".join(condition_key)
+        print(condition_key)
+        
+        if condition_key in info_dict:
+            scores = info_dict[condition_key]
+            
+            if scores:
+                under = bisect_left(scores, int(condition_val))
+                answer.append(len(scores) - under)
+        else:
+            answer.append(0)
+    return answer
+
 
 
 

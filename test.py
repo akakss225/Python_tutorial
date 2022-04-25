@@ -141,11 +141,11 @@
 # # 5
 
 from math import ceil
+from bisect import bisect_left
 
 
 
 
 
-a = ['java', 'backend', 'junior', 'pizza']
-b = ['java', 'backend', 'junior']
-print(b in a)
+a = [8]
+print(len(a) - bisect_left(a, 4))
