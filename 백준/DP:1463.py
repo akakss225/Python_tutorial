@@ -34,4 +34,4 @@ for i in range(4, X+1):
             else:
                 rs.append(rs[i - 1] + 1)
 
-print(rs)
+print(rs[X])

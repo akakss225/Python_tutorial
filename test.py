@@ -147,6 +147,8 @@ from bisect import bisect_left
 
 
 
-a = [[[0, 0], 'UP'], [[1, 0], 'UP'], [[1, 1], 'RIGHT'], [[0, 1], 'DOWN'], [[0, 0], 'LEFT'], [[0, 1], 'LEFT'], [[1, 1], 'DOWN'], [[1, 0], 'LEFT'], [[0, 0], 'DOWN'], [[1, 0], 'DOWN'], [[1, 1], 'LEFT'], [[0, 1], 'UP'], [[0, 0], 'RIGHT'], [[0, 1], 'RIGHT'], [[1, 1], 'UP'], [[1, 0], 'RIGHT']]
-b = [[[0, 0], 'UP'], [[1, 0], 'UP']]
-print(b in a)
+
+a = ["1", "2"]
+b = ["3", "4"]
+
+print([str(int(a[i]) + int(b[i])) for i in range(len(a))])
