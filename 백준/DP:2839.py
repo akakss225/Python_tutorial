@@ -31,6 +31,6 @@ for i in range(3, N+1):
         else:
             d.append(int(i / 3))
 
-print(d)
+print(d[N])
 
 
