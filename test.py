@@ -148,7 +148,7 @@ from bisect import bisect_left
 
 
 
-a = ["1", "2"]
-b = ["3", "4"]
+colors = [[[3, 0], [2, 1], [4, 2]]]
 
-print([str(int(a[i]) + int(b[i])) for i in range(len(a))])
+print(sorted(colors[0]))
+print(colors[0])

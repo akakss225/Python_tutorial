@@ -15,71 +15,19 @@ for i in range(N):
         result.append(int(i))
     grid.append(result)
 
-first = min(grid[0])
-idx = grid[0].index(first)
-colors = [[first, idx]]
+colors = [[[grid[0][0], 0], [grid[0][1], 1], [grid[0][2], 2]]]
 
 for i in range(1, N):
-    grid[i][colors[i-1][1]] = 9999
-    minimum = min(grid[i])
-    mini_idx = grid[i].index(minimum)
+    temp = []
+    first_mini = min(colors[i-1])
+    second_mini = sorted(colors[i-1])[1]
     
-    colors.append([colors[i-1][0] + minimum, mini_idx])
-
-print(colors)
+    for j in range(3):
+        if first_mini[1] == j:
+            temp.append([second_mini[0] + grid[i][j], j])
+        else:
+            temp.append([first_mini[0] + grid[i][j], j])
     
-# for i in range(1, N):
-#     temp = []
-#     if colors[i-1][0][1] == 0:
-#         if colors[i-1][0][0] + grid[i][1] <= colors[i-1][0][0] + grid[i][2]:
-#             temp.append([colors[i-1][0][0] + grid[i][1], 1])
-#         else:
-#             temp.append([colors[i-1][0][0] + grid[i][2], 2])
-#     elif colors[i-1][0][1] == 1:
-#         if colors[i-1][0][0] + grid[i][0] <= colors[i-1][0][0] + grid[i][2]:
-#             temp.append([colors[i-1][0][0] + grid[i][0], 0])
-#         else:
-#             temp.append([colors[i-1][0][0] + grid[i][2], 2])
-#     else:
-#         if colors[i-1][0][0] + grid[i][0] <= colors[i-1][0][0] + grid[i][1]:
-#             temp.append([colors[i-1][0][0] + grid[i][0], 0])
-#         else:
-#             temp.append([colors[i-1][0][0] + grid[i][1], 1])
-            
-#     if colors[i-1][1][1] == 0:
-#         if colors[i-1][1][0] + grid[i][1] <= colors[i-1][1][0] + grid[i][2]:
-#             temp.append([colors[i-1][1][0] + grid[i][1], 1])
-#         else:
-#             temp.append([colors[i-1][1][0] + grid[i][2], 2])
-#     elif colors[i-1][1][1] == 1:
-#         if colors[i-1][1][0] + grid[i][0] <= colors[i-1][1][0] + grid[i][2]:
-#             temp.append([colors[i-1][1][0] + grid[i][0], 0])
-#         else:
-#             temp.append([colors[i-1][1][0] + grid[i][2], 2])
-#     else:
-#         if colors[i-1][1][0] + grid[i][0] <= colors[i-1][1][0] + grid[i][1]:
-#             temp.append([colors[i-1][1][0] + grid[i][0], 0])
-#         else:
-#             temp.append([colors[i-1][1][0] + grid[i][1], 1])
-    
-#     if colors[i-1][2][1] == 0:
-#         if colors[i-1][2][0] + grid[i][1] <= colors[i-1][2][0] + grid[i][2]:
-#             temp.append([colors[i-1][2][0] + grid[i][1], 1])
-#         else:
-#             temp.append([colors[i-1][2][0] + grid[i][2], 2])
-#     elif colors[i-1][2][1] == 1:
-#         if colors[i-1][2][0] + grid[i][0] <= colors[i-1][2][0] + grid[i][2]:
-#             temp.append([colors[i-1][2][0] + grid[i][0], 0])
-#         else:
-#             temp.append([colors[i-1][2][0] + grid[i][2], 2])
-#     else:
-#         if colors[i-1][2][0] + grid[i][0] <= colors[i-1][2][0] + grid[i][1]:
-#             temp.append([colors[i-1][2][0] + grid[i][0], 0])
-#         else:
-#             temp.append([colors[i-1][2][0] + grid[i][1], 1])
-#     colors.append(temp)
+    colors.append(temp)
 
-
-
-
-
+print(min(colors[N-1])[0])
