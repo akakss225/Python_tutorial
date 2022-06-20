@@ -1,154 +1,27 @@
-# # 2
-# def solution(p):    
-#     answer = 0
-#     for i in range(len(p)):
-#         idx = [i]
-#         check = 0
-#         while idx:
-#             cur = idx.pop()
-#             if p[cur] == "<":
-#                 next_idx = cur - 1
-#                 if next_idx == -1:
-#                     check = 1
-#                     break
-#                 else:
-#                     if p[next_idx] == ">":
-#                         break
-#                     else:
-#                         idx.append(next_idx)
-#             else:
-#                 next_idx = cur + 1
-#                 if next_idx == len(p):
-#                     check = 1
-#                     break
-#                 else:
-#                     if p[next_idx] == "<":
-#                         break
-#                     else:
-#                         idx.append(next_idx)
-#         if check == 1:
-#             answer += 1
-#     return answer
+Ld=745e-6
+Lq=2360e-6
+vs_max = 250
+phi_a=0.06424
 
-# def solution(p):
-#     answer = 0
-#     answer = 0
-#     dp = [False] * len(p)
-#     for i in range(len(p)):
-#         idx = [i]
-#         check = 0
-#         while idx:
-#             cur = idx.pop()
-#             if dp[cur] == True:
-#                 check = 1
-#                 break
-#             if p[cur] == "<":
-#                 next_idx = cur - 1
-#                 if next_idx == -1:
-#                     check = 1
-#                     break
-#                 else:
-#                     if p[next_idx] == ">":
-#                         break
-#                     else:
-#                         idx.append(next_idx)
-#             else:
-#                 next_idx = cur + 1
-#                 if next_idx == len(p):
-#                     check = 1
-#                     break
-#                 else:
-#                     if p[next_idx] == "<":
-#                         break
-#                     else:
-#                         idx.append(next_idx)
-#         if check == 1:
-#             answer += 1
-#             dp[i] = True
+# 반지름
+def fwcontrol(x, y, r):
+    global Ld
+    global Lq
+    global vs_max
+    global phi_a
     
-#     return answer
-
-# def solution(p):
-#     answer = 0
-#     dp = [False] * len(p)
-#     for i in range(len(p)):
-#         idx = [i]
-#         while idx:
-#             cur_idx = idx.pop()
-#             if p[cur_idx] == "<":
-#                 if cur_idx == 0:
-#                     dp[i] = True
-#                     break
-#                 else:
-#                     next_idx = cur_idx - 1
-#                     if p[next_idx] == ">":
-#                         break
-#                     else:
-#                         if dp[next_idx] == True:
-#                             dp[i] = True
-#                             break
-#                         idx.append(next_idx)
-#             else:
-#                 if cur_idx == len(p)-1:
-#                     dp[i] = True
-#                     break
-#                 else:
-#                     next_idx = cur_idx + 1
-#                     if p[next_idx] == "<":
-#                         break
-#                     else:
-#                         if dp[next_idx] == True:
-#                             dp[i] = True
-#                             break
-#                         idx.append(next_idx)
-#         if dp[i] == True:
-#             answer += 1
-#     return answer
-
-# p = "<<<>>>"
-# p = ">>><<>>"
-# print(solution(p))
-
-
-# # 3
-
-# from itertools import combinations
-
-# def solution(arr, k, t):
-#     answer = 0
-#     for i in range(k, len(arr)+1):
-#         for j in list(combinations(arr, i)):
-#             if sum(j) <= t:
-#                 answer += 1
-#     return answer
-
-# # 4
-
-# def solution(e, k):
-#     answer = []
-#     for i in range((len(e)-k)//2+1):
-#         answer.append(e[-1-i:-k-1-i:-1])
+    answer = ((vs_max-10) ** 2 - r ** 2 * (Ld*x+phi_a) ** 2) / r ** 2 / (Lq * y) / Lq
     
-#     return answer
+    return answer
+
+def solution(idsr, iqsr, wrm, y):
+    limit = fwcontrol(idsr, iqsr, wrm)
+    answer = 0
+    if y >= limit:
+        answer = limit - 1
+    else:
+        answer = y
+    return answer
     
 
-
-# e = [5, 1, 9, 8, 10, 5]
-# k = 3
-# print(solution(e,k))
-
-
-# # 5
-
-from math import ceil
-from bisect import bisect_left
-
-
-
-
-
-
-colors = [[[3, 0], [2, 1], [4, 2]]]
-
-print(sorted(colors[0]))
-print(colors[0])
+print(solution(-100, 160, 785.4, 150))
