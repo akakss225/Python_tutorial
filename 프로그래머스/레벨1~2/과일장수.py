@@ -10,19 +10,12 @@ from collections import deque as deq
 def solution(k, m, score):
     answer = 0
     score = deq(sorted(score, reverse=True))
-    while len(score) / m >= 1:
-        if len(score) / m >= 2:
-            box = []
-            for i in range(m):
-                item = score.pop()
-                box.append(item)
-            answer += min(box) * m
-        else:
-            box = []
-            for i in range(m):
-                item = score.popleft()
-                box.append(item)
-            answer += min(box) * m
+    while len(score) - m >= 0:
+        box = []
+        for i in range(m):
+            item = score.popleft()
+            box.append(item)
+        answer += min(box) * m
     return answer
 
 k = 4
