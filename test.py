@@ -1,3 +1,3 @@
-arr = ['1', '2']
+n = "01033334444"
 
-print(sum(arr))
+print(n.replace(n[:-4], '*'*len(n[:-4])))
