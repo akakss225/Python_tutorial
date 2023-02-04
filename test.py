@@ -1,3 +1,6 @@
-n = "01033334444"
+import numpy as np
 
-print(n.replace(n[:-4], '*'*len(n[:-4])))
+a = [[1,2], [3,4]]
+b = [[2,3], [4,5]]
+
+print((np.array(a)+ np.array(b)).tolist())
