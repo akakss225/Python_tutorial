@@ -1,6 +1,7 @@
-import numpy as np
+from collections import deque as dq
 
-a = [[1,2], [3,4]]
-b = [[2,3], [4,5]]
+d = [2, 2, 3, 3]
+d = dq(d)
+budget = 9
 
-print((np.array(a)+ np.array(b)).tolist())
+print(d)
