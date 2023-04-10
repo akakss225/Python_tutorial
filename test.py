@@ -1,7 +1,5 @@
-from collections import deque as dq
-
-d = [2, 2, 3, 3]
-d = dq(d)
-budget = 9
-
-print(d)
+a = 9
+b = bin(a)
+print(b)
+print(b[2:])
+print(list(b[2:]))
